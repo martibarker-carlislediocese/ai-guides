@@ -163,6 +163,10 @@
   /* ── GUIDE CARDS ── */
   .guides-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 16px; }
   @media (max-width: 600px) { .guides-grid { grid-template-columns: 1fr; } }
+  .ch-grid { display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; gap: 16px; margin-bottom: 16px; }
+  @media (max-width: 900px) { .ch-grid { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 500px) { .ch-grid { grid-template-columns: 1fr; } }
+  .ch-section-label { font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--grey-mid); margin: 44px 0 16px; border-top: 1px solid #E5E7EB; padding-top: 36px; }
 
   .guide-card {
     background: var(--white); border-radius: 14px; padding: 26px;
@@ -388,7 +392,7 @@
   </div>
 
   <!-- ── GUIDES ── -->
-  <div class="section-label">Guides by team</div>
+  <div class="section-label">Available guides</div>
   <div class="guides-grid">
 
     <a class="guide-card" href="bishops-house/">
@@ -427,20 +431,74 @@
       <span class="card-arrow">Read guide →</span>
     </a>
 
+  </div>
+
+  <!-- ── CHURCH HOUSE ── -->
+  <div class="ch-section-label">Church House — Team guides coming soon</div>
+  <div class="ch-grid">
+
     <div class="guide-card coming-soon">
-      <span class="card-icon">🏛️</span>
+      <span class="card-icon">📢</span>
       <span class="card-badge soon">Coming soon</span>
-      <div class="card-title">Church House — Gemini</div>
-      <div class="card-subtitle gemini">Gemini</div>
-      <div class="card-desc">For Church House admin and governance staff — using Gemini via Google Workspace for everyday drafting, summarising, and document tasks.</div>
+      <div class="card-title">Communications</div>
+      <div class="card-subtitle multi">Church House</div>
+      <div class="card-desc">AI guidance for the Communications team — drafting, editing, and creating content for Diocese-wide audiences.</div>
     </div>
 
     <div class="guide-card coming-soon">
-      <span class="card-icon">🏛️</span>
+      <span class="card-icon">🎓</span>
       <span class="card-badge soon">Coming soon</span>
-      <div class="card-title">Church House — Claude</div>
-      <div class="card-subtitle cowork">Claude + Cowork</div>
-      <div class="card-desc">For Church House managers and power users — complex workflows, M365 integration, and automated tasks using the Diocese's Claude Team licence.</div>
+      <div class="card-title">Education</div>
+      <div class="card-subtitle multi">Church House</div>
+      <div class="card-desc">AI guidance for the Education team — supporting schools, policy documents, and curriculum-related tasks.</div>
+    </div>
+
+    <div class="guide-card coming-soon">
+      <span class="card-icon">💰</span>
+      <span class="card-badge soon">Coming soon</span>
+      <div class="card-title">Finance</div>
+      <div class="card-subtitle multi">Church House</div>
+      <div class="card-desc">AI guidance for the Finance team — reports, summaries, and document workflows within approved tools.</div>
+    </div>
+
+    <div class="guide-card coming-soon">
+      <span class="card-icon">👥</span>
+      <span class="card-badge soon">Coming soon</span>
+      <div class="card-title">HR &amp; Governance</div>
+      <div class="card-subtitle multi">Church House</div>
+      <div class="card-desc">AI guidance for HR and Governance — policy drafting, board papers, and handling people-related tasks safely.</div>
+    </div>
+
+    <div class="guide-card coming-soon">
+      <span class="card-icon">🕊️</span>
+      <span class="card-badge soon">Coming soon</span>
+      <div class="card-title">Mission &amp; Ministry</div>
+      <div class="card-subtitle multi">Church House</div>
+      <div class="card-desc">AI guidance for the Mission and Ministry team — resources, communications, and planning support.</div>
+    </div>
+
+    <div class="guide-card coming-soon">
+      <span class="card-icon">📋</span>
+      <span class="card-badge soon">Coming soon</span>
+      <div class="card-title">Project Management</div>
+      <div class="card-subtitle multi">Church House</div>
+      <div class="card-desc">AI guidance for project managers — planning documents, status reporting, and task coordination.</div>
+    </div>
+
+    <div class="guide-card coming-soon">
+      <span class="card-icon">🏗️</span>
+      <span class="card-badge soon">Coming soon</span>
+      <div class="card-title">Property</div>
+      <div class="card-subtitle multi">Church House</div>
+      <div class="card-desc">AI guidance for the Property team — correspondence, reports, and document management for buildings and estates.</div>
+    </div>
+
+    <div class="guide-card coming-soon">
+      <span class="card-icon">🤝</span>
+      <span class="card-badge soon">Coming soon</span>
+      <div class="card-title">Safeguarding</div>
+      <div class="card-subtitle multi">Church House</div>
+      <div class="card-desc">AI guidance for the Safeguarding team — with strict guidance on what must never be shared with any AI tool.</div>
     </div>
 
   </div>
