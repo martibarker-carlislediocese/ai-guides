@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Responsible Use — Diocese of Carlisle AI Guides</title>
+<style>
+  :root {
+    --grey-dark:    #1F2937;
+    --grey-mid:     #6B7280;
+    --grey-light:   #F9FAFB;
+    --white:        #FFFFFF;
+    --purple:       #6B21A8;
+    --purple-light: #F3E8FF;
+    --google-blue:  #1A73E8;
+    --google-light: #E8F0FE;
+    --nlm:          #0F766E;
+    --nlm-light:    #CCFBF1;
+    --copilot:      #0078D4;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: var(--grey-light); color: var(--grey-dark); }
+
+  /* NAV */
+  .nav-bar { position: sticky; top: 0; z-index: 100; background: white; border-bottom: 1px solid #E5E7EB; padding: 0 32px; display: flex; gap: 28px; align-items: center; }
+  .nav-bar a { font-size: 13px; font-weight: 600; color: var(--grey-mid); text-decoration: none; padding: 14px 0; border-bottom: 3px solid transparent; }
+  .nav-bar a:hover, .nav-bar a.active { color: var(--grey-dark); border-bottom-color: var(--grey-dark); }
+  .nav-home { margin-right: auto; }
+
+  /* HERO */
+  .hero { background: linear-gradient(135deg, #111827 0%, #1F2937 60%, #374151 100%); color: white; padding: 48px 40px 40px; text-align: center; }
+  .hero-badge { display: inline-block; background: rgba(255,255,255,0.12); border: 1px solid rgba(255,255,255,0.25); border-radius: 20px; padding: 5px 16px; font-size: 12px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 16px; }
+  .hero h1 { font-size: 34px; font-weight: 800; margin-bottom: 10px; }
+  .hero p  { font-size: 16px; opacity: 0.85; max-width: 580px; margin: 0 auto; line-height: 1.7; }
+
+  /* LAYOUT */
+  .page { max-width: 860px; margin: 0 auto; padding: 44px 24px 72px; }
+  .section-label { font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--grey-mid); margin-bottom: 18px; }
+  .sub-label { font-size: 15px; font-weight: 700; color: var(--grey-dark); margin: 32px 0 14px; padding-bottom: 8px; border-bottom: 2px solid #E5E7EB; }
+
+  /* INTRO */
+  .intro { background: var(--white); border-radius: 14px; padding: 28px 32px; border: 1px solid #E5E7EB; margin-bottom: 36px; box-shadow: 0 1px 4px rgba(0,0,0,0.06); }
+  .intro p { font-size: 15px; color: var(--grey-mid); line-height: 1.8; margin-bottom: 10px; }
+  .intro p:last-child { margin-bottom: 0; }
+
+  /* PRINCIPLES */
+  .principles { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 36px; }
+  @media (max-width: 600px) { .principles { grid-template-columns: 1fr; } }
+  .principle { background: var(--white); border-radius: 12px; padding: 22px; border: 1px solid #E5E7EB; }
+  .p-num { font-size: 28px; font-weight: 900; color: #E5E7EB; margin-bottom: 6px; }
+  .p-title { font-size: 15px; font-weight: 700; color: var(--grey-dark); margin-bottom: 8px; }
+  .p-desc { font-size: 13px; color: var(--grey-mid); line-height: 1.75; }
+
+  /* TRAFFIC LIGHTS */
+  .tl-green { background: #F0FDF4; border-left: 5px solid #22C55E; border-radius: 0 10px 10px 0; padding: 18px 22px; margin-bottom: 14px; }
+  .tl-amber { background: #FFFBEB; border-left: 5px solid #F59E0B; border-radius: 0 10px 10px 0; padding: 18px 22px; margin-bottom: 14px; }
+  .tl-red   { background: #FEF2F2; border-left: 5px solid #EF4444; border-radius: 0 10px 10px 0; padding: 18px 22px; margin-bottom: 14px; }
+  .tl-title { font-weight: 700; font-size: 15px; margin-bottom: 10px; }
+  .tl-green .tl-title { color: #166534; }
+  .tl-amber .tl-title { color: #92400E; }
+  .tl-red   .tl-title { color: #991B1B; }
+  .tl-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4px 20px; font-size: 13px; line-height: 1.8; }
+  .tl-green .tl-grid { color: #166534; }
+  .tl-amber .tl-grid { color: #92400E; }
+  .tl-red   .tl-grid { color: #7F1D1D; }
+  .tl-grid span::before { content: "• "; }
+
+  /* ACCOUNT TABLE */
+  .account-table-wrap { background: var(--white); border-radius: 14px; padding: 28px; border: 1px solid #E5E7EB; margin-bottom: 36px; box-shadow: 0 1px 4px rgba(0,0,0,0.06); }
+  .account-table-wrap h2 { font-size: 17px; font-weight: 700; margin-bottom: 18px; }
+  .account-table { width: 100%; border-collapse: collapse; font-size: 14px; }
+  .account-table th { text-align: left; padding: 0 12px 12px 0; font-size: 11px; font-weight: 700; letter-spacing: 0.07em; text-transform: uppercase; color: var(--grey-mid); border-bottom: 2px solid #E5E7EB; }
+  .account-table td { padding: 12px 12px 12px 0; border-bottom: 1px solid #F3F4F6; vertical-align: middle; }
+  .account-table tr:last-child td { border-bottom: none; }
+  .pill { display: inline-block; font-size: 11px; font-weight: 700; padding: 3px 10px; border-radius: 20px; }
+  .pill.google  { background: var(--google-light); color: var(--google-blue); }
+  .pill.ms      { background: #E6F2FF; color: var(--copilot); }
+  .pill.claude  { background: var(--purple-light); color: var(--purple); }
+  .account-tag { display: inline-block; background: #FDE68A; border: 1px solid #F59E0B; border-radius: 6px; padding: 2px 8px; font-family: monospace; font-size: 12px; font-weight: 700; color: #78350F; }
+
+  /* DO / DON'T */
+  .dos-donts { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 36px; }
+  @media (max-width: 600px) { .dos-donts { grid-template-columns: 1fr; } }
+  .do-box   { background: #F0FDF4; border: 1px solid #BBF7D0; border-radius: 12px; padding: 22px; }
+  .dont-box { background: #FEF2F2; border: 1px solid #FECACA; border-radius: 12px; padding: 22px; }
+  .do-box h3   { font-size: 15px; font-weight: 700; color: #166534; margin-bottom: 14px; }
+  .dont-box h3 { font-size: 15px; font-weight: 700; color: #991B1B; margin-bottom: 14px; }
+  .do-box ul, .dont-box ul { list-style: none; }
+  .do-box   ul li { font-size: 13px; color: #166534; line-height: 1.8; padding: 3px 0; }
+  .dont-box ul li { font-size: 13px; color: #7F1D1D; line-height: 1.8; padding: 3px 0; }
+  .do-box   ul li::before { content: "✓ "; font-weight: 700; }
+  .dont-box ul li::before { content: "✗ "; font-weight: 700; }
+
+  /* GDPR */
+  .gdpr-box { background: var(--white); border-radius: 14px; padding: 28px 32px; border: 1px solid #E5E7EB; margin-bottom: 36px; box-shadow: 0 1px 4px rgba(0,0,0,0.06); }
+  .gdpr-box h2 { font-size: 17px; font-weight: 700; margin-bottom: 16px; }
+  .gdpr-box p  { font-size: 14px; color: var(--grey-mid); line-height: 1.8; margin-bottom: 10px; }
+  .gdpr-box p:last-child { margin-bottom: 0; }
+
+  /* REASSURANCE */
+  .reassurance { background: #F3F4F6; border-left: 4px solid var(--grey-dark); border-radius: 0 10px 10px 0; padding: 16px 20px; display: flex; gap: 14px; align-items: flex-start; font-size: 14px; color: var(--grey-mid); line-height: 1.7; margin-bottom: 24px; }
+  .r-icon { font-size: 22px; flex-shrink: 0; }
+
+  /* FOOTER */
+  .footer { background: white; border-top: 1px solid #E5E7EB; padding: 20px 40px; text-align: center; font-size: 13px; color: var(--grey-mid); }
+  .footer a { color: var(--grey-dark); text-decoration: none; font-weight: 600; }
+</style>
+</head>
+<body>
+
+<nav class="nav-bar">
+  <a href="../" class="nav-home">← All Guides</a>
+  <a href="#principles" class="active">Principles</a>
+  <a href="#traffic">What to share</a>
+  <a href="#accounts">Account checklist</a>
+  <a href="#gdpr">GDPR</a>
+</nav>
+
+<div class="hero">
+  <div class="hero-badge">Diocese of Carlisle — AI Guides</div>
+  <h1>⚖️ Responsible Use of AI</h1>
+  <p>A plain-English guide to using AI tools wisely — applying across Gemini, NotebookLM, Microsoft Copilot, and Claude + Cowork.</p>
+</div>
+
+<div class="page">
+
+  <!-- INTRO -->
+  <div class="intro">
+    <p>AI tools offer genuine benefits for Diocese staff — saving time on drafting, summarising, and routine tasks. But using them responsibly is important, both to protect the people we serve and to comply with our obligations under UK data protection law.</p>
+    <p>This page sets out the Diocese's approach. The rules here apply to <strong>all</strong> approved AI tools — Gemini, NotebookLM, Microsoft Copilot, and Claude + Cowork. Each tool also has its own guide with more detail.</p>
+    <p>If you're ever unsure, the question to ask yourself is: <em>"Would I be comfortable if the Bishop or our data protection officer could see exactly what I've just shared with this tool?"</em> If yes, proceed. If not, don't.</p>
+  </div>
+
+  <!-- CORE PRINCIPLES -->
+  <section id="principles">
+    <div class="section-label">Core principles</div>
+    <div class="principles">
+
+      <div class="principle">
+        <div class="p-num">01</div>
+        <div class="p-title">You are always responsible</div>
+        <div class="p-desc">AI tools are assistants, not decision-makers. Everything you send, publish, or act upon remains your responsibility. Always read, check, and edit AI output before using it. Never send something you haven't reviewed.</div>
+      </div>
+
+      <div class="principle">
+        <div class="p-num">02</div>
+        <div class="p-title">Use the right account</div>
+        <div class="p-desc">Always use your Diocese account when accessing AI tools — never a personal email or Google account. The data protections negotiated by the Diocese only apply when you're signed in as yourself within the Diocese's licences.</div>
+      </div>
+
+      <div class="principle">
+        <div class="p-num">03</div>
+        <div class="p-title">Don't share what you wouldn't share with a solicitor</div>
+        <div class="p-desc">A useful test: would you be comfortable sharing this information with a trusted external professional — a solicitor, accountant, or IT provider? If yes, it's likely fine for AI tools. If no, keep it in-house.</div>
+      </div>
+
+      <div class="principle">
+        <div class="p-num">04</div>
+        <div class="p-title">AI can be wrong — check the facts</div>
+        <div class="p-desc">All AI tools can produce plausible-sounding information that is incorrect, out of date, or invented. This is called "hallucination." Always verify names, facts, figures, and legal or policy details from primary sources before including them in official documents.</div>
+      </div>
+
+      <div class="principle">
+        <div class="p-num">05</div>
+        <div class="p-title">Protect vulnerable people above all</div>
+        <div class="p-desc">Safeguarding information, case notes, and personal details about vulnerable individuals must never be shared with any AI tool. The Diocese's safeguarding obligations are absolute and take precedence over any productivity benefit.</div>
+      </div>
+
+      <div class="principle">
+        <div class="p-num">06</div>
+        <div class="p-title">Use the right tool for the task</div>
+        <div class="p-desc">Different tools are approved for different uses. Gemini for everyday drafting. NotebookLM for document analysis. Claude + Cowork for managers needing automation. Microsoft Copilot (basic) is available but has significant limitations — see the tool guides.</div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- TRAFFIC LIGHT -->
+  <section id="traffic">
+    <div class="section-label">What to share — and what not to</div>
+    <p style="font-size:14px;color:var(--grey-mid);line-height:1.8;margin-bottom:20px;">This applies to <strong>all</strong> approved AI tools. When in doubt, err on the side of sharing less.</p>
+
+    <div class="tl-green">
+      <div class="tl-title">🟢 Generally fine — use AI tools for these</div>
+      <div class="tl-grid">
+        <span>Drafting letters, emails and communications</span>
+        <span>Grammar checking and proofreading</span>
+        <span>Summarising reports and documents</span>
+        <span>Creating templates and standard documents</span>
+        <span>Agenda and minute templates</span>
+        <span>Researching topics and explaining concepts</span>
+        <span>Financial reports and budget summaries</span>
+        <span>Translating text</span>
+        <span>Formatting and restructuring documents</span>
+        <span>Brainstorming ideas and approaches</span>
+      </div>
+    </div>
+
+    <div class="tl-amber">
+      <div class="tl-title">🟡 Use with care — think before you paste</div>
+      <div style="font-size:13px;color:#92400E;line-height:1.8;">
+        <strong>Named individuals' personal details</strong> — consider whether the person's name is necessary, or whether "a parishioner" or "a member of staff" achieves the same result. Use the minimum personal information needed to get the task done.<br><br>
+        <strong>Personnel and HR matters</strong> — letter templates are fine. Drafting content about a specific named individual's conduct, absence, or personal circumstances warrants more care. Anonymise where possible.<br><br>
+        <strong>Sensitive financial details</strong> — general budget summaries are fine. Specific account numbers, payroll details, or individual salary information should not be shared.
+      </div>
+    </div>
+
+    <div class="tl-red">
+      <div class="tl-title">🔴 Never share with any AI tool</div>
+      <div class="tl-grid">
+        <span>Safeguarding case notes or referrals</span>
+        <span>Medical or health information about individuals</span>
+        <span>Pastoral confidences shared in confidence</span>
+        <span>Passwords, PINs or login credentials</span>
+        <span>Financial account or banking details</span>
+        <span>Full national insurance or ID numbers</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ACCOUNT CHECKLIST -->
+  <section id="accounts">
+    <div class="sub-label">🔑 Account checklist — before you start</div>
+    <div class="account-table-wrap">
+      <h2>Make sure you're using the right account for each tool</h2>
+      <table class="account-table">
+        <thead>
+          <tr>
+            <th>Tool</th>
+            <th>Sign in with</th>
+            <th>Where to check</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span class="pill google">Gemini</span></td>
+            <td><span class="account-tag">yourname@carlislediocese.org.uk</span></td>
+            <td style="font-size:13px;color:var(--grey-mid);">Account icon, top-right corner of gemini.google.com</td>
+          </tr>
+          <tr>
+            <td><span class="pill google">NotebookLM</span></td>
+            <td><span class="account-tag">yourname@carlislediocese.org.uk</span></td>
+            <td style="font-size:13px;color:var(--grey-mid);">Account icon, top-right corner of notebooklm.google.com</td>
+          </tr>
+          <tr>
+            <td><span class="pill ms">Microsoft Copilot</span></td>
+            <td>Your Diocese Microsoft 365 account</td>
+            <td style="font-size:13px;color:var(--grey-mid);">Account icon at copilot.microsoft.com — look for your Diocese email address</td>
+          </tr>
+          <tr>
+            <td><span class="pill claude">Claude + Cowork</span></td>
+            <td>Your Diocese Claude account (managers only)</td>
+            <td style="font-size:13px;color:var(--grey-mid);">Account shown in Claude desktop app settings</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="dos-donts">
+      <div class="do-box">
+        <h3>✅ Do</h3>
+        <ul>
+          <li>Check your account before every session</li>
+          <li>Sign out of personal accounts on shared devices</li>
+          <li>Use separate browser profiles for work and personal if needed</li>
+          <li>Report any uncertainty about accounts to IT</li>
+          <li>Read AI output before sending or acting on it</li>
+          <li>Verify facts, figures, and names independently</li>
+          <li>Ask IT if you're unsure whether something is appropriate</li>
+        </ul>
+      </div>
+      <div class="dont-box">
+        <h3>✗ Don't</h3>
+        <ul>
+          <li>Use a personal Google or Microsoft account for Diocese work</li>
+          <li>Share safeguarding or case information with any AI</li>
+          <li>Send AI-generated content without reviewing it first</li>
+          <li>Rely on AI for legal, financial, or medical facts without checking</li>
+          <li>Enter passwords or login credentials into any AI chat</li>
+          <li>Assume AI output is accurate — always verify</li>
+          <li>Use non-approved AI tools for Diocese work</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- GDPR -->
+  <section id="gdpr">
+    <div class="section-label">UK GDPR &amp; data protection</div>
+    <div class="gdpr-box">
+      <h2>⚖️ What the law requires</h2>
+      <p><strong>The Diocese is the data controller</strong> under UK GDPR for any personal data that staff put into AI tools. This means the Diocese — and individual staff members — are responsible for ensuring that personal data is processed lawfully, fairly, and securely.</p>
+      <p><strong>All three primary tools have Data Processing Agreements in place.</strong> Google (Gemini and NotebookLM), Anthropic (Claude), and Microsoft (Copilot) all contractually commit to acting as data processors on behalf of the Diocese and not using your data to train their AI models — when accessed via the correct accounts.</p>
+      <p><strong>You must have a lawful basis to process personal data.</strong> For most Diocese admin tasks, "legitimate interests" covers general correspondence and document work. But processing special category data (health, religious beliefs, safeguarding) requires a specific basis and extra care — in most cases, this means keeping it out of AI tools entirely.</p>
+      <p><strong>When in doubt, contact the Diocese's Data Protection Officer</strong> — or <a href="mailto:martin.barker@carlislediocese.org.uk" style="color:var(--grey-dark);font-weight:600;">Marti Barker</a> (IT Support Manager) for day-to-day queries about AI tool use.</p>
+    </div>
+
+    <div class="reassurance">
+      <div class="r-icon">📋</div>
+      <div><strong>Reporting concerns:</strong> If you think you may have shared something inappropriately with an AI tool, contact <a href="mailto:martin.barker@carlislediocese.org.uk" style="color:var(--grey-dark);font-weight:600;">Marti Barker</a> as soon as possible. It's always better to raise a concern early than to leave it unreported.</div>
+    </div>
+  </section>
+
+</div>
+
+<div class="footer">
+  Diocese of Carlisle &nbsp;·&nbsp; <a href="../">AI Guides home</a> &nbsp;·&nbsp; Maintained by <a href="mailto:martin.barker@carlislediocese.org.uk">Marti Barker</a>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gemini — Diocese of Carlisle AI Guides</title>
+<style>
+  :root {
+    --google-blue:   #1A73E8;
+    --google-light:  #E8F0FE;
+    --google-xlight: #F8FAFF;
+    --google-dark:   #0D47A1;
+    --nlm:           #0F766E;
+    --purple:        #6B21A8;
+    --purple-light:  #F3E8FF;
+    --grey-dark:     #1F2937;
+    --grey-mid:      #6B7280;
+    --grey-light:    #F9FAFB;
+    --white:         #FFFFFF;
+    --warn-bg:       #FFF7ED;
+    --warn-border:   #FED7AA;
+    --warn-text:     #9A3412;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: var(--grey-light); color: var(--grey-dark); }
+
+  /* NAV */
+  .nav-bar {
+    position: sticky; top: 0; z-index: 100;
+    background: white; border-bottom: 1px solid #E5E7EB;
+    padding: 0 32px; display: flex; gap: 28px; align-items: center;
+  }
+  .nav-bar a { font-size: 13px; font-weight: 600; color: var(--grey-mid); text-decoration: none; padding: 14px 0; border-bottom: 3px solid transparent; }
+  .nav-bar a:hover { color: var(--google-blue); }
+  .nav-bar a.active { color: var(--google-blue); border-bottom-color: var(--google-blue); }
+  .nav-home { margin-right: auto; }
+
+  /* ACCOUNT WARNING — always at top */
+  .account-warning {
+    background: #FFF3CD; border-bottom: 3px solid #F59E0B;
+    padding: 14px 32px; display: flex; gap: 14px; align-items: center;
+    font-size: 14px; color: #78350F; line-height: 1.6;
+  }
+  .account-warning .aw-icon { font-size: 22px; flex-shrink: 0; }
+  .account-warning strong { font-weight: 700; }
+  .account-tag {
+    display: inline-block; background: #FDE68A; border: 1px solid #F59E0B;
+    border-radius: 6px; padding: 2px 8px; font-family: monospace;
+    font-size: 13px; font-weight: 700; color: #78350F; margin: 0 2px;
+  }
+
+  /* HERO */
+  .hero {
+    background: linear-gradient(135deg, #0D47A1 0%, #1A73E8 60%, #4285F4 100%);
+    color: white; padding: 48px 40px 40px; text-align: center;
+  }
+  .hero-badge { display: inline-block; background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.3); border-radius: 20px; padding: 5px 16px; font-size: 12px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 16px; }
+  .hero h1 { font-size: 34px; font-weight: 800; margin-bottom: 10px; }
+  .hero p { font-size: 16px; opacity: 0.88; max-width: 560px; margin: 0 auto; line-height: 1.7; }
+
+  /* LAYOUT */
+  .page { max-width: 860px; margin: 0 auto; padding: 44px 24px 72px; }
+  .section-label { font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--grey-mid); margin-bottom: 18px; }
+  .sub-label { font-size: 15px; font-weight: 700; color: var(--grey-dark); margin: 28px 0 14px; padding-bottom: 8px; border-bottom: 2px solid var(--google-light); }
+
+  /* CARDS */
+  .card { background: var(--white); border-radius: 14px; padding: 28px 32px; border: 1px solid #E5E7EB; margin-bottom: 24px; box-shadow: 0 1px 4px rgba(0,0,0,0.06); }
+  .card h2 { font-size: 18px; font-weight: 700; color: var(--google-blue); margin-bottom: 12px; }
+  .card p { font-size: 14px; color: var(--grey-mid); line-height: 1.8; margin-bottom: 10px; }
+  .card p:last-child { margin-bottom: 0; }
+
+  /* CAPABILITY GRID */
+  .cap-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 32px; }
+  @media (max-width: 600px) { .cap-grid { grid-template-columns: 1fr; } }
+  .cap-card { background: var(--google-xlight); border: 1px solid var(--google-light); border-radius: 12px; padding: 18px 20px; }
+  .cap-icon  { font-size: 24px; margin-bottom: 10px; }
+  .cap-title { font-size: 13px; font-weight: 700; color: var(--google-blue); margin-bottom: 6px; }
+  .cap-desc  { font-size: 13px; color: var(--grey-mid); line-height: 1.7; }
+
+  /* TRY IT BOXES */
+  .try-it { background: #1E293B; border-radius: 12px; padding: 20px 24px; margin: 12px 0 20px; }
+  .try-it-label { font-size: 10px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #94A3B8; margin-bottom: 10px; }
+  .try-it p { font-size: 14px; color: #F1F5F9; font-style: italic; line-height: 1.75; margin-bottom: 6px; }
+  .try-it p:last-child { margin-bottom: 0; }
+
+  /* LIMITATIONS */
+  .limit-list { list-style: none; margin-bottom: 24px; }
+  .limit-list li { display: flex; gap: 12px; padding: 12px 0; border-bottom: 1px solid #F3F4F6; font-size: 14px; line-height: 1.7; }
+  .limit-list li:last-child { border-bottom: none; }
+  .limit-icon { font-size: 18px; flex-shrink: 0; margin-top: 1px; }
+  .limit-body strong { display: block; color: var(--grey-dark); margin-bottom: 2px; }
+  .limit-body span { color: var(--grey-mid); }
+
+  /* HOW TO */
+  .step { display: flex; gap: 16px; margin-bottom: 18px; align-items: flex-start; }
+  .step-num { background: var(--google-blue); color: white; border-radius: 50%; width: 28px; height: 28px; font-size: 13px; font-weight: 700; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+  .step-title { font-size: 14px; font-weight: 700; margin-bottom: 4px; }
+  .step-desc  { font-size: 13px; color: var(--grey-mid); line-height: 1.7; }
+
+  /* REASSURANCE */
+  .reassurance { background: var(--google-xlight); border-left: 4px solid var(--google-blue); border-radius: 0 10px 10px 0; padding: 16px 20px; display: flex; gap: 14px; align-items: flex-start; font-size: 14px; color: var(--grey-mid); line-height: 1.7; margin-bottom: 24px; }
+  .r-icon { font-size: 22px; flex-shrink: 0; }
+
+  /* PRIVACY */
+  .privacy-box { background: #F0FDF4; border: 1px solid #BBF7D0; border-radius: 12px; padding: 24px 28px; margin-bottom: 32px; }
+  .privacy-box h2 { font-size: 16px; font-weight: 700; color: #166534; margin-bottom: 12px; }
+  .privacy-box p { font-size: 14px; color: #166534; line-height: 1.8; margin-bottom: 8px; }
+  .privacy-box p:last-child { margin-bottom: 0; }
+
+  /* TRAFFIC LIGHTS */
+  .tl-green  { background: #F0FDF4; border-left: 5px solid #22C55E; border-radius: 0 10px 10px 0; padding: 16px 20px; margin-bottom: 12px; font-size: 14px; color: #166534; line-height: 1.8; }
+  .tl-amber  { background: #FFFBEB; border-left: 5px solid #F59E0B; border-radius: 0 10px 10px 0; padding: 16px 20px; margin-bottom: 12px; font-size: 14px; color: #92400E; line-height: 1.8; }
+  .tl-red    { background: #FEF2F2; border-left: 5px solid #EF4444; border-radius: 0 10px 10px 0; padding: 16px 20px; margin-bottom: 12px; font-size: 14px; color: #7F1D1D; line-height: 1.8; }
+  .tl-title  { font-weight: 700; margin-bottom: 6px; font-size: 15px; }
+
+  /* FOOTER */
+  .footer { background: white; border-top: 1px solid #E5E7EB; padding: 20px 40px; text-align: center; font-size: 13px; color: var(--grey-mid); }
+  .footer a { color: var(--google-blue); text-decoration: none; }
+</style>
+</head>
+<body>
+
+<!-- PERMANENT ACCOUNT WARNING -->
+<div class="account-warning">
+  <div class="aw-icon">⚠️</div>
+  <div><strong>Important — always check your account before using Gemini.</strong> You must be signed in with your Diocese account (<span class="account-tag">yourname@carlislediocese.org.uk</span>) — not a personal Gmail address. If you're signed into a personal Google account, your conversations may be used to train Google's AI and the Diocese's data protections will not apply. <strong>Check the account icon in the top-right corner of the screen before you start.</strong></div>
+</div>
+
+<nav class="nav-bar">
+  <a href="../" class="nav-home">← All Guides</a>
+  <a href="#what-is" class="active">What is it?</a>
+  <a href="#what-can">What can it do?</a>
+  <a href="#limits">Limitations</a>
+  <a href="#howto">How to use</a>
+  <a href="#privacy">Privacy</a>
+</nav>
+
+<div class="hero">
+  <div class="hero-badge">Diocese of Carlisle — AI Guides</div>
+  <h1>✨ Gemini</h1>
+  <p>Google's AI assistant — available free to all Diocese staff through the Google Workspace for Nonprofits licence. The everyday AI for drafting, summarising, creating images, and getting things done.</p>
+</div>
+
+<div class="page">
+
+  <!-- WHAT IS IT -->
+  <section id="what-is">
+    <div class="card">
+      <h2>What is Gemini?</h2>
+      <p>Gemini is Google's AI assistant — similar in concept to asking a very knowledgeable colleague for help. You type a question or request in plain English and it responds with a draft, summary, answer, or whatever you've asked for.</p>
+      <p>It's available free to all Diocese staff as part of the Google Workspace for Nonprofits licence. You access it at <a href="https://gemini.google.com" target="_blank" style="color:var(--google-blue);font-weight:600;">gemini.google.com</a> — but always through your Diocese Google account, not a personal Gmail.</p>
+      <p>Gemini draws on a broad base of general knowledge and can help with a wide range of everyday writing and thinking tasks. It's the right tool for most general tasks. For deep analysis of specific documents, see <a href="../notebooklm/" style="color:var(--nlm);font-weight:600;">NotebookLM</a>. For complex task automation and M365 integration, managers should use <a href="../bishops-house/" style="color:var(--purple);font-weight:600;">Claude + Cowork</a>.</p>
+    </div>
+  </section>
+
+  <!-- WHAT CAN IT DO -->
+  <section id="what-can">
+    <div class="section-label">What it can do</div>
+    <div class="cap-grid">
+
+      <div class="cap-card">
+        <div class="cap-icon">✉️</div>
+        <div class="cap-title">Drafting emails and letters</div>
+        <div class="cap-desc">Give Gemini the key points and tone you need, and it will produce a well-written first draft in seconds. Works for formal Diocese correspondence, replies to enquiries, or internal communications.</div>
+      </div>
+
+      <div class="cap-card">
+        <div class="cap-icon">✍️</div>
+        <div class="cap-title">Grammar and proofreading</div>
+        <div class="cap-desc">Paste in a draft and ask Gemini to check it for grammar, spelling, clarity, or tone. It will suggest improvements or produce a corrected version.</div>
+      </div>
+
+      <div class="cap-card">
+        <div class="cap-icon">📋</div>
+        <div class="cap-title">Summarising documents</div>
+        <div class="cap-desc">Paste in a long document, report, or email chain and ask for a summary. Gemini can produce a short paragraph or a bullet-point overview — whichever is most useful.</div>
+      </div>
+
+      <div class="cap-card">
+        <div class="cap-icon">💡</div>
+        <div class="cap-title">Brainstorming and ideas</div>
+        <div class="cap-desc">Stuck on how to structure a report, phrase a tricky message, or approach a problem? Ask Gemini for ideas or options. It's good at generating starting points for you to refine.</div>
+      </div>
+
+      <div class="cap-card">
+        <div class="cap-icon">📝</div>
+        <div class="cap-title">Creating agendas and minutes templates</div>
+        <div class="cap-desc">Describe a meeting or committee and ask Gemini to draft an agenda structure or a template for minutes. Saves time getting started on routine documents.</div>
+      </div>
+
+      <div class="cap-card">
+        <div class="cap-icon">🔍</div>
+        <div class="cap-title">Research and plain-English explanations</div>
+        <div class="cap-desc">Ask Gemini to explain a concept, policy, or regulation in plain English — useful for understanding legislation, Church of England guidance, or unfamiliar topics quickly.</div>
+      </div>
+
+      <div class="cap-card">
+        <div class="cap-icon">🌍</div>
+        <div class="cap-title">Translation</div>
+        <div class="cap-desc">Need to communicate with a parishioner or contact in another language? Gemini can translate text to and from a wide range of languages quickly and accurately.</div>
+      </div>
+
+      <div class="cap-card">
+        <div class="cap-icon">📊</div>
+        <div class="cap-title">Formatting and restructuring text</div>
+        <div class="cap-desc">Ask Gemini to turn bullet points into flowing paragraphs, reformat a table into a summary, or restructure a document into a different layout or style.</div>
+      </div>
+
+      <div class="cap-card">
+        <div class="cap-icon">🖼️</div>
+        <div class="cap-title">Image creation</div>
+        <div class="cap-desc">Gemini can generate images from a text description using Google's Imagen technology. Useful for creating visuals for newsletters, event flyers, social media, or presentations — especially alongside tools like Canva where you can edit the result further.</div>
+      </div>
+
+      <div class="cap-card">
+        <div class="cap-icon">🎬</div>
+        <div class="cap-title">Video generation</div>
+        <div class="cap-desc">Gemini (via Google's Veo model) can create short video clips from a text description. Useful for social media content, communication campaigns, or simple explainer visuals. Clips are typically a few seconds long and can be downloaded and used directly.</div>
+      </div>
+
+    </div>
+
+    <div class="sub-label">✏️ Try it — Diocese examples</div>
+
+    <div class="try-it">
+      <div class="try-it-label">Try typing this</div>
+      <p>"Draft a short, friendly email to a parishioner confirming their booking for a church hall event on Saturday 12 April at 2pm. The contact is to confirm numbers — we need to know by Wednesday."</p>
+    </div>
+
+    <div class="try-it">
+      <div class="try-it-label">Try typing this</div>
+      <p>"I need to write to a member of staff to thank them for their work on a recent fundraising event. The tone should be warm and sincere, not overly formal. The event raised over £3,000 for the food bank."</p>
+    </div>
+
+    <div class="try-it">
+      <div class="try-it-label">Try typing this</div>
+      <p>"Can you explain what a Data Protection Impact Assessment (DPIA) is, in plain English, in around 100 words?"</p>
+    </div>
+
+    <div class="try-it">
+      <div class="try-it-label">Try typing this — image creation</div>
+      <p>"Create an image for a church community events flyer — warm, welcoming, showing people of different ages gathered together in a traditional stone church setting. Suitable for use on social media."</p>
+      <p style="margin-top:8px;color:#94A3B8;font-size:12px;">💡 Tip: You can then download the image and bring it into Canva to add text, adjust layout, and match your parish branding.</p>
+    </div>
+
+  </section>
+
+  <!-- LIMITATIONS -->
+  <section id="limits">
+    <div class="section-label">What it can't do — and where to be careful</div>
+    <div class="card" style="padding-bottom: 8px;">
+      <h2>Gemini's limitations</h2>
+      <ul class="limit-list">
+        <li>
+          <span class="limit-icon">⚠️</span>
+          <div class="limit-body">
+            <strong>It can make things up — confidently</strong>
+            <span>This is called "hallucination." Gemini draws on broad training data and can occasionally produce plausible-sounding information that is incorrect, out of date, or simply invented. Always verify facts, figures, dates, and names before including them in official communications. Never rely on Gemini for legal, financial, or medical specifics without checking.</span>
+          </div>
+        </li>
+        <li>
+          <span class="limit-icon">📅</span>
+          <div class="limit-body">
+            <strong>Its knowledge has a cutoff date</strong>
+            <span>Gemini's training data has a cutoff — it may not know about very recent events, policy changes, or news. For current affairs or recent Church of England guidance, check primary sources directly.</span>
+          </div>
+        </li>
+        <li>
+          <span class="limit-icon">📂</span>
+          <div class="limit-body">
+            <strong>It doesn't automatically access your Diocese files</strong>
+            <span>Gemini (via the web) doesn't have access to your Outlook emails, SharePoint, or OneDrive. You need to paste in the content you want it to work on. If you need Claude to search your inbox or open files directly from OneDrive, that's what Claude + Cowork is for — it connects directly to your Diocese Microsoft account. For deep analysis of specific uploaded documents, NotebookLM is also worth considering.</span>
+          </div>
+        </li>
+        <li>
+          <span class="limit-icon">🔒</span>
+          <div class="limit-body">
+            <strong>It doesn't know Diocese-specific context</strong>
+            <span>Gemini has no knowledge of internal Diocese processes, people, history, or preferences unless you tell it. Treat each conversation as starting fresh — provide the context it needs.</span>
+          </div>
+        </li>
+        <li>
+          <span class="limit-icon">🧮</span>
+          <div class="limit-body">
+            <strong>It can struggle with complex numbers and calculations</strong>
+            <span>For straightforward sums it's fine, but don't rely on Gemini for detailed financial calculations or complex data analysis. Always check the arithmetic independently.</span>
+          </div>
+        </li>
+      </ul>
+    </div>
+
+    <div class="reassurance">
+      <div class="r-icon">💡</div>
+      <div><strong>The golden rule:</strong> Gemini is an excellent <em>first-draft</em> tool. Always read, check, and take responsibility for anything you send or publish. Think of it as a capable assistant who occasionally gets things wrong — you're always the editor.</div>
+    </div>
+  </section>
+
+  <!-- HOW TO USE -->
+  <section id="howto">
+    <div class="section-label">Getting started</div>
+    <div class="card">
+      <h2>How to use Gemini — step by step</h2>
+      <br>
+
+      <div class="step">
+        <div class="step-num">1</div>
+        <div>
+          <div class="step-title">Check your account first</div>
+          <div class="step-desc">Go to <a href="https://gemini.google.com" target="_blank" style="color:var(--google-blue);font-weight:600;">gemini.google.com</a>. Look at the account icon in the top-right corner. It must show your <span class="account-tag" style="font-size:12px;">@carlislediocese.org.uk</span> address. If it shows a personal Gmail, click the icon, sign out, and sign back in with your Diocese account.</div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-num">2</div>
+        <div>
+          <div class="step-title">Type your request in plain English</div>
+          <div class="step-desc">Don't worry about using special commands or keywords — just describe what you need as you'd ask a colleague. The more context you give, the better the result. "Draft a short reply to thank a volunteer" is fine; "draft a 150-word email thanking a volunteer for running the Christmas fair, warm but professional in tone" is better.</div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-num">3</div>
+        <div>
+          <div class="step-title">Refine if needed</div>
+          <div class="step-desc">If the first response isn't quite right, don't start over — just reply and tell Gemini what to change. "Make it shorter", "make the tone more formal", "add a line about the event date" — all work naturally.</div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-num">4</div>
+        <div>
+          <div class="step-title">Always review before using</div>
+          <div class="step-desc">Read the response carefully. Check any facts, names, or figures it has included. Edit as needed. You are always responsible for the final content — Gemini is the assistant, not the author.</div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- PRIVACY -->
+  <section id="privacy">
+    <div class="section-label">Privacy &amp; data</div>
+
+    <div class="privacy-box">
+      <h2>🔒 Your data is protected — when you use the right account</h2>
+      <p><strong>When accessed via your Diocese Google Workspace account</strong>, Gemini is covered by Google's Cloud Data Processing Addendum. Your conversations are not used to train Google's AI models, and Google acts as a data processor on behalf of the Diocese. The Diocese owns your data.</p>
+      <p><strong>When accessed via a personal Gmail account</strong>, Google's consumer terms apply. By default, your conversations may be used to improve Google's AI. This is why the account check is so important.</p>
+      <p>The Diocese is the <strong>data controller</strong> under UK GDPR — which means staff are responsible for what personal data they put into Gemini, regardless of how strong Google's protections are. Apply the same judgement you'd use with any trusted external professional.</p>
+    </div>
+
+    <div class="sub-label">🚦 What to put in — and what not to</div>
+
+    <div class="tl-green">
+      <div class="tl-title">🟢 Generally fine</div>
+      Drafting and proofreading letters, emails, and communications · Summarising documents or reports · Researching topics or explaining concepts · Creating templates, agendas, and standard documents · Formatting and restructuring text
+    </div>
+
+    <div class="tl-amber">
+      <div class="tl-title">🟡 Use with care — think before you paste</div>
+      Named individuals' personal details — anonymise where possible (use "a parishioner" rather than their name) · Personnel matters — templates are fine; specific named employee situations need more thought
+    </div>
+
+    <div class="tl-red">
+      <div class="tl-title">🔴 Do not put into Gemini</div>
+      Safeguarding case notes or referral details about identifiable individuals · Detailed medical, health, or pastoral confidences about named people · Passwords, login credentials, or financial account information
+    </div>
+
+    <div class="reassurance" style="margin-top:20px;">
+      <div class="r-icon">❓</div>
+      <div>Not sure whether something is appropriate to use Gemini for? Contact <a href="mailto:martin.barker@carlislediocese.org.uk" style="color:var(--google-blue);font-weight:600;">Marti Barker</a> (IT Support Manager) for advice.</div>
+    </div>
+  </section>
+
+</div>
+
+<div class="footer">
+  Diocese of Carlisle &nbsp;·&nbsp; <a href="../">AI Guides home</a> &nbsp;·&nbsp; Maintained by <a href="mailto:martin.barker@carlislediocese.org.uk">Marti Barker</a>
+</div>
+
+</body>
+</html>

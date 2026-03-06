@@ -13,10 +13,14 @@
     --google-light: #E8F0FE;
     --nlm-green:    #0F766E;
     --nlm-light:    #CCFBF1;
+    --copilot:      #0078D4;
+    --copilot-light:#EFF6FF;
     --grey-dark:    #1F2937;
     --grey-mid:     #6B7280;
     --grey-light:   #F9FAFB;
     --white:        #FFFFFF;
+    --amber:        #B45309;
+    --amber-light:  #FEF3C7;
   }
   * { box-sizing: border-box; margin: 0; padding: 0; }
   body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: var(--grey-light); color: var(--grey-dark); min-height: 100vh; }
@@ -86,6 +90,51 @@
   .tool-link.cowork { background: var(--purple);       color: white; }
   .tool-link:hover  { opacity: 0.88; }
 
+  /* ── COPILOT BANNER ── */
+  .copilot-section { margin-bottom: 52px; }
+  .copilot-banner {
+    background: white; border-radius: 14px; border: 2px solid #E5E7EB;
+    border-left: 6px solid var(--copilot); padding: 28px 32px;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+  }
+  .copilot-header {
+    display: flex; align-items: flex-start; gap: 20px;
+    margin-bottom: 20px; flex-wrap: wrap;
+  }
+  .copilot-icon { font-size: 36px; flex-shrink: 0; }
+  .copilot-title-area { flex: 1; }
+  .copilot-name { font-size: 19px; font-weight: 800; color: var(--copilot); margin-bottom: 4px; }
+  .copilot-sub  { font-size: 13px; color: var(--grey-mid); margin-bottom: 8px; }
+  .copilot-badge {
+    display: inline-block; font-size: 11px; font-weight: 700;
+    letter-spacing: 0.06em; text-transform: uppercase;
+    padding: 3px 10px; border-radius: 20px;
+    background: var(--amber-light); color: var(--amber);
+  }
+  .copilot-body { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+  @media (max-width: 620px) { .copilot-body { grid-template-columns: 1fr; } }
+
+  .copilot-desc { font-size: 14px; color: var(--grey-mid); line-height: 1.75; }
+  .copilot-desc strong { color: var(--grey-dark); }
+
+  .accuracy-box {
+    background: var(--amber-light); border-radius: 10px; padding: 18px 20px;
+    border: 1px solid #FDE68A;
+  }
+  .accuracy-box h4 {
+    font-size: 12px; font-weight: 700; text-transform: uppercase;
+    letter-spacing: 0.07em; color: var(--amber); margin-bottom: 12px;
+  }
+  .accuracy-stat {
+    display: flex; align-items: baseline; gap: 8px; margin-bottom: 10px;
+  }
+  .accuracy-stat .pct { font-size: 28px; font-weight: 900; }
+  .accuracy-stat .pct.bad  { color: var(--amber); }
+  .accuracy-stat .pct.good { color: var(--nlm-green); }
+  .accuracy-stat .label { font-size: 12px; color: var(--grey-dark); line-height: 1.4; }
+  .accuracy-divider { border: none; border-top: 1px solid #FDE68A; margin: 12px 0; }
+  .accuracy-note { font-size: 11px; color: var(--amber); line-height: 1.5; }
+
   /* ── WHO GETS WHAT banner ── */
   .routing-box {
     background: var(--white); border-radius: 14px; padding: 28px 32px;
@@ -105,9 +154,11 @@
     display: inline-block; font-size: 11px; font-weight: 700;
     padding: 2px 10px; border-radius: 20px; white-space: nowrap;
   }
-  .pill.gemini { background: var(--google-light); color: var(--google-blue); }
-  .pill.nlm    { background: var(--nlm-light);    color: var(--nlm-green); }
-  .pill.cowork { background: var(--purple-light);  color: var(--purple); }
+  .pill.gemini  { background: var(--google-light); color: var(--google-blue); }
+  .pill.nlm     { background: var(--nlm-light);    color: var(--nlm-green); }
+  .pill.cowork  { background: var(--purple-light);  color: var(--purple); }
+  .pill.copilot { background: var(--copilot-light); color: var(--copilot); }
+  .pill.amber   { background: var(--amber-light);   color: var(--amber); }
 
   /* ── GUIDE CARDS ── */
   .guides-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 16px; }
@@ -129,6 +180,7 @@
   .card-subtitle.nlm    { color: var(--nlm-green); }
   .card-subtitle.cowork { color: var(--purple); }
   .card-subtitle.multi  { color: var(--grey-mid); }
+  .card-subtitle.amber  { color: var(--amber); }
   .card-desc     { font-size: 13px; color: var(--grey-mid); line-height: 1.7; margin-bottom: 14px; }
   .card-badge {
     position: absolute; top: 14px; right: 14px;
@@ -165,24 +217,24 @@
 
 <div class="page">
 
-  <!-- ── THE THREE TOOLS ── -->
-  <div class="section-label">The tools available across the Diocese</div>
+  <!-- ── THE THREE PRIMARY TOOLS ── -->
+  <div class="section-label">Approved Tools Available Across the Diocese</div>
   <div class="tools-grid">
 
     <!-- Gemini -->
     <div class="tool-card gemini">
-      <div class="tool-icon">🔵</div>
+      <div class="tool-icon">✨</div>
       <div class="tool-name gemini">Gemini</div>
       <span class="tool-who gemini">Most staff</span>
-      <p class="tool-desc">Google's AI assistant, available free to the Diocese through the Google Workspace for Nonprofits licence. The everyday AI for general tasks — available to all staff.</p>
+      <p class="tool-desc">Google's AI assistant, available free to the Diocese through the Google Workspace for Nonprofits licence. The everyday AI for drafting, creating images, and getting things done — available to all staff.</p>
       <ul class="tool-uses">
         <li>Drafting and improving emails</li>
         <li>Grammar and proofreading</li>
         <li>Summarising documents</li>
+        <li>Creating images and short videos</li>
         <li>Answering general questions</li>
-        <li>Creating first drafts</li>
       </ul>
-      <a class="tool-link gemini" href="https://gemini.google.com" target="_blank">Open Gemini ↗</a>
+      <a class="tool-link gemini" href="gemini/">Read the Gemini guide →</a>
     </div>
 
     <!-- NotebookLM -->
@@ -219,6 +271,47 @@
 
   </div>
 
+  <!-- ── COPILOT ── -->
+  <div class="copilot-section">
+    <div class="section-label">Also Available — With Limitations</div>
+    <div class="copilot-banner">
+      <div class="copilot-header">
+        <div class="copilot-icon">🪟</div>
+        <div class="copilot-title-area">
+          <div class="copilot-name">Microsoft Copilot</div>
+          <div class="copilot-sub">Free version included with M365 Business Premium &nbsp;·&nbsp; All staff</div>
+          <span class="copilot-badge">⚠ Use with caution — lower accuracy</span>
+        </div>
+      </div>
+      <div class="copilot-body">
+        <div class="copilot-desc">
+          <p style="margin-bottom:12px;">Microsoft Copilot Chat is bundled with the Diocese's Microsoft 365 Business Premium licence, so staff may already be using it. <strong>It is permitted</strong>, but it is the least capable of the Diocese's available AI tools and should not be the first choice for important work.</p>
+          <p style="margin-bottom:12px;"><strong>What the free version can do:</strong> General chat and question-answering, drafting basic text, web-grounded searches. Similar to a basic chatbot.</p>
+          <p style="margin-bottom:12px;"><strong>What it cannot do</strong> (without a paid £30/user/month add-on): access your Diocese emails, SharePoint files, Teams messages, or OneDrive documents. The free version has no connection to your Diocese data.</p>
+          <p><strong>Recommendation:</strong> For any Diocese work, use Gemini (free, better accuracy, Diocese DPA in place) or Claude + Cowork (Diocese Team licence, most powerful). Use Copilot only if you have a specific reason to.</p>
+        </div>
+        <div class="accuracy-box">
+          <h4>📊 How do they compare for accuracy?</h4>
+          <div class="accuracy-stat">
+            <span class="pct bad">~40%</span>
+            <span class="label"><strong>Copilot</strong> citation error rate — the highest of the three tools (Columbia Journalism Review, March 2025)</span>
+          </div>
+          <hr class="accuracy-divider">
+          <div style="margin-bottom:10px;">
+            <div style="font-size:13px;font-weight:700;color:#166534;margin-bottom:3px;">✔ Gemini — significantly better</div>
+            <div style="font-size:12px;color:#374151;line-height:1.5;">Performs well on drafting and summarisation tasks. Strong choice for everyday Diocese work (Vectara, 2025).</div>
+          </div>
+          <div style="margin-bottom:10px;">
+            <div style="font-size:13px;font-weight:700;color:#166534;margin-bottom:3px;">✔✔ Claude Teams — fewest hallucinations</div>
+            <div style="font-size:12px;color:#374151;line-height:1.5;">Produces the fewest factual errors of the three tools across 2025 benchmarks — the most reliable for research and knowledge-intensive work (Vectara, 2025; AA-Omniscience, 2025).</div>
+          </div>
+          <hr class="accuracy-divider">
+          <p class="accuracy-note">Sources: Columbia Journalism Review citation accuracy study (March 2025); Vectara Hallucination Leaderboard (Nov 2025); AA-Omniscience Knowledge Benchmark (2025). Rates vary significantly by task type — always review AI output before use.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <!-- ── WHO GETS WHAT ── -->
   <div class="routing-box">
     <h2>🗺️ Which tool — and for whom?</h2>
@@ -251,6 +344,11 @@
           <td><span class="pill gemini">Gemini</span></td>
           <td>Available to everyone via the free Google Workspace for Nonprofits account</td>
         </tr>
+        <tr>
+          <td><strong>All staff (already available)</strong></td>
+          <td><span class="pill amber">Copilot ⚠</span></td>
+          <td>Permitted but lower accuracy — prefer Gemini for Diocese work</td>
+        </tr>
       </tbody>
     </table>
   </div>
@@ -265,6 +363,33 @@
       <div class="card-title">Bishop's House</div>
       <div class="card-subtitle cowork">Claude + Cowork</div>
       <div class="card-desc">For Ali (Bishop's Chaplain) and the Bishop's House admin team — covering correspondence, diary management, M365 integration, scheduled tasks, financial documents, and data privacy.</div>
+      <span class="card-arrow">Read guide →</span>
+    </a>
+
+    <a class="guide-card" href="gemini/">
+      <span class="card-icon">✨</span>
+      <span class="card-badge live">Available now</span>
+      <div class="card-title">Gemini — All Staff</div>
+      <div class="card-subtitle gemini">Gemini</div>
+      <div class="card-desc">For all Diocese staff — what Gemini can do (including image and video creation), how to use it safely, its limitations, and the essential rule about signing in with your Diocese account.</div>
+      <span class="card-arrow">Read guide →</span>
+    </a>
+
+    <a class="guide-card" href="notebooklm/">
+      <span class="card-icon">📓</span>
+      <span class="card-badge live">Available now</span>
+      <div class="card-title">NotebookLM</div>
+      <div class="card-subtitle nlm">Admin &amp; governance</div>
+      <div class="card-desc">A guide to using NotebookLM for document research and analysis — what it is, how it differs from Gemini and Cowork, and when to use it.</div>
+      <span class="card-arrow">Read guide →</span>
+    </a>
+
+    <a class="guide-card" href="responsible-use/">
+      <span class="card-icon">🛡️</span>
+      <span class="card-badge live">Available now</span>
+      <div class="card-title">Responsible Use</div>
+      <div class="card-subtitle multi">All tools · All staff</div>
+      <div class="card-desc">The Diocese's principles for using AI responsibly — what to share, what never to share, how to check which account you're using, and how to spot AI errors.</div>
       <span class="card-arrow">Read guide →</span>
     </a>
 
@@ -284,15 +409,6 @@
       <div class="card-desc">For Church House managers and power users — complex workflows, M365 integration, and automated tasks using the Diocese's Claude Team licence.</div>
     </div>
 
-    <a class="guide-card" href="notebooklm/">
-      <span class="card-icon">📓</span>
-      <span class="card-badge live">Available now</span>
-      <div class="card-title">NotebookLM</div>
-      <div class="card-subtitle nlm">All teams</div>
-      <div class="card-desc">A guide to using NotebookLM for document research and analysis — what it is, how it differs from Gemini and Cowork, and when to use it.</div>
-      <span class="card-arrow">Read guide →</span>
-    </a>
-
   </div>
 
   <!-- ── PRIVACY NOTE ── -->
@@ -304,6 +420,7 @@
 
 <div class="footer">
   Diocese of Carlisle &nbsp;·&nbsp; AI Guides &nbsp;·&nbsp; Maintained by <a href="mailto:martin.barker@carlislediocese.org.uk">Marti Barker</a>
+  &nbsp;·&nbsp; <a href="responsible-use/">Responsible Use Policy</a>
 </div>
 
 </body>
