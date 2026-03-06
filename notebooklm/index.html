@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NotebookLM — Diocese of Carlisle AI Guides</title>
+<style>
+  :root {
+    --nlm:          #0F766E;
+    --nlm-mid:      #14B8A6;
+    --nlm-light:    #CCFBF1;
+    --nlm-xlight:   #F0FDFA;
+    --purple:       #6B21A8;
+    --purple-light: #F3E8FF;
+    --google-blue:  #1A73E8;
+    --google-light: #E8F0FE;
+    --grey-dark:    #1F2937;
+    --grey-mid:     #6B7280;
+    --grey-light:   #F9FAFB;
+    --white:        #FFFFFF;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: var(--grey-light); color: var(--grey-dark); }
+
+  /* ── NAV ── */
+  .nav-bar {
+    position: sticky; top: 0; z-index: 100;
+    background: white; border-bottom: 1px solid #E5E7EB;
+    padding: 0 32px; display: flex; gap: 28px; align-items: center;
+  }
+  .nav-bar a {
+    font-size: 13px; font-weight: 600; color: var(--grey-mid);
+    text-decoration: none; padding: 14px 0; border-bottom: 3px solid transparent;
+  }
+  .nav-bar a:hover { color: var(--nlm); }
+  .nav-bar a.active { color: var(--nlm); border-bottom-color: var(--nlm); }
+  .nav-home { font-size: 13px; color: var(--grey-mid); margin-right: auto; }
+
+  /* ── HERO ── */
+  .hero {
+    background: linear-gradient(135deg, #042f2e 0%, #0F766E 60%, #14B8A6 100%);
+    color: white; padding: 52px 40px 44px; text-align: center;
+  }
+  .hero-badge {
+    display: inline-block; background: rgba(255,255,255,0.15);
+    border: 1px solid rgba(255,255,255,0.3); border-radius: 20px;
+    padding: 5px 16px; font-size: 12px; font-weight: 600;
+    letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 18px;
+  }
+  .hero h1 { font-size: 34px; font-weight: 800; margin-bottom: 10px; }
+  .hero p  { font-size: 16px; opacity: 0.88; max-width: 560px; margin: 0 auto; line-height: 1.7; }
+
+  /* ── LAYOUT ── */
+  .page { max-width: 860px; margin: 0 auto; padding: 48px 24px 72px; }
+
+  .section-label {
+    font-size: 11px; font-weight: 700; letter-spacing: 0.1em;
+    text-transform: uppercase; color: var(--grey-mid); margin-bottom: 18px;
+  }
+  .sub-label {
+    font-size: 15px; font-weight: 700; color: var(--grey-dark);
+    margin: 32px 0 14px; padding-bottom: 8px;
+    border-bottom: 2px solid var(--nlm-light);
+  }
+
+  /* ── WHAT IS IT ── */
+  .intro-card {
+    background: var(--white); border-radius: 14px; padding: 32px;
+    border: 2px solid var(--nlm-light); margin-bottom: 40px;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+  }
+  .intro-card h2 { font-size: 20px; font-weight: 800; color: var(--nlm); margin-bottom: 14px; }
+  .intro-card p  { font-size: 15px; color: var(--grey-mid); line-height: 1.8; margin-bottom: 12px; }
+  .intro-card p:last-child { margin-bottom: 0; }
+
+  /* ── COMPARISON TABLE ── */
+  .compare-wrap { background: var(--white); border-radius: 14px; padding: 28px 28px 24px; border: 1px solid #E5E7EB; margin-bottom: 40px; box-shadow: 0 1px 4px rgba(0,0,0,0.06); }
+  .compare-wrap h2 { font-size: 17px; font-weight: 700; margin-bottom: 20px; }
+  .compare-table { width: 100%; border-collapse: collapse; font-size: 14px; }
+  .compare-table th {
+    text-align: left; padding: 0 14px 12px 0; font-size: 12px; font-weight: 700;
+    letter-spacing: 0.06em; text-transform: uppercase;
+    color: var(--grey-mid); border-bottom: 2px solid #E5E7EB;
+  }
+  .compare-table th:not(:first-child) { text-align: center; }
+  .compare-table td { padding: 12px 14px 12px 0; border-bottom: 1px solid #F3F4F6; vertical-align: top; line-height: 1.6; color: var(--grey-dark); }
+  .compare-table td:not(:first-child) { text-align: center; }
+  .compare-table tr:last-child td { border-bottom: none; }
+  .compare-table .feature { font-weight: 600; color: var(--grey-dark); }
+  .tick   { color: #22C55E; font-size: 17px; font-weight: 700; }
+  .cross  { color: #EF4444; font-size: 17px; }
+  .part   { color: #F59E0B; font-size: 14px; font-weight: 700; }
+  .col-nlm    { color: var(--nlm);        font-weight: 700; }
+  .col-gemini { color: var(--google-blue); font-weight: 700; }
+  .col-cowork { color: var(--purple);      font-weight: 700; }
+
+  /* ── USE CASES ── */
+  .use-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 40px; }
+  @media (max-width: 600px) { .use-grid { grid-template-columns: 1fr; } }
+
+  .use-card {
+    background: var(--nlm-xlight); border: 1px solid var(--nlm-light);
+    border-radius: 12px; padding: 20px;
+  }
+  .use-card .uc-icon  { font-size: 26px; margin-bottom: 10px; }
+  .use-card .uc-title { font-size: 14px; font-weight: 700; color: var(--nlm); margin-bottom: 6px; }
+  .use-card .uc-desc  { font-size: 13px; color: var(--grey-mid); line-height: 1.7; }
+
+  /* ── HOW TO ── */
+  .how-to {
+    background: var(--white); border-radius: 14px; padding: 28px 32px;
+    border: 1px solid #E5E7EB; margin-bottom: 40px;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+  }
+  .how-to h2 { font-size: 17px; font-weight: 700; margin-bottom: 20px; }
+  .step { display: flex; gap: 16px; margin-bottom: 18px; align-items: flex-start; }
+  .step:last-child { margin-bottom: 0; }
+  .step-num {
+    background: var(--nlm); color: white; border-radius: 50%;
+    width: 28px; height: 28px; font-size: 13px; font-weight: 700;
+    display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+  }
+  .step-body { flex: 1; }
+  .step-title { font-size: 14px; font-weight: 700; color: var(--grey-dark); margin-bottom: 4px; }
+  .step-desc  { font-size: 13px; color: var(--grey-mid); line-height: 1.7; }
+
+  /* ── AUDIO FEATURE ── */
+  .audio-box {
+    background: linear-gradient(135deg, #042f2e, #0F766E);
+    color: white; border-radius: 14px; padding: 28px 32px; margin-bottom: 40px;
+  }
+  .audio-box h2 { font-size: 17px; font-weight: 700; margin-bottom: 10px; }
+  .audio-box p  { font-size: 14px; opacity: 0.88; line-height: 1.75; }
+
+  /* ── PRIVACY ── */
+  .privacy-box {
+    background: #F0FDF4; border: 1px solid #BBF7D0; border-radius: 12px;
+    padding: 24px 28px; margin-bottom: 40px; font-size: 14px; line-height: 1.8;
+  }
+  .privacy-box h2 { font-size: 16px; font-weight: 700; color: #166534; margin-bottom: 12px; }
+  .privacy-box p  { color: #166534; margin-bottom: 8px; }
+  .privacy-box p:last-child { margin-bottom: 0; }
+
+  /* ── REASSURANCE ── */
+  .reassurance {
+    background: var(--nlm-xlight); border-left: 4px solid var(--nlm);
+    border-radius: 0 10px 10px 0; padding: 16px 20px;
+    display: flex; gap: 14px; align-items: flex-start;
+    font-size: 14px; color: var(--grey-mid); line-height: 1.7; margin-bottom: 16px;
+  }
+  .r-icon { font-size: 22px; flex-shrink: 0; }
+
+  /* ── FOOTER ── */
+  .footer {
+    background: white; border-top: 1px solid #E5E7EB;
+    padding: 20px 40px; text-align: center;
+    font-size: 13px; color: var(--grey-mid);
+  }
+  .footer a { color: var(--nlm); text-decoration: none; }
+</style>
+</head>
+<body>
+
+<nav class="nav-bar">
+  <a href="../" class="nav-home">← All Guides</a>
+  <a href="#what-is" class="active">What is it?</a>
+  <a href="#vs">vs Gemini &amp; Cowork</a>
+  <a href="#uses">Diocese uses</a>
+  <a href="#howto">How to use</a>
+  <a href="#privacy">Privacy</a>
+</nav>
+
+<div class="hero">
+  <div class="hero-badge">Diocese of Carlisle — AI Guides</div>
+  <h1>📓 NotebookLM</h1>
+  <p>Google's document intelligence tool — not a general AI assistant, but a focused tool for understanding and querying the documents that matter to you.</p>
+</div>
+
+<div class="page">
+
+  <!-- WHAT IS IT -->
+  <section id="what-is">
+    <div class="intro-card">
+      <h2>What is NotebookLM?</h2>
+      <p>NotebookLM is a free tool from Google that lets you upload your own documents — reports, PDFs, meeting notes, policy papers — and then ask questions about them in plain English. It reads your documents and answers based <strong>only on what you've given it</strong>.</p>
+      <p>Think of it as a very well-read assistant who has studied exactly the documents on your desk and nothing else. It won't add information from the internet or make things up — if the answer isn't in your documents, it will tell you so.</p>
+      <p>It's available free to all Diocese staff through the Google Workspace for Nonprofits account at <strong><a href="https://notebooklm.google.com" target="_blank" style="color:var(--nlm);">notebooklm.google.com</a></strong>.</p>
+    </div>
+  </section>
+
+  <!-- COMPARISON -->
+  <section id="vs">
+    <div class="section-label">How it compares</div>
+    <div class="compare-wrap">
+      <h2>NotebookLM vs Gemini vs Claude + Cowork</h2>
+      <table class="compare-table">
+        <thead>
+          <tr>
+            <th style="width:34%;">Feature</th>
+            <th class="col-nlm">NotebookLM</th>
+            <th class="col-gemini">Gemini</th>
+            <th class="col-cowork">Claude + Cowork</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="feature">Answers from your uploaded documents</td>
+            <td><span class="tick">✓</span><br><span style="font-size:12px;color:var(--grey-mid);">Only your sources</span></td>
+            <td><span class="part">~</span><br><span style="font-size:12px;color:var(--grey-mid);">Can read files, but mixes with general knowledge</span></td>
+            <td><span class="tick">✓</span><br><span style="font-size:12px;color:var(--grey-mid);">Via file upload</span></td>
+          </tr>
+          <tr>
+            <td class="feature">Answers from general knowledge / internet</td>
+            <td><span class="cross">✗</span><br><span style="font-size:12px;color:var(--grey-mid);">Grounded in your sources only</span></td>
+            <td><span class="tick">✓</span><br><span style="font-size:12px;color:var(--grey-mid);">Draws on broad training</span></td>
+            <td><span class="tick">✓</span></td>
+          </tr>
+          <tr>
+            <td class="feature">Drafting letters and emails</td>
+            <td><span class="cross">✗</span></td>
+            <td><span class="tick">✓</span></td>
+            <td><span class="tick">✓</span></td>
+          </tr>
+          <tr>
+            <td class="feature">Automating tasks / scheduled workflows</td>
+            <td><span class="cross">✗</span></td>
+            <td><span class="cross">✗</span></td>
+            <td><span class="tick">✓</span></td>
+          </tr>
+          <tr>
+            <td class="feature">Microsoft 365 integration</td>
+            <td><span class="cross">✗</span></td>
+            <td><span class="cross">✗</span></td>
+            <td><span class="tick">✓</span></td>
+          </tr>
+          <tr>
+            <td class="feature">Deep analysis of long documents</td>
+            <td><span class="tick">✓</span><br><span style="font-size:12px;color:var(--grey-mid);">Designed for this</span></td>
+            <td><span class="part">~</span><br><span style="font-size:12px;color:var(--grey-mid);">Good but not specialised</span></td>
+            <td><span class="tick">✓</span></td>
+          </tr>
+          <tr>
+            <td class="feature">Audio overview (podcast-style summary)</td>
+            <td><span class="tick">✓</span><br><span style="font-size:12px;color:var(--grey-mid);">Unique feature</span></td>
+            <td><span class="cross">✗</span></td>
+            <td><span class="cross">✗</span></td>
+          </tr>
+          <tr>
+            <td class="feature">Available to all Diocese staff (free)</td>
+            <td><span class="tick">✓</span></td>
+            <td><span class="tick">✓</span></td>
+            <td><span class="part">~</span><br><span style="font-size:12px;color:var(--grey-mid);">Managers &amp; power users only</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="reassurance">
+      <div class="r-icon">💡</div>
+      <div><strong>The simple rule:</strong> Use <strong style="color:var(--nlm);">NotebookLM</strong> when you have specific documents you need to understand deeply. Use <strong style="color:var(--google-blue);">Gemini</strong> for general drafting and everyday questions. Use <strong style="color:var(--purple);">Claude + Cowork</strong> if you're a manager who needs to automate tasks or integrate with M365.</div>
+    </div>
+  </section>
+
+  <!-- USE CASES -->
+  <section id="uses">
+    <div class="section-label" style="margin-top:8px;">Diocese use cases</div>
+    <div class="use-grid">
+
+      <div class="use-card">
+        <div class="uc-icon">📋</div>
+        <div class="uc-title">Board &amp; committee papers</div>
+        <div class="uc-desc">Upload the papers ahead of a meeting and ask "what are the key decisions being made?" or "summarise the finance report" — without reading every page.</div>
+      </div>
+
+      <div class="use-card">
+        <div class="uc-icon">⛪</div>
+        <div class="uc-title">Synod reports &amp; resolutions</div>
+        <div class="uc-desc">Upload past synod reports and ask what was agreed on a specific topic, or get a summary of all resolutions passed in a given year.</div>
+      </div>
+
+      <div class="use-card">
+        <div class="uc-icon">📜</div>
+        <div class="uc-title">Policy &amp; governance documents</div>
+        <div class="uc-desc">Upload the Diocese's safeguarding policy, HR handbook, or other governance documents and ask specific questions — "what is the process for X?" — rather than searching manually.</div>
+      </div>
+
+      <div class="use-card">
+        <div class="uc-icon">📊</div>
+        <div class="uc-title">Financial &amp; annual reports</div>
+        <div class="uc-desc">Upload annual reports or financial statements and ask for a plain-English summary of the key figures, trends, or specific sections.</div>
+      </div>
+
+      <div class="use-card">
+        <div class="uc-icon">✉️</div>
+        <div class="uc-title">Correspondence archives</div>
+        <div class="uc-desc">Upload a set of emails or letters on a topic and ask NotebookLM to summarise the thread, extract key decisions, or identify outstanding actions.</div>
+      </div>
+
+      <div class="use-card">
+        <div class="uc-icon">📖</div>
+        <div class="uc-title">Theological &amp; reference texts</div>
+        <div class="uc-desc">Upload a report, consultation document, or theological text and query it — useful for clergy and staff preparing responses to national Church consultations.</div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- AUDIO OVERVIEW -->
+  <div class="audio-box">
+    <h2>🎙️ The Audio Overview — a standout feature</h2>
+    <p>One of NotebookLM's most distinctive features is <strong>Audio Overview</strong>. Once you've uploaded your sources, NotebookLM can generate a short podcast-style conversation between two AI hosts summarising the key points of your documents. It's particularly useful for getting a quick feel for a long report during a commute, or sharing a summary with colleagues who haven't read the papers. The audio is generated from your documents only — nothing external is added.</p>
+  </div>
+
+  <!-- HOW TO USE -->
+  <section id="howto">
+    <div class="section-label">Getting started</div>
+    <div class="how-to">
+      <h2>How to use NotebookLM — step by step</h2>
+
+      <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-body">
+          <div class="step-title">Go to NotebookLM</div>
+          <div class="step-desc">Open <a href="https://notebooklm.google.com" target="_blank" style="color:var(--nlm);font-weight:600;">notebooklm.google.com</a> — make sure you're signed in with your <strong>Diocese Google Workspace account</strong> (your @carlislediocese.org.uk address), not a personal Gmail account.</div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-body">
+          <div class="step-title">Create a new notebook</div>
+          <div class="step-desc">Click <strong>New Notebook</strong>. Give it a name that makes sense — for example "PCC Meeting — March 2026" or "Safeguarding Policy 2025".</div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-num">3</div>
+        <div class="step-body">
+          <div class="step-title">Upload your sources</div>
+          <div class="step-desc">Click <strong>Add Sources</strong>. You can upload PDFs, Word documents, Google Docs, paste in text, or add a URL. You can add up to 50 sources per notebook. NotebookLM will read and index them — this takes about 30 seconds.</div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-num">4</div>
+        <div class="step-body">
+          <div class="step-title">Ask your questions</div>
+          <div class="step-desc">Type your question in the chat box — exactly as you'd ask a colleague. For example: <em>"What are the main agenda items for this meeting?"</em> or <em>"What does the policy say about lone working?"</em> NotebookLM will answer and show you which source it drew from.</div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-num">5</div>
+        <div class="step-body">
+          <div class="step-title">Generate an Audio Overview (optional)</div>
+          <div class="step-desc">Click <strong>Audio Overview</strong> in the right panel and then <strong>Generate</strong>. Within a couple of minutes, NotebookLM produces a short podcast summarising your sources. You can listen in the browser or download it.</div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- PRIVACY -->
+  <section id="privacy">
+    <div class="privacy-box">
+      <h2>🔒 Privacy &amp; data — what you need to know</h2>
+      <p><strong>Your sources are not used to train AI models.</strong> Google's terms for NotebookLM (accessed via a Google Workspace account) explicitly state that your uploaded documents and queries are not used to improve Google's AI. A Data Processing Addendum covers the Diocese's use.</p>
+      <p><strong>Your notebook is private.</strong> Only you can see the sources you upload and the conversations you have, unless you choose to share a notebook with a colleague.</p>
+      <p><strong>Always use your Diocese Workspace account.</strong> Sign in at notebooklm.google.com with your @carlislediocese.org.uk address. If you use a personal Gmail account, the consumer privacy terms apply and your data may be used for training.</p>
+      <p><strong>Apply the same judgement as any external service.</strong> NotebookLM is safe for most document work — board papers, reports, policy documents. As with any AI tool, avoid uploading documents containing individual safeguarding case details, detailed personal health information, or anything you would not share with a trusted professional adviser. For queries, contact <a href="mailto:martin.barker@carlislediocese.org.uk" style="color:var(--nlm);font-weight:600;">Marti Barker</a>.</p>
+    </div>
+
+    <div class="reassurance">
+      <div class="r-icon">🚀</div>
+      <div><strong>Ready to try it?</strong> A good first test: take a long report or set of board papers you already have, upload them, and ask <em>"Give me a one-paragraph summary of the key points."</em> Most people are surprised how quickly and accurately it works.</div>
+    </div>
+  </section>
+
+</div>
+
+<div class="footer">
+  Diocese of Carlisle &nbsp;·&nbsp; <a href="../">AI Guides home</a> &nbsp;·&nbsp; Maintained by <a href="mailto:martin.barker@carlislediocese.org.uk">Marti Barker</a>
+</div>
+
+</body>
+</html>
