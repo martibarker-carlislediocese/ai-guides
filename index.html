@@ -6,183 +6,151 @@
 <title>Diocese of Carlisle — AI Guides</title>
 <style>
   :root {
-    --purple: #6B21A8;
+    --purple:       #6B21A8;
     --purple-light: #F3E8FF;
-    --purple-mid: #9333EA;
-    --grey-dark: #1F2937;
-    --grey-mid: #6B7280;
-    --grey-light: #F9FAFB;
-    --white: #FFFFFF;
+    --purple-mid:   #9333EA;
+    --google-blue:  #1A73E8;
+    --google-light: #E8F0FE;
+    --nlm-green:    #0F766E;
+    --nlm-light:    #CCFBF1;
+    --grey-dark:    #1F2937;
+    --grey-mid:     #6B7280;
+    --grey-light:   #F9FAFB;
+    --white:        #FFFFFF;
   }
-
   * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: var(--grey-light); color: var(--grey-dark); min-height: 100vh; }
 
-  body {
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-    background: var(--grey-light);
-    color: var(--grey-dark);
-    min-height: 100vh;
-  }
-
-  /* Hero */
+  /* ── HERO ── */
   .hero {
-    background: linear-gradient(135deg, #4C1D95 0%, #6B21A8 50%, #7C3AED 100%);
-    color: white;
-    padding: 52px 40px 44px;
-    text-align: center;
+    background: linear-gradient(135deg, #1e1b4b 0%, #4C1D95 50%, #6B21A8 100%);
+    color: white; padding: 52px 40px 44px; text-align: center;
   }
   .hero-badge {
-    display: inline-block;
-    background: rgba(255,255,255,0.15);
-    border: 1px solid rgba(255,255,255,0.3);
-    border-radius: 20px;
-    padding: 5px 16px;
-    font-size: 12px;
-    font-weight: 600;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    margin-bottom: 18px;
+    display: inline-block; background: rgba(255,255,255,0.15);
+    border: 1px solid rgba(255,255,255,0.3); border-radius: 20px;
+    padding: 5px 16px; font-size: 12px; font-weight: 600;
+    letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 18px;
   }
-  .hero h1 {
-    font-size: 36px;
-    font-weight: 800;
-    margin-bottom: 12px;
-    letter-spacing: -0.5px;
-  }
-  .hero p {
-    font-size: 16px;
-    opacity: 0.85;
-    max-width: 540px;
-    margin: 0 auto;
-    line-height: 1.7;
-  }
+  .hero h1 { font-size: 36px; font-weight: 800; margin-bottom: 12px; letter-spacing: -0.5px; }
+  .hero p  { font-size: 16px; opacity: 0.85; max-width: 580px; margin: 0 auto; line-height: 1.7; }
 
-  /* Main content */
-  .page {
-    max-width: 860px;
-    margin: 0 auto;
-    padding: 48px 24px 64px;
-  }
+  /* ── LAYOUT ── */
+  .page { max-width: 920px; margin: 0 auto; padding: 48px 24px 72px; }
 
   .section-label {
-    font-size: 11px;
-    font-weight: 700;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--grey-mid);
-    margin-bottom: 20px;
+    font-size: 11px; font-weight: 700; letter-spacing: 0.1em;
+    text-transform: uppercase; color: var(--grey-mid); margin-bottom: 20px;
   }
 
-  /* Guide cards */
-  .guides-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 20px;
-    margin-bottom: 48px;
-  }
+  /* ── TOOL CARDS ── */
+  .tools-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 20px; margin-bottom: 52px; }
+  @media (max-width: 720px) { .tools-grid { grid-template-columns: 1fr; } }
 
-  @media (max-width: 600px) {
-    .guides-grid { grid-template-columns: 1fr; }
-    .hero h1 { font-size: 26px; }
+  .tool-card {
+    background: var(--white); border-radius: 14px; padding: 28px 24px 24px;
+    border: 2px solid #E5E7EB; box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+    display: flex; flex-direction: column;
   }
+  .tool-card.gemini  { border-top: 4px solid var(--google-blue); }
+  .tool-card.nlm     { border-top: 4px solid var(--nlm-green); }
+  .tool-card.cowork  { border-top: 4px solid var(--purple); }
 
-  .guide-card {
-    background: var(--white);
-    border-radius: 14px;
-    padding: 28px;
-    box-shadow: 0 1px 4px rgba(0,0,0,0.07);
-    border: 1px solid #E5E7EB;
-    text-decoration: none;
-    color: inherit;
-    display: block;
-    transition: box-shadow 0.15s, transform 0.15s;
-    position: relative;
-  }
-  .guide-card:hover {
-    box-shadow: 0 6px 20px rgba(107,33,168,0.12);
-    transform: translateY(-2px);
-  }
-  .guide-card.coming-soon {
-    opacity: 0.55;
-    cursor: default;
-    pointer-events: none;
-  }
+  .tool-icon  { font-size: 34px; margin-bottom: 14px; }
+  .tool-name  { font-size: 19px; font-weight: 800; margin-bottom: 4px; }
+  .tool-name.gemini { color: var(--google-blue); }
+  .tool-name.nlm    { color: var(--nlm-green); }
+  .tool-name.cowork { color: var(--purple); }
 
-  .card-icon {
-    font-size: 32px;
-    margin-bottom: 14px;
-    display: block;
+  .tool-who {
+    display: inline-block; font-size: 11px; font-weight: 700;
+    letter-spacing: 0.06em; text-transform: uppercase;
+    padding: 3px 10px; border-radius: 20px; margin-bottom: 14px;
   }
-  .card-title {
-    font-size: 18px;
-    font-weight: 700;
-    color: var(--grey-dark);
-    margin-bottom: 6px;
-  }
-  .card-subtitle {
-    font-size: 13px;
-    color: var(--purple);
-    font-weight: 600;
-    margin-bottom: 10px;
-  }
-  .card-desc {
-    font-size: 14px;
-    color: var(--grey-mid);
-    line-height: 1.7;
-  }
-  .card-badge {
-    position: absolute;
-    top: 16px;
-    right: 16px;
-    background: var(--purple-light);
-    color: var(--purple);
-    font-size: 11px;
-    font-weight: 700;
-    padding: 3px 10px;
-    border-radius: 20px;
-    letter-spacing: 0.04em;
-  }
-  .card-badge.soon {
-    background: #F3F4F6;
-    color: var(--grey-mid);
-  }
-  .card-arrow {
-    display: inline-block;
-    margin-top: 16px;
-    font-size: 13px;
-    font-weight: 600;
-    color: var(--purple);
-  }
+  .tool-who.gemini { background: var(--google-light); color: var(--google-blue); }
+  .tool-who.nlm    { background: var(--nlm-light);    color: var(--nlm-green); }
+  .tool-who.cowork { background: var(--purple-light);  color: var(--purple); }
 
-  /* What is Claude box */
-  .intro-box {
-    background: var(--white);
-    border-radius: 14px;
-    padding: 28px 32px;
-    margin-bottom: 40px;
-    border: 1px solid #E5E7EB;
+  .tool-desc { font-size: 14px; color: var(--grey-mid); line-height: 1.75; margin-bottom: 18px; flex: 1; }
+
+  .tool-uses { list-style: none; margin-bottom: 20px; }
+  .tool-uses li { font-size: 13px; color: var(--grey-dark); padding: 4px 0; }
+  .tool-uses li::before { content: "✓ "; color: var(--grey-mid); }
+
+  .tool-link {
+    display: inline-block; padding: 9px 18px; border-radius: 8px;
+    font-size: 13px; font-weight: 700; text-decoration: none; text-align: center;
+  }
+  .tool-link.gemini { background: var(--google-blue); color: white; }
+  .tool-link.nlm    { background: var(--nlm-green);   color: white; }
+  .tool-link.cowork { background: var(--purple);       color: white; }
+  .tool-link:hover  { opacity: 0.88; }
+
+  /* ── WHO GETS WHAT banner ── */
+  .routing-box {
+    background: var(--white); border-radius: 14px; padding: 28px 32px;
+    border: 1px solid #E5E7EB; margin-bottom: 48px;
     box-shadow: 0 1px 4px rgba(0,0,0,0.06);
   }
-  .intro-box h2 {
-    font-size: 17px;
-    font-weight: 700;
-    color: var(--grey-dark);
-    margin-bottom: 10px;
+  .routing-box h2 { font-size: 17px; font-weight: 700; margin-bottom: 18px; }
+  .routing-table { width: 100%; border-collapse: collapse; font-size: 14px; }
+  .routing-table th {
+    text-align: left; font-size: 11px; font-weight: 700; letter-spacing: 0.07em;
+    text-transform: uppercase; color: var(--grey-mid); padding: 0 12px 10px 0;
+    border-bottom: 2px solid #E5E7EB;
   }
-  .intro-box p {
-    font-size: 14px;
-    color: var(--grey-mid);
-    line-height: 1.8;
+  .routing-table td { padding: 11px 12px 11px 0; border-bottom: 1px solid #F3F4F6; vertical-align: top; line-height: 1.6; }
+  .routing-table tr:last-child td { border-bottom: none; }
+  .pill {
+    display: inline-block; font-size: 11px; font-weight: 700;
+    padding: 2px 10px; border-radius: 20px; white-space: nowrap;
   }
+  .pill.gemini { background: var(--google-light); color: var(--google-blue); }
+  .pill.nlm    { background: var(--nlm-light);    color: var(--nlm-green); }
+  .pill.cowork { background: var(--purple-light);  color: var(--purple); }
 
-  /* Footer */
+  /* ── GUIDE CARDS ── */
+  .guides-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 16px; }
+  @media (max-width: 600px) { .guides-grid { grid-template-columns: 1fr; } }
+
+  .guide-card {
+    background: var(--white); border-radius: 14px; padding: 26px;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.07); border: 1px solid #E5E7EB;
+    text-decoration: none; color: inherit; display: block;
+    transition: box-shadow 0.15s, transform 0.15s; position: relative;
+  }
+  .guide-card:hover { box-shadow: 0 6px 20px rgba(0,0,0,0.1); transform: translateY(-2px); }
+  .guide-card.coming-soon { opacity: 0.5; pointer-events: none; }
+
+  .card-icon     { font-size: 30px; margin-bottom: 12px; display: block; }
+  .card-title    { font-size: 17px; font-weight: 700; margin-bottom: 4px; }
+  .card-subtitle { font-size: 13px; font-weight: 600; margin-bottom: 10px; }
+  .card-subtitle.gemini { color: var(--google-blue); }
+  .card-subtitle.nlm    { color: var(--nlm-green); }
+  .card-subtitle.cowork { color: var(--purple); }
+  .card-subtitle.multi  { color: var(--grey-mid); }
+  .card-desc     { font-size: 13px; color: var(--grey-mid); line-height: 1.7; margin-bottom: 14px; }
+  .card-badge {
+    position: absolute; top: 14px; right: 14px;
+    font-size: 11px; font-weight: 700; padding: 3px 10px; border-radius: 20px;
+  }
+  .card-badge.live { background: #DCFCE7; color: #166534; }
+  .card-badge.soon { background: #F3F4F6; color: var(--grey-mid); }
+  .card-arrow { font-size: 13px; font-weight: 600; color: var(--purple); }
+
+  /* ── PRIVACY NOTE ── */
+  .privacy-note {
+    background: #F0FDF4; border: 1px solid #BBF7D0; border-radius: 12px;
+    padding: 20px 24px; margin-top: 16px; font-size: 14px;
+    color: #166534; line-height: 1.75;
+  }
+  .privacy-note strong { font-weight: 700; }
+
+  /* ── FOOTER ── */
   .footer {
-    background: white;
-    border-top: 1px solid #E5E7EB;
-    padding: 20px 40px;
-    text-align: center;
-    font-size: 13px;
-    color: var(--grey-mid);
+    background: white; border-top: 1px solid #E5E7EB;
+    padding: 20px 40px; text-align: center;
+    font-size: 13px; color: var(--grey-mid);
   }
   .footer a { color: var(--purple); text-decoration: none; }
 </style>
@@ -192,44 +160,144 @@
 <div class="hero">
   <div class="hero-badge">Diocese of Carlisle</div>
   <h1>AI Guides</h1>
-  <p>Practical guides to using Claude + Cowork across the Diocese — written for each team, in plain English.</p>
+  <p>Practical guides to using AI tools across the Diocese — written for each team, in plain English, with data privacy at the centre.</p>
 </div>
 
 <div class="page">
 
-  <div class="intro-box">
-    <h2>🤖 What is Claude?</h2>
-    <p>Claude is an AI assistant built by Anthropic. The Diocese holds a <strong>Claude for Work (Team) licence</strong>, which means your conversations are never used to train the AI and all data is covered by a formal Data Processing Agreement. These guides explain how each team can use it day-to-day — from drafting letters to managing emails, analysing budgets, and automating routine tasks.</p>
+  <!-- ── THE THREE TOOLS ── -->
+  <div class="section-label">The tools available across the Diocese</div>
+  <div class="tools-grid">
+
+    <!-- Gemini -->
+    <div class="tool-card gemini">
+      <div class="tool-icon">🔵</div>
+      <div class="tool-name gemini">Gemini</div>
+      <span class="tool-who gemini">Most staff</span>
+      <p class="tool-desc">Google's AI assistant, available free to the Diocese through the Google Workspace for Nonprofits licence. The everyday AI for general tasks — available to all staff.</p>
+      <ul class="tool-uses">
+        <li>Drafting and improving emails</li>
+        <li>Grammar and proofreading</li>
+        <li>Summarising documents</li>
+        <li>Answering general questions</li>
+        <li>Creating first drafts</li>
+      </ul>
+      <a class="tool-link gemini" href="https://gemini.google.com" target="_blank">Open Gemini ↗</a>
+    </div>
+
+    <!-- NotebookLM -->
+    <div class="tool-card nlm">
+      <div class="tool-icon">📓</div>
+      <div class="tool-name nlm">NotebookLM</div>
+      <span class="tool-who nlm">Admin &amp; governance staff</span>
+      <p class="tool-desc">Google's document intelligence tool. Unlike Gemini, it works exclusively from documents <em>you</em> upload — making it ideal for complex reports, board papers, and governance documents.</p>
+      <ul class="tool-uses">
+        <li>Summarising board papers</li>
+        <li>Querying synod reports</li>
+        <li>Preparing for meetings</li>
+        <li>Understanding policy documents</li>
+        <li>Audio summaries of documents</li>
+      </ul>
+      <a class="tool-link nlm" href="notebooklm/">What is NotebookLM? →</a>
+    </div>
+
+    <!-- Claude + Cowork -->
+    <div class="tool-card cowork">
+      <div class="tool-icon">🖥️</div>
+      <div class="tool-name cowork">Claude + Cowork</div>
+      <span class="tool-who cowork">Managers &amp; power users</span>
+      <p class="tool-desc">Anthropic's AI assistant with the Cowork desktop app — the Diocese's Team licence covers this. More powerful than Gemini for complex, multi-step tasks and automation.</p>
+      <ul class="tool-uses">
+        <li>Automating recurring tasks</li>
+        <li>Microsoft 365 integration</li>
+        <li>Financial documents &amp; reports</li>
+        <li>Complex document workflows</li>
+        <li>Scheduled &amp; background tasks</li>
+      </ul>
+      <a class="tool-link cowork" href="bishops-house/">View guides →</a>
+    </div>
+
   </div>
 
-  <div class="section-label">Available Guides</div>
+  <!-- ── WHO GETS WHAT ── -->
+  <div class="routing-box">
+    <h2>🗺️ Which tool — and for whom?</h2>
+    <table class="routing-table">
+      <thead>
+        <tr>
+          <th>Role</th>
+          <th>Primary tool</th>
+          <th>Notes</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Admin &amp; PA staff</strong></td>
+          <td><span class="pill gemini">Gemini</span></td>
+          <td>Drafting, grammar, summarising — everyday tasks via Google Workspace</td>
+        </tr>
+        <tr>
+          <td><strong>Governance &amp; committees</strong></td>
+          <td><span class="pill gemini">Gemini</span> &nbsp;<span class="pill nlm">NotebookLM</span></td>
+          <td>Gemini for drafting; NotebookLM for querying board papers and reports</td>
+        </tr>
+        <tr>
+          <td><strong>Managers &amp; senior staff</strong></td>
+          <td><span class="pill cowork">Claude + Cowork</span></td>
+          <td>Complex workflows, M365 automation, scheduled tasks — Diocese Team licence</td>
+        </tr>
+        <tr>
+          <td><strong>All staff</strong></td>
+          <td><span class="pill gemini">Gemini</span></td>
+          <td>Available to everyone via the free Google Workspace for Nonprofits account</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 
+  <!-- ── GUIDES ── -->
+  <div class="section-label">Guides by team</div>
   <div class="guides-grid">
 
     <a class="guide-card" href="bishops-house/">
       <span class="card-icon">⛪</span>
-      <div class="card-badge">Available now</div>
+      <span class="card-badge live">Available now</span>
       <div class="card-title">Bishop's House</div>
-      <div class="card-subtitle">Keswick</div>
-      <div class="card-desc">For Ali (Bishop's Chaplain) and the admin team — covering correspondence, diary management, M365 integration, scheduled tasks, financial documents, and data privacy.</div>
+      <div class="card-subtitle cowork">Claude + Cowork</div>
+      <div class="card-desc">For Ali (Bishop's Chaplain) and the Bishop's House admin team — covering correspondence, diary management, M365 integration, scheduled tasks, financial documents, and data privacy.</div>
       <span class="card-arrow">Read guide →</span>
     </a>
 
     <div class="guide-card coming-soon">
       <span class="card-icon">🏛️</span>
-      <div class="card-badge soon">Coming soon</div>
-      <div class="card-title">Church House</div>
-      <div class="card-subtitle">Carlisle</div>
-      <div class="card-desc">For the central diocesan office team — covering communications, HR support, governance documents, and diocesan administration.</div>
+      <span class="card-badge soon">Coming soon</span>
+      <div class="card-title">Church House — Gemini</div>
+      <div class="card-subtitle gemini">Gemini</div>
+      <div class="card-desc">For Church House admin and governance staff — using Gemini via Google Workspace for everyday drafting, summarising, and document tasks.</div>
     </div>
+
+    <div class="guide-card coming-soon">
+      <span class="card-icon">🏛️</span>
+      <span class="card-badge soon">Coming soon</span>
+      <div class="card-title">Church House — Claude</div>
+      <div class="card-subtitle cowork">Claude + Cowork</div>
+      <div class="card-desc">For Church House managers and power users — complex workflows, M365 integration, and automated tasks using the Diocese's Claude Team licence.</div>
+    </div>
+
+    <a class="guide-card" href="notebooklm/">
+      <span class="card-icon">📓</span>
+      <span class="card-badge live">Available now</span>
+      <div class="card-title">NotebookLM</div>
+      <div class="card-subtitle nlm">All teams</div>
+      <div class="card-desc">A guide to using NotebookLM for document research and analysis — what it is, how it differs from Gemini and Cowork, and when to use it.</div>
+      <span class="card-arrow">Read guide →</span>
+    </a>
 
   </div>
 
-  <div class="section-label">About These Guides</div>
-  <div class="intro-box">
-    <h2>📋 How guides are organised</h2>
-    <p>Each guide is tailored to the specific team and their workflows. They include worked examples you can try yourself, step-by-step how-to instructions, and a plain-English section on data privacy and what is and isn't appropriate to use Claude for. New guides will appear here as they are produced.<br><br>
-    Questions or suggestions? Contact <a href="mailto:martin.barker@carlislediocese.org.uk">Marti Barker</a> (IT Support Manager).</p>
+  <!-- ── PRIVACY NOTE ── -->
+  <div class="privacy-note">
+    🔒 <strong>Data &amp; privacy:</strong> Both the Diocese's Claude Team licence and Google Workspace for Nonprofits include formal Data Processing Agreements and explicitly prohibit use of your data for AI model training. Each guide contains a full privacy section. One important rule for Gemini: always access it through your <strong>Diocese Google Workspace account</strong> — not a personal Gmail account — to ensure these protections apply. Questions? Contact <a href="mailto:martin.barker@carlislediocese.org.uk" style="color:#166534;font-weight:600;">Marti Barker</a> (IT Support Manager).
   </div>
 
 </div>
