@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Safeguarding — Church House AI Guide</title>
+<style>
+  :root {
+    --purple:#6B21A8;--purple-light:#F3E8FF;--google-blue:#1A73E8;--google-light:#E8F0FE;
+    --grey-dark:#1F2937;--grey-mid:#6B7280;--grey-light:#F9FAFB;--white:#FFFFFF;
+    --safe:#0F766E;--safe-light:#CCFBF1;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:var(--grey-light);color:var(--grey-dark);}
+  .nav-bar{position:sticky;top:0;z-index:100;background:white;border-bottom:1px solid #E5E7EB;padding:0 32px;display:flex;gap:28px;align-items:center;}
+  .nav-bar a{font-size:13px;font-weight:600;color:var(--grey-mid);text-decoration:none;padding:14px 0;border-bottom:3px solid transparent;}
+  .nav-bar a:hover,.nav-bar a.active{color:var(--grey-dark);border-bottom-color:var(--grey-dark);}
+  .nav-home{margin-right:auto;}
+  .hero{background:linear-gradient(135deg,#065F46 0%,#0F766E 60%,#14B8A6 100%);color:white;padding:48px 40px 40px;text-align:center;}
+  .hero-badge{display:inline-block;background:rgba(255,255,255,0.15);border:1px solid rgba(255,255,255,0.3);border-radius:20px;padding:5px 16px;font-size:12px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;margin-bottom:16px;}
+  .hero h1{font-size:34px;font-weight:800;margin-bottom:10px;}
+  .hero p{font-size:16px;opacity:0.85;max-width:600px;margin:0 auto;line-height:1.7;}
+  .page{max-width:920px;margin:0 auto;padding:44px 24px 72px;}
+  .boundary-box{background:#FEF2F2;border:2px solid #EF4444;border-radius:14px;padding:28px 32px;margin-bottom:36px;}
+  .boundary-box h2{font-size:18px;font-weight:800;color:#991B1B;margin-bottom:12px;}
+  .boundary-box p{font-size:14px;color:#7F1D1D;line-height:1.8;margin-bottom:10px;}
+  .boundary-box p:last-child{margin-bottom:0;}
+  .never-list{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin:14px 0;}
+  @media(max-width:600px){.never-list{grid-template-columns:1fr;}}
+  .never-item{background:#FEE2E2;border-radius:8px;padding:10px 14px;font-size:13px;color:#991B1B;font-weight:600;}
+  .never-item::before{content:"✗ ";}
+  .intro{background:white;border-radius:14px;padding:28px 32px;border:1px solid #E5E7EB;margin-bottom:36px;box-shadow:0 1px 4px rgba(0,0,0,0.06);}
+  .intro p{font-size:15px;color:var(--grey-mid);line-height:1.8;margin-bottom:10px;}
+  .intro p:last-child{margin-bottom:0;}
+  .section-label{font-size:11px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--grey-mid);margin-bottom:18px;}
+  .tools-compare{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-bottom:36px;}
+  @media(max-width:700px){.tools-compare{grid-template-columns:1fr;}}
+  .tool-col{background:white;border-radius:14px;padding:28px;border:1px solid #E5E7EB;box-shadow:0 1px 4px rgba(0,0,0,0.06);}
+  .tool-col.gemini{border-top:4px solid var(--google-blue);}
+  .tool-col.cowork{border-top:4px solid var(--purple);}
+  .tool-col h2{font-size:17px;font-weight:800;margin-bottom:6px;}
+  .tool-col.gemini h2{color:var(--google-blue);}
+  .tool-col.cowork h2{color:var(--purple);}
+  .tool-col .tagline{font-size:12px;font-weight:600;color:var(--grey-mid);margin-bottom:20px;padding-bottom:16px;border-bottom:1px solid #F3F4F6;}
+  .use-case{margin-bottom:18px;}
+  .use-case h3{font-size:14px;font-weight:700;color:var(--grey-dark);margin-bottom:5px;}
+  .use-case p{font-size:13px;color:var(--grey-mid);line-height:1.75;}
+  .try-box{background:var(--grey-light);border-radius:8px;padding:12px 14px;margin-top:8px;font-size:12px;color:var(--grey-dark);line-height:1.6;}
+  .try-box strong{display:block;font-size:11px;text-transform:uppercase;letter-spacing:0.07em;color:var(--grey-mid);margin-bottom:4px;}
+  .cowork .try-box{background:var(--purple-light);}
+  .timesave{background:var(--safe-light);border-left:4px solid var(--safe);border-radius:0 8px 8px 0;padding:10px 14px;margin-top:10px;font-size:12px;color:var(--safe);font-weight:600;}
+  .training-box{background:white;border-radius:14px;padding:28px 32px;border:2px solid var(--safe);margin-bottom:36px;box-shadow:0 1px 4px rgba(0,0,0,0.06);}
+  .training-box h2{font-size:17px;font-weight:800;color:var(--safe);margin-bottom:12px;}
+  .training-box p{font-size:14px;color:var(--grey-mid);line-height:1.8;margin-bottom:10px;}
+  .training-box p:last-child{margin-bottom:0;}
+  .footer{background:white;border-top:1px solid #E5E7EB;padding:20px 40px;text-align:center;font-size:13px;color:var(--grey-mid);}
+  .footer a{color:var(--grey-dark);text-decoration:none;font-weight:600;}
+</style>
+</head>
+<body>
+
+<nav class="nav-bar">
+  <a href="../../" class="nav-home">← All Guides</a>
+  <a href="#boundaries">Boundaries first</a>
+  <a href="#gemini">Gemini</a>
+  <a href="#cowork">Claude + Cowork</a>
+  <a href="#training">Training management</a>
+</nav>
+
+<div class="hero">
+  <div class="hero-badge">Church House — AI Guide</div>
+  <h1>🤝 Safeguarding</h1>
+  <p>Strict guidelines on what AI can and cannot be used for — with practical support for training administration, policy work, and SharePoint organisation.</p>
+</div>
+
+<div class="page">
+
+  <!-- BOUNDARIES FIRST — this goes at the top for Safeguarding -->
+  <div class="boundary-box" id="boundaries">
+    <h2>⛔ This must be read first — absolute limits for Safeguarding</h2>
+    <p>Safeguarding work involves some of the most sensitive personal data the Diocese holds. The rules below are <strong>absolute</strong> — they apply to every AI tool, including Claude + Cowork, Gemini, and any other system. There are no exceptions, regardless of how urgent the task feels.</p>
+    <div class="never-list">
+      <div class="never-item">Case notes or referral details of any kind</div>
+      <div class="never-item">Names or identifiers of individuals subject to safeguarding concerns</div>
+      <div class="never-item">Details of abuse allegations or investigations</div>
+      <div class="never-item">Information that could identify a victim or alleged perpetrator</div>
+      <div class="never-item">DBS check results or criminal record information</div>
+      <div class="never-item">Multi-Agency Safeguarding Hub (MASH) or referral information</div>
+      <div class="never-item">Pastoral or private disclosures shared in confidence</div>
+      <div class="never-item">Children's personal details of any kind</div>
+    </div>
+    <p>If you are ever unsure whether something is safe to share with an AI tool, the answer is: <strong>don't.</strong> Contact Marti Barker (IT Support Manager) if you need guidance.</p>
+  </div>
+
+  <div class="intro">
+    <p>Within those firm limits, there is genuine value AI can offer the Safeguarding team — particularly around the administrative work that surrounds safeguarding rather than the casework itself. Training course management, policy document drafting, guidance materials for parishes, and the SharePoint organisation that underpins it all are all appropriate uses.</p>
+    <p>The Safeguarding team runs a significant volume of training and certification activity across the Diocese. Managing bookings, confirmations, registers, and certificate tracking is time-consuming. This is exactly where AI earns its keep — handling the admin so your team can focus on the work that matters.</p>
+  </div>
+
+  <div class="section-label" id="gemini">What AI can legitimately help with</div>
+  <div class="tools-compare">
+
+    <div class="tool-col gemini">
+      <h2>✨ Gemini</h2>
+      <p class="tagline">Open in your browser · No case data ever</p>
+
+      <div class="use-case">
+        <h3>Draft training course materials and guidance</h3>
+        <p>Gemini can help write or improve safeguarding training descriptions, joining instructions, delegate briefings, and parish guidance documents. All of this is generic — no case information, no named individuals.</p>
+        <div class="try-box">
+          <strong>Try this prompt</strong>
+          "Write a parish safeguarding officer briefing document explaining the Diocese's expectations for safeguarding in a local church setting. Use plain language suitable for volunteers."
+        </div>
+      </div>
+
+      <div class="use-case">
+        <h3>Summarise Church of England guidance updates</h3>
+        <p>When new safeguarding guidance is published by the Church of England or statutory bodies, paste it into Gemini and ask for a plain-English summary — so you can quickly understand what's changed and communicate it to parishes.</p>
+      </div>
+
+      <div class="use-case">
+        <h3>Draft FAQ documents for Parish Safeguarding Officers</h3>
+        <p>Ask Gemini to draft a Q&A document for PSOs covering common situations — when to report, who to contact, what the Diocese expects. Gemini produces a clear first draft that you refine based on your expertise.</p>
+      </div>
+
+      <div class="use-case">
+        <h3>Write policy templates and procedural flowcharts</h3>
+        <p>Gemini can help draft safeguarding policy documents, review and improve existing policies for clarity, and describe procedures in a step-by-step format — always working with generic policy language, never case-specific content.</p>
+      </div>
+
+      <div class="use-case">
+        <h3>Structure safeguarding audit and self-assessment frameworks</h3>
+        <p>Ask Gemini to create a structured self-assessment template for parishes, based on the Church of England's safeguarding framework — with clear questions, response options, and guidance notes.</p>
+      </div>
+    </div>
+
+    <div class="tool-col cowork" id="cowork">
+      <h2>🖥️ Claude + Cowork</h2>
+      <p class="tagline">Training admin · SharePoint · Outlook · No case data ever</p>
+
+      <div class="use-case">
+        <h3>Manage training course bookings via Outlook</h3>
+        <p>When people email to book a training course, Claude can read your Outlook inbox, compile the booking list, send confirmation emails with joining instructions, and flag when you're approaching capacity — without you maintaining a spreadsheet manually.</p>
+        <div class="try-box">
+          <strong>Example workflow</strong>
+          "Read my Outlook inbox for emails about the May Domestic Abuse Awareness training. Create a booking register with names and organisations, and draft confirmation emails with the joining instructions attached."
+        </div>
+        <div class="timesave">⏱ Managing 30 bookings manually: 2 hours. With Claude: 15 minutes.</div>
+      </div>
+
+      <div class="use-case">
+        <h3>Create and send joining instructions automatically</h3>
+        <p>Claude can generate personalised joining instructions for each delegate from a standard template — inserting their name, the course date and location, what to bring, and any preparatory reading — then send them via Outlook as a batch.</p>
+      </div>
+
+      <div class="use-case">
+        <h3>Organise your SharePoint training records</h3>
+        <p>Claude can help bring order to a SharePoint folder structure — renaming files consistently, moving documents into the right folders, and generating a summary of what training records exist and where gaps might be. This is especially useful if SharePoint feels unfamiliar or overwhelming.</p>
+        <div class="timesave">⏱ SharePoint reorganisation that would take a day can be done in under an hour.</div>
+      </div>
+
+      <div class="use-case">
+        <h3>Track and flag expiring certifications</h3>
+        <p>Point Claude at a training records spreadsheet on SharePoint and ask it to identify everyone whose certification is due to expire in the next 3 months — and draft individual reminder emails to each person, ready for you to review and send.</p>
+      </div>
+
+      <div class="use-case">
+        <h3>Build a training attendance register</h3>
+        <p>After a course, Claude can read the booking list and generate a formatted attendance register — with a column for signature, a column to mark who attended, and a summary of non-attendees for follow-up.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="training-box" id="training">
+    <h2>📅 Training management — where AI saves the most time</h2>
+    <p>The Safeguarding team coordinates training across the whole Diocese — courses, certifications, renewals, and the administrative cycle that goes with each. This is high-volume, repetitive work where AI is genuinely transformative.</p>
+    <p>A typical training cycle — announce course, receive bookings, confirm delegates, send joining instructions, create register, chase non-attenders, update records — can be largely automated using Claude + Cowork and Outlook. You set the parameters, Claude handles the correspondence and record-keeping, and you review before anything is sent.</p>
+    <p>None of this involves case information. It's purely administrative — which is exactly why it's safe to use AI for.</p>
+  </div>
+
+</div>
+
+<div class="footer">
+  Diocese of Carlisle &nbsp;·&nbsp; <a href="../../">AI Guides home</a> &nbsp;·&nbsp; <a href="../../responsible-use/">Responsible Use Policy</a> &nbsp;·&nbsp; Maintained by <a href="mailto:martin.barker@carlislediocese.org.uk">Marti Barker</a>
+</div>
+
+</body>
+</html>

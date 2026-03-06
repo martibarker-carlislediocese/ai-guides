@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Property — Church House AI Guide</title>
+<style>
+  :root {
+    --purple:#6B21A8;--purple-light:#F3E8FF;--google-blue:#1A73E8;--google-light:#E8F0FE;
+    --grey-dark:#1F2937;--grey-mid:#6B7280;--grey-light:#F9FAFB;--white:#FFFFFF;
+    --prop:#78350F;--prop-light:#FEF3C7;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:var(--grey-light);color:var(--grey-dark);}
+  .nav-bar{position:sticky;top:0;z-index:100;background:white;border-bottom:1px solid #E5E7EB;padding:0 32px;display:flex;gap:28px;align-items:center;}
+  .nav-bar a{font-size:13px;font-weight:600;color:var(--grey-mid);text-decoration:none;padding:14px 0;border-bottom:3px solid transparent;}
+  .nav-bar a:hover,.nav-bar a.active{color:var(--grey-dark);border-bottom-color:var(--grey-dark);}
+  .nav-home{margin-right:auto;}
+  .hero{background:linear-gradient(135deg,#431407 0%,#9A3412 60%,#C2410C 100%);color:white;padding:48px 40px 40px;text-align:center;}
+  .hero-badge{display:inline-block;background:rgba(255,255,255,0.15);border:1px solid rgba(255,255,255,0.3);border-radius:20px;padding:5px 16px;font-size:12px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;margin-bottom:16px;}
+  .hero h1{font-size:34px;font-weight:800;margin-bottom:10px;}
+  .hero p{font-size:16px;opacity:0.85;max-width:600px;margin:0 auto;line-height:1.7;}
+  .page{max-width:920px;margin:0 auto;padding:44px 24px 72px;}
+  .intro{background:white;border-radius:14px;padding:28px 32px;border:1px solid #E5E7EB;margin-bottom:36px;box-shadow:0 1px 4px rgba(0,0,0,0.06);}
+  .intro p{font-size:15px;color:var(--grey-mid);line-height:1.8;margin-bottom:10px;}
+  .intro p:last-child{margin-bottom:0;}
+  .section-label{font-size:11px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--grey-mid);margin-bottom:18px;}
+  .tools-compare{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-bottom:36px;}
+  @media(max-width:700px){.tools-compare{grid-template-columns:1fr;}}
+  .tool-col{background:white;border-radius:14px;padding:28px;border:1px solid #E5E7EB;box-shadow:0 1px 4px rgba(0,0,0,0.06);}
+  .tool-col.gemini{border-top:4px solid var(--google-blue);}
+  .tool-col.cowork{border-top:4px solid var(--purple);}
+  .tool-col h2{font-size:17px;font-weight:800;margin-bottom:6px;}
+  .tool-col.gemini h2{color:var(--google-blue);}
+  .tool-col.cowork h2{color:var(--purple);}
+  .tool-col .tagline{font-size:12px;font-weight:600;color:var(--grey-mid);margin-bottom:20px;padding-bottom:16px;border-bottom:1px solid #F3F4F6;}
+  .use-case{margin-bottom:18px;}
+  .use-case h3{font-size:14px;font-weight:700;color:var(--grey-dark);margin-bottom:5px;}
+  .use-case p{font-size:13px;color:var(--grey-mid);line-height:1.75;}
+  .try-box{background:var(--grey-light);border-radius:8px;padding:12px 14px;margin-top:8px;font-size:12px;color:var(--grey-dark);line-height:1.6;}
+  .try-box strong{display:block;font-size:11px;text-transform:uppercase;letter-spacing:0.07em;color:var(--grey-mid);margin-bottom:4px;}
+  .cowork .try-box{background:var(--purple-light);}
+  .timesave{background:var(--prop-light);border-left:4px solid var(--prop);border-radius:0 8px 8px 0;padding:10px 14px;margin-top:10px;font-size:12px;color:var(--prop);font-weight:600;}
+  .footer{background:white;border-top:1px solid #E5E7EB;padding:20px 40px;text-align:center;font-size:13px;color:var(--grey-mid);}
+  .footer a{color:var(--grey-dark);text-decoration:none;font-weight:600;}
+</style>
+</head>
+<body>
+
+<nav class="nav-bar">
+  <a href="../../" class="nav-home">← All Guides</a>
+  <a href="#gemini">Gemini</a>
+  <a href="#cowork">Claude + Cowork</a>
+</nav>
+
+<div class="hero">
+  <div class="hero-badge">Church House — AI Guide</div>
+  <h1>🏗️ Property</h1>
+  <p>Managing a large portfolio of buildings, contractors, and inspection cycles — AI as your correspondence engine, record organiser, and document processor.</p>
+</div>
+
+<div class="page">
+
+  <div class="intro">
+    <p>The Property team manages one of the Diocese's most complex portfolios — churches, vicarages, offices, and other buildings across Cumbria, each with its own maintenance history, inspection schedule, and contractor relationships. The correspondence and documentation load is significant: surveys, specifications, planning applications, contractor instructions, and statutory compliance records.</p>
+    <p><strong>Gemini</strong> handles the drafting — contractor letters, survey response notes, specification summaries. <strong>Claude + Cowork</strong> goes further: it can pull together all correspondence with a specific contractor from Outlook, read survey documents from SharePoint, and help maintain the master property records that underpin the team's work.</p>
+  </div>
+
+  <div class="section-label" id="gemini">Gemini — property documents and correspondence</div>
+  <div class="tools-compare">
+
+    <div class="tool-col gemini">
+      <h2>✨ Gemini</h2>
+      <p class="tagline">Open in your browser · No setup · All staff</p>
+
+      <div class="use-case">
+        <h3>Draft contractor instructions and correspondence</h3>
+        <p>Describe the work required and Gemini will write a professional instruction letter to a contractor — clearly setting out the scope, timeline, access arrangements, and any special requirements. Consistent professional tone without starting from scratch each time.</p>
+        <div class="try-box">
+          <strong>Try this prompt</strong>
+          "Write a formal instruction letter to a roofing contractor for emergency repair works to the nave roof at [church name]. Works required: [description]. Access via [details]. Works to be completed by [date]. Diocese of Carlisle is the instructing client."
+        </div>
+      </div>
+
+      <div class="use-case">
+        <h3>Summarise survey and inspection reports</h3>
+        <p>Quinquennial inspections and building condition surveys can run to 50 or more pages. Paste the report into Gemini and ask it to summarise the urgent items, category 1 and 2 defects, and recommended actions — a one-page briefing that non-technical readers can act on.</p>
+        <div class="timesave">⏱ A 60-page quinquennial report summarised in under 3 minutes.</div>
+      </div>
+
+      <div class="use-case">
+        <h3>Write planning application supporting statements</h3>
+        <p>Planning applications for listed buildings require carefully worded supporting statements — explaining the heritage context, the proposed works, and why they are appropriate. Gemini can produce a first draft that your team and any appointed architect then refine.</p>
+      </div>
+
+      <div class="use-case">
+        <h3>Draft responses to quinquennial inspection recommendations</h3>
+        <p>When an architect issues quinquennial recommendations, the PCC and diocese need to respond. Paste the recommendations into Gemini and ask it to draft a structured response — acknowledging each item, indicating the proposed approach, and noting any constraints.</p>
+      </div>
+
+      <div class="use-case">
+        <h3>Create maintenance schedules and asset registers</h3>
+        <p>Ask Gemini to produce a planned maintenance schedule template — with recommended inspection intervals, responsible parties, and typical costs — for a property type such as a Victorian stone church or a 1970s vicarage.</p>
+      </div>
+    </div>
+
+    <div class="tool-col cowork" id="cowork">
+      <h2>🖥️ Claude + Cowork</h2>
+      <p class="tagline">Opens your files · Works with Outlook and SharePoint · Things Gemini can't do</p>
+
+      <div class="use-case">
+        <h3>Pull together all correspondence with a contractor</h3>
+        <p>When a dispute arises, or when you need to review the history of a project, Claude can search your Outlook inbox for all emails with a specific contractor, organise them chronologically, and produce a timeline of what was instructed, what was delivered, and what remains outstanding — without you scrolling through months of emails.</p>
+        <div class="try-box">
+          <strong>Example workflow</strong>
+          "Search my Outlook inbox for all emails to and from [contractor name]. Organise them by date and produce a chronological summary of the project history — what was agreed, what was done, and any outstanding items or disputes."
+        </div>
+        <div class="timesave">⏱ Rebuilding a project correspondence history: half a day → 20 minutes.</div>
+      </div>
+
+      <div class="use-case">
+        <h3>Maintain your property register on SharePoint</h3>
+        <p>Claude can help build and maintain a master property register in SharePoint — with columns for property type, inspection date, next inspection due, responsible officer, and outstanding works. It can read the existing records, flag overdue inspections, and draft reminder emails to relevant PCCs.</p>
+        <div class="timesave">⏱ Identifying all properties with overdue quinquennials: hours → minutes.</div>
+      </div>
+
+      <div class="use-case">
+        <h3>Process multiple survey reports in bulk</h3>
+        <p>If you receive several quinquennial or condition survey reports in a single season, Claude can read each one from SharePoint and produce a comparative summary — ranking buildings by urgency, identifying common defect types, and giving you an overview of the maintenance liability across the portfolio.</p>
+      </div>
+
+      <div class="use-case">
+        <h3>Generate inspection reminder letters automatically</h3>
+        <p>From your property register on SharePoint, Claude can identify which buildings have a quinquennial inspection due in the next 12 months and generate reminder letters to each PCC — personalised with the church name, last inspection date, and the appointed architect's details — ready for your review and sending via Outlook.</p>
+      </div>
+
+      <div class="use-case">
+        <h3>Organise and index historic property documents</h3>
+        <p>SharePoint folders that have accumulated years of documents — surveys, correspondence, specifications, certificates — can be brought into order. Claude can review the folder, rename files consistently, and create a structured index document so the team can find what they need without searching manually.</p>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div class="footer">
+  Diocese of Carlisle &nbsp;·&nbsp; <a href="../../">AI Guides home</a> &nbsp;·&nbsp; <a href="../../responsible-use/">Responsible Use Policy</a> &nbsp;·&nbsp; Maintained by <a href="mailto:martin.barker@carlislediocese.org.uk">Marti Barker</a>
+</div>
+
+</body>
+</html>

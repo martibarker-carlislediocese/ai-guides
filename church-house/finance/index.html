@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Finance — Church House AI Guide</title>
+<style>
+  :root {
+    --purple:#6B21A8;--purple-light:#F3E8FF;--google-blue:#1A73E8;--google-light:#E8F0FE;
+    --nlm:#0F766E;--nlm-light:#CCFBF1;--grey-dark:#1F2937;--grey-mid:#6B7280;
+    --grey-light:#F9FAFB;--white:#FFFFFF;--amber:#B45309;--amber-light:#FEF3C7;
+    --finance:#0369A1;--finance-light:#E0F2FE;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:var(--grey-light);color:var(--grey-dark);}
+  .nav-bar{position:sticky;top:0;z-index:100;background:white;border-bottom:1px solid #E5E7EB;padding:0 32px;display:flex;gap:28px;align-items:center;}
+  .nav-bar a{font-size:13px;font-weight:600;color:var(--grey-mid);text-decoration:none;padding:14px 0;border-bottom:3px solid transparent;}
+  .nav-bar a:hover,.nav-bar a.active{color:var(--grey-dark);border-bottom-color:var(--grey-dark);}
+  .nav-home{margin-right:auto;}
+  .hero{background:linear-gradient(135deg,#0C4A6E 0%,#0369A1 60%,#0EA5E9 100%);color:white;padding:48px 40px 40px;text-align:center;}
+  .hero-badge{display:inline-block;background:rgba(255,255,255,0.15);border:1px solid rgba(255,255,255,0.3);border-radius:20px;padding:5px 16px;font-size:12px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;margin-bottom:16px;}
+  .hero h1{font-size:34px;font-weight:800;margin-bottom:10px;}
+  .hero p{font-size:16px;opacity:0.85;max-width:600px;margin:0 auto;line-height:1.7;}
+  .page{max-width:920px;margin:0 auto;padding:44px 24px 72px;}
+  .intro{background:white;border-radius:14px;padding:28px 32px;border:1px solid #E5E7EB;margin-bottom:36px;box-shadow:0 1px 4px rgba(0,0,0,0.06);}
+  .intro p{font-size:15px;color:var(--grey-mid);line-height:1.8;margin-bottom:10px;}
+  .intro p:last-child{margin-bottom:0;}
+  .section-label{font-size:11px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--grey-mid);margin-bottom:18px;}
+  .tools-compare{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-bottom:36px;}
+  @media(max-width:700px){.tools-compare{grid-template-columns:1fr;}}
+  .tool-col{background:white;border-radius:14px;padding:28px;border:1px solid #E5E7EB;box-shadow:0 1px 4px rgba(0,0,0,0.06);}
+  .tool-col.gemini{border-top:4px solid var(--google-blue);}
+  .tool-col.cowork{border-top:4px solid var(--purple);}
+  .tool-col h2{font-size:17px;font-weight:800;margin-bottom:6px;}
+  .tool-col.gemini h2{color:var(--google-blue);}
+  .tool-col.cowork h2{color:var(--purple);}
+  .tool-col .tagline{font-size:12px;font-weight:600;color:var(--grey-mid);margin-bottom:20px;padding-bottom:16px;border-bottom:1px solid #F3F4F6;}
+  .use-case{margin-bottom:18px;}
+  .use-case h3{font-size:14px;font-weight:700;color:var(--grey-dark);margin-bottom:5px;}
+  .use-case p{font-size:13px;color:var(--grey-mid);line-height:1.75;}
+  .try-box{background:var(--grey-light);border-radius:8px;padding:12px 14px;margin-top:8px;font-size:12px;color:var(--grey-dark);line-height:1.6;}
+  .try-box strong{display:block;font-size:11px;text-transform:uppercase;letter-spacing:0.07em;color:var(--grey-mid);margin-bottom:4px;}
+  .cowork .try-box{background:var(--purple-light);}
+  .timesave{background:var(--finance-light);border-left:4px solid var(--finance);border-radius:0 8px 8px 0;padding:10px 14px;margin-top:10px;font-size:12px;color:var(--finance);font-weight:600;}
+  .highlight-box{background:white;border-radius:14px;padding:28px 32px;border:2px solid var(--purple);margin-bottom:36px;box-shadow:0 1px 4px rgba(0,0,0,0.06);}
+  .highlight-box h2{font-size:17px;font-weight:800;color:var(--purple);margin-bottom:12px;}
+  .highlight-box p{font-size:14px;color:var(--grey-mid);line-height:1.8;margin-bottom:10px;}
+  .highlight-box p:last-child{margin-bottom:0;}
+  .safety-box{background:#FEF2F2;border:1px solid #FECACA;border-radius:14px;padding:28px 32px;margin-bottom:36px;}
+  .safety-box h2{font-size:17px;font-weight:800;color:#991B1B;margin-bottom:16px;}
+  .safety-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+  @media(max-width:600px){.safety-grid{grid-template-columns:1fr;}}
+  .safety-ok{background:#F0FDF4;border-radius:10px;padding:16px 18px;}
+  .safety-no{background:#FEF2F2;border:1px solid #FECACA;border-radius:10px;padding:16px 18px;}
+  .safety-ok h3{font-size:13px;font-weight:700;color:#166534;margin-bottom:8px;}
+  .safety-no h3{font-size:13px;font-weight:700;color:#991B1B;margin-bottom:8px;}
+  .safety-ok li,.safety-no li{font-size:12px;line-height:1.8;list-style:none;padding:2px 0;}
+  .safety-ok li::before{content:"✓ ";color:#166534;font-weight:700;}
+  .safety-no li::before{content:"✗ ";color:#991B1B;font-weight:700;}
+  .footer{background:white;border-top:1px solid #E5E7EB;padding:20px 40px;text-align:center;font-size:13px;color:var(--grey-mid);}
+  .footer a{color:var(--grey-dark);text-decoration:none;font-weight:600;}
+</style>
+</head>
+<body>
+
+<nav class="nav-bar">
+  <a href="../../" class="nav-home">← All Guides</a>
+  <a href="#gemini">Gemini</a>
+  <a href="#cowork">Claude + Cowork</a>
+  <a href="#safety">Data safety</a>
+</nav>
+
+<div class="hero">
+  <div class="hero-badge">Church House — AI Guide</div>
+  <h1>💰 Finance</h1>
+  <p>How AI tools can reduce time spent on routine financial reporting, correspondence, and analysis — so your team can focus on the work that requires human judgement.</p>
+</div>
+
+<div class="page">
+
+  <div class="intro">
+    <p>Much of what the Finance team produces — management account narratives, grant reports, trustee updates, supplier correspondence — follows a consistent structure every month. AI won't replace the judgement involved in financial decision-making, but it can draft the words, spot anomalies in spreadsheet data, and handle the routine correspondence that consumes hours every cycle.</p>
+    <p>There are two tools available to you. <strong>Gemini</strong> is the everyday AI — open it in your browser and start typing. <strong>Claude + Cowork</strong> goes further: it can open files directly from your computer, read your Sage 200 Excel exports, and work with Outlook — without you copying and pasting anything.</p>
+  </div>
+
+  <div class="section-label" id="gemini">Start here — Gemini for everyday finance tasks</div>
+  <div class="tools-compare">
+
+    <div class="tool-col gemini">
+      <h2>✨ Gemini</h2>
+      <p class="tagline">Open in your browser · No setup · All staff</p>
+
+      <div class="use-case">
+        <h3>Write management account commentary</h3>
+        <p>Paste in a table of figures and ask Gemini to write the explanatory narrative. It will describe variances, flag movements, and frame the commentary in professional language — ready for you to review and adjust.</p>
+        <div class="try-box">
+          <strong>Try this prompt</strong>
+          "Here is our income and expenditure for March versus budget. Write a 3-paragraph management commentary explaining the main variances, in plain English suitable for our Finance Committee."
+        </div>
+      </div>
+
+      <div class="use-case">
+        <h3>Draft trustee and PCC financial reports</h3>
+        <p>Gemini can turn a set of figures into a readable narrative report. Describe what happened — which income lines moved and why — and it will write the report around your explanation.</p>
+      </div>
+
+      <div class="use-case">
+        <h3>Explain accounting concepts in plain English</h3>
+        <p>Need to explain restricted funds, the Charities Act requirements, or why the balance sheet has changed to a trustee who isn't an accountant? Gemini can translate financial language into clear prose.</p>
+        <div class="try-box">
+          <strong>Try this prompt</strong>
+          "Explain the difference between restricted and unrestricted funds to a church warden who has no accounting background."
+        </div>
+      </div>
+
+      <div class="use-case">
+        <h3>Write grant application financial sections</h3>
+        <p>Paste in your budget figures and let Gemini draft the supporting narrative for grant applications — explaining what the money is for, how it will be spent, and how you will account for it.</p>
+      </div>
+
+      <div class="use-case">
+        <h3>Draft financial policy templates</h3>
+        <p>Ask Gemini to draft a expenses policy, a purchasing policy, or a reserves policy — then adapt it to the Diocese's specifics. A first draft in minutes rather than starting from a blank page.</p>
+      </div>
+    </div>
+
+    <div class="tool-col cowork" id="cowork">
+      <h2>🖥️ Claude + Cowork</h2>
+      <p class="tagline">Opens your files · Works with Outlook · Things Gemini can't do</p>
+
+      <div class="use-case">
+        <h3>Read your Sage 200 Excel exports</h3>
+        <p>Sage 200 doesn't connect directly to AI — but your Excel exports do. Export your month-end trial balance, aged creditors, or any Sage report to Excel, and Claude can open it directly, read across every row and column, and do the analysis for you.</p>
+        <div class="try-box">
+          <strong>Example workflow</strong>
+          Export your trial balance from Sage 200. Tell Claude: "Open this file and flag any expense line that has moved by more than 15% versus the same period last year, then draft a one-sentence explanation I can review for each." Done in under a minute.
+        </div>
+        <div class="timesave">⏱ What takes 45 minutes of manual comparison takes 2 minutes with Claude.</div>
+      </div>
+
+      <div class="use-case">
+        <h3>Work across your linked Excel workbooks</h3>
+        <p>If your budget model spans multiple linked Excel sheets — common when workbooks pull figures from Sage — Claude can open the master file, navigate the linked sheets, read the totals across all tabs, and produce a summary. It will also flag if a link appears broken or a cell is showing an error value.</p>
+      </div>
+
+      <div class="use-case">
+        <h3>Generate month-end narrative from your actual figures</h3>
+        <p>Point Claude at your month-end Excel file and ask it to draft the management account commentary directly from the numbers — no copy-pasting figures into a chat window. Claude reads the file and writes the narrative using the actual data.</p>
+        <div class="try-box">
+          <strong>Example workflow</strong>
+          "Open March_Management_Accounts.xlsx and write a Finance Committee narrative explaining income versus budget, expenditure movements, and the overall surplus/deficit position."
+        </div>
+      </div>
+
+      <div class="use-case">
+        <h3>Process supplier and grant correspondence via Outlook</h3>
+        <p>Claude can search your Outlook inbox for emails relating to a specific supplier or grant, pull them together into a timeline of what's been agreed and what's outstanding, and draft a chasing email or acknowledgement — without you scrolling through months of emails.</p>
+        <div class="timesave">⏱ A 30-minute inbox trawl becomes a 2-minute task.</div>
+      </div>
+
+      <div class="use-case">
+        <h3>Maintain a grant tracker on SharePoint</h3>
+        <p>Claude can read a SharePoint grant tracking spreadsheet and, when you receive a new grant email in Outlook, help you update the tracker, note key deadlines, and draft a receipt acknowledgement — all from one instruction.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="highlight-box">
+    <h2>💡 A note on Sage 200</h2>
+    <p>Claude cannot connect directly to Sage 200's database — it works with the files you export from it. The good news is that almost everything Finance needs — trial balances, aged reports, budget comparisons, payroll summaries — can be exported from Sage to Excel in seconds. From that point, Claude can do the analytical and narrative work that would otherwise take you significant time.</p>
+    <p>If your team works with Excel spreadsheets that pull data directly from Sage via linked cells, Claude can open these too. It reads the values as they appear in the spreadsheet and can work with whatever data is visible, including spotting where links have broken or where figures look unusual.</p>
+  </div>
+
+  <div class="safety-box" id="safety">
+    <h2>🔒 Data safety for Finance</h2>
+    <div class="safety-grid">
+      <div class="safety-ok">
+        <h3>Fine to share with AI tools</h3>
+        <ul>
+          <li>Aggregated income and expenditure figures</li>
+          <li>Budget comparisons and variance analysis</li>
+          <li>Grant narratives and application text</li>
+          <li>Policy templates and draft documents</li>
+          <li>Report commentary and trustee updates</li>
+          <li>Supplier correspondence (general)</li>
+        </ul>
+      </div>
+      <div class="safety-no">
+        <h3>Do not share with any AI tool</h3>
+        <ul>
+          <li>Individual staff salary or payroll details</li>
+          <li>Bank account or sort code numbers</li>
+          <li>Full supplier account or banking details</li>
+          <li>National insurance or tax reference numbers</li>
+          <li>Individual expense claims with personal details</li>
+          <li>Passwords or login credentials for any system</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div class="footer">
+  Diocese of Carlisle &nbsp;·&nbsp; <a href="../../">AI Guides home</a> &nbsp;·&nbsp; <a href="../../responsible-use/">Responsible Use Policy</a> &nbsp;·&nbsp; Maintained by <a href="mailto:martin.barker@carlislediocese.org.uk">Marti Barker</a>
+</div>
+
+</body>
+</html>

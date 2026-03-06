@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HR & Governance — Church House AI Guide</title>
+<style>
+  :root {
+    --purple:#6B21A8;--purple-light:#F3E8FF;--google-blue:#1A73E8;--google-light:#E8F0FE;
+    --grey-dark:#1F2937;--grey-mid:#6B7280;--grey-light:#F9FAFB;--white:#FFFFFF;
+    --hr:#7C3AED;--hr-light:#EDE9FE;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:var(--grey-light);color:var(--grey-dark);}
+  .nav-bar{position:sticky;top:0;z-index:100;background:white;border-bottom:1px solid #E5E7EB;padding:0 32px;display:flex;gap:28px;align-items:center;}
+  .nav-bar a{font-size:13px;font-weight:600;color:var(--grey-mid);text-decoration:none;padding:14px 0;border-bottom:3px solid transparent;}
+  .nav-bar a:hover,.nav-bar a.active{color:var(--grey-dark);border-bottom-color:var(--grey-dark);}
+  .nav-home{margin-right:auto;}
+  .hero{background:linear-gradient(135deg,#4C1D95 0%,#6D28D9 60%,#8B5CF6 100%);color:white;padding:48px 40px 40px;text-align:center;}
+  .hero-badge{display:inline-block;background:rgba(255,255,255,0.15);border:1px solid rgba(255,255,255,0.3);border-radius:20px;padding:5px 16px;font-size:12px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;margin-bottom:16px;}
+  .hero h1{font-size:34px;font-weight:800;margin-bottom:10px;}
+  .hero p{font-size:16px;opacity:0.85;max-width:600px;margin:0 auto;line-height:1.7;}
+  .page{max-width:920px;margin:0 auto;padding:44px 24px 72px;}
+  .intro{background:white;border-radius:14px;padding:28px 32px;border:1px solid #E5E7EB;margin-bottom:36px;box-shadow:0 1px 4px rgba(0,0,0,0.06);}
+  .intro p{font-size:15px;color:var(--grey-mid);line-height:1.8;margin-bottom:10px;}
+  .intro p:last-child{margin-bottom:0;}
+  .section-label{font-size:11px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--grey-mid);margin-bottom:18px;}
+  .tools-compare{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-bottom:36px;}
+  @media(max-width:700px){.tools-compare{grid-template-columns:1fr;}}
+  .tool-col{background:white;border-radius:14px;padding:28px;border:1px solid #E5E7EB;box-shadow:0 1px 4px rgba(0,0,0,0.06);}
+  .tool-col.gemini{border-top:4px solid var(--google-blue);}
+  .tool-col.cowork{border-top:4px solid var(--purple);}
+  .tool-col h2{font-size:17px;font-weight:800;margin-bottom:6px;}
+  .tool-col.gemini h2{color:var(--google-blue);}
+  .tool-col.cowork h2{color:var(--purple);}
+  .tool-col .tagline{font-size:12px;font-weight:600;color:var(--grey-mid);margin-bottom:20px;padding-bottom:16px;border-bottom:1px solid #F3F4F6;}
+  .use-case{margin-bottom:18px;}
+  .use-case h3{font-size:14px;font-weight:700;color:var(--grey-dark);margin-bottom:5px;}
+  .use-case p{font-size:13px;color:var(--grey-mid);line-height:1.75;}
+  .try-box{background:var(--grey-light);border-radius:8px;padding:12px 14px;margin-top:8px;font-size:12px;color:var(--grey-dark);line-height:1.6;}
+  .try-box strong{display:block;font-size:11px;text-transform:uppercase;letter-spacing:0.07em;color:var(--grey-mid);margin-bottom:4px;}
+  .cowork .try-box{background:var(--purple-light);}
+  .timesave{background:var(--hr-light);border-left:4px solid var(--hr);border-radius:0 8px 8px 0;padding:10px 14px;margin-top:10px;font-size:12px;color:var(--hr);font-weight:600;}
+  .highlight-box{background:white;border-radius:14px;padding:28px 32px;border:2px solid var(--purple);margin-bottom:36px;box-shadow:0 1px 4px rgba(0,0,0,0.06);}
+  .highlight-box h2{font-size:17px;font-weight:800;color:var(--purple);margin-bottom:12px;}
+  .highlight-box p{font-size:14px;color:var(--grey-mid);line-height:1.8;margin-bottom:10px;}
+  .highlight-box p:last-child{margin-bottom:0;}
+  .safety-box{background:#FEF2F2;border:1px solid #FECACA;border-radius:14px;padding:28px 32px;margin-bottom:36px;}
+  .safety-box h2{font-size:17px;font-weight:800;color:#991B1B;margin-bottom:16px;}
+  .safety-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+  @media(max-width:600px){.safety-grid{grid-template-columns:1fr;}}
+  .safety-ok{background:#F0FDF4;border-radius:10px;padding:16px 18px;}
+  .safety-no{background:#FEF2F2;border:1px solid #FECACA;border-radius:10px;padding:16px 18px;}
+  .safety-ok h3{font-size:13px;font-weight:700;color:#166534;margin-bottom:8px;}
+  .safety-no h3{font-size:13px;font-weight:700;color:#991B1B;margin-bottom:8px;}
+  .safety-ok li,.safety-no li{font-size:12px;line-height:1.8;list-style:none;padding:2px 0;}
+  .safety-ok li::before{content:"✓ ";color:#166534;font-weight:700;}
+  .safety-no li::before{content:"✗ ";color:#991B1B;font-weight:700;}
+  .footer{background:white;border-top:1px solid #E5E7EB;padding:20px 40px;text-align:center;font-size:13px;color:var(--grey-mid);}
+  .footer a{color:var(--grey-dark);text-decoration:none;font-weight:600;}
+</style>
+</head>
+<body>
+
+<nav class="nav-bar">
+  <a href="../../" class="nav-home">← All Guides</a>
+  <a href="#gemini">Gemini</a>
+  <a href="#cowork">Claude + Cowork</a>
+  <a href="#sar">SARs</a>
+  <a href="#safety">Data safety</a>
+</nav>
+
+<div class="hero">
+  <div class="hero-badge">Church House — AI Guide</div>
+  <h1>👥 HR &amp; Governance</h1>
+  <p>From job adverts and minutes to Subject Access Requests — practical AI tools that cut administrative overhead and keep the Diocese organised.</p>
+</div>
+
+<div class="page">
+
+  <div class="intro">
+    <p>HR and Governance teams deal with high volumes of structured but time-consuming work — drafting job adverts, taking minutes, organising committee papers, and responding to data requests. Much of this follows patterns that AI handles well. The key is knowing which tasks are safe to delegate and which need human oversight.</p>
+    <p><strong>Gemini</strong> handles everyday drafting and document work in your browser. <strong>Claude + Cowork</strong> goes further — it can read files from SharePoint, process Outlook email threads, and help organise complex document sets without you copying and pasting anything.</p>
+  </div>
+
+  <div class="section-label" id="gemini">Gemini — everyday HR drafting</div>
+  <div class="tools-compare">
+
+    <div class="tool-col gemini">
+      <h2>✨ Gemini</h2>
+      <p class="tagline">Open in your browser · No setup · All staff</p>
+
+      <div class="use-case">
+        <h3>Write job adverts and job descriptions</h3>
+        <p>Paste in the key responsibilities and requirements and Gemini will produce a well-structured, professional job advert — in plain English, with consistent formatting. It can write for different audiences: formal for diocesan roles, more accessible for parish-facing positions.</p>
+        <div class="try-box">
+          <strong>Try this prompt</strong>
+          "Write a job advert for a [role title] at the Diocese of Carlisle. The role involves [key responsibilities]. We're looking for someone with [requirements]. The salary is [range]. Use an approachable but professional tone."
+        </div>
+      </div>
+
+      <div class="use-case">
+        <h3>Create interview question banks</h3>
+        <p>Describe the role and Gemini will generate a structured set of interview questions — including competency-based questions, scenario questions, and questions that probe values alignment. A useful starting point that you can refine.</p>
+      </div>
+
+      <div class="use-case">
+        <h3>Draft induction materials and handbooks</h3>
+        <p>Give Gemini a list of topics to cover and it will produce a structured draft of induction materials — welcome sections, key policies summary, who's who, and what new starters need to know in their first week.</p>
+      </div>
+
+      <div class="use-case">
+        <h3>Summarise HR policies in plain English</h3>
+        <p>Paste in a formal policy document and ask Gemini to write a plain-English summary for staff — turning dense policy language into something readable and practical.</p>
+        <div class="try-box">
+          <strong>Try this prompt</strong>
+          "Summarise this disciplinary policy in plain English for a member of staff who has never read an HR policy before. Focus on what they actually need to know."
+        </div>
+      </div>
+
+      <div class="use-case">
+        <h3>Draft appraisal templates and forms</h3>
+        <p>Gemini can produce structured appraisal templates, objective-setting frameworks, and self-evaluation forms — tailored to Diocese roles and values.</p>
+      </div>
+    </div>
+
+    <div class="tool-col cowork" id="cowork">
+      <h2>🖥️ Claude + Cowork</h2>
+      <p class="tagline">Opens your files · Works with Outlook and SharePoint · Things Gemini can't do</p>
+
+      <div class="use-case">
+        <h3>Minutes to action tracker — automatically</h3>
+        <p>Drop a set of meeting minutes from SharePoint and Claude will extract every action point, identify who is responsible, assign a suggested deadline, and format everything as a table — then draft individual follow-up emails to each action owner.</p>
+        <div class="try-box">
+          <strong>Example workflow</strong>
+          "Open the March Finance Committee minutes from SharePoint. Extract all action points, list who is responsible for each, and draft a follow-up email to each person with their specific actions."
+        </div>
+        <div class="timesave">⏱ 45 minutes of post-meeting admin becomes a 5-minute review task.</div>
+      </div>
+
+      <div class="use-case">
+        <h3>Organise committee and board papers</h3>
+        <p>Claude can read a folder of synod or committee papers from SharePoint, summarise each document, and produce a single briefing note — so decision-makers arrive at meetings prepared rather than overwhelmed by the volume of papers.</p>
+      </div>
+
+      <div class="use-case">
+        <h3>Build and maintain an organisation structure</h3>
+        <p>Point Claude at a SharePoint list or spreadsheet of staff roles and reporting lines and it will help you structure, update, and export the information — ready for an org chart tool or for inclusion in board papers.</p>
+      </div>
+
+      <div class="use-case">
+        <h3>Process recruitment applications from Outlook</h3>
+        <p>When applications arrive in Outlook, Claude can read them, extract key information (name, experience, qualifications), compile a comparison table, and flag which candidates meet the essential criteria — before you've opened a single email manually.</p>
+        <div class="timesave">⏱ Longlisting 20 applications: 2 hours manually, 15 minutes with Claude.</div>
+      </div>
+
+      <div class="use-case">
+        <h3>Draft contract and offer letter templates</h3>
+        <p>Working from a master template on SharePoint, Claude can populate personalised offer letters or contracts for each new appointment — substituting the correct role title, salary, start date, and terms — ready for your review and signature.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="highlight-box" id="sar">
+    <h2>📂 Subject Access Requests — a proven Diocese use case</h2>
+    <p>The Diocese IT team has already used Claude + Cowork to successfully process a Subject Access Request (SAR) — one of the most time-consuming HR obligations. What would typically take days of manual document review and redaction was completed in a fraction of the time.</p>
+    <p>Here's what Claude can do with a SAR: when you receive a SAR, you need to collect all relevant documents, redact information about third parties, organise everything chronologically, and produce a packaged response. Claude can read document folders from SharePoint, identify which files contain the data subject's information, redact third-party names and details, and organise the output into a structured response pack.</p>
+    <p>This is not a theoretical use case — it has been done successfully within the Diocese. Contact Marti Barker (IT Support Manager) if your team receives a SAR and you'd like support running this process.</p>
+  </div>
+
+  <div class="safety-box" id="safety">
+    <h2>🔒 Data safety for HR &amp; Governance</h2>
+    <div class="safety-grid">
+      <div class="safety-ok">
+        <h3>Fine to share with AI tools</h3>
+        <ul>
+          <li>Job advert and job description drafts</li>
+          <li>Interview question templates</li>
+          <li>Policy documents and handbook drafts</li>
+          <li>Anonymised meeting minutes and action logs</li>
+          <li>Committee paper summaries (non-confidential)</li>
+          <li>Induction materials and general HR templates</li>
+        </ul>
+      </div>
+      <div class="safety-no">
+        <h3>Do not share with any AI tool</h3>
+        <ul>
+          <li>Individual disciplinary or grievance case details</li>
+          <li>Specific named staff performance information</li>
+          <li>Medical or occupational health information</li>
+          <li>Salary or payroll details for named individuals</li>
+          <li>Unredacted SAR documents (use Claude + Cowork for redaction — don't paste into Gemini)</li>
+          <li>DBS or criminal record information</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div class="footer">
+  Diocese of Carlisle &nbsp;·&nbsp; <a href="../../">AI Guides home</a> &nbsp;·&nbsp; <a href="../../responsible-use/">Responsible Use Policy</a> &nbsp;·&nbsp; Maintained by <a href="mailto:martin.barker@carlislediocese.org.uk">Marti Barker</a>
+</div>
+
+</body>
+</html>

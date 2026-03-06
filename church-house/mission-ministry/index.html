@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mission & Ministry — Church House AI Guide</title>
+<style>
+  :root {
+    --purple:#6B21A8;--purple-light:#F3E8FF;--google-blue:#1A73E8;--google-light:#E8F0FE;
+    --grey-dark:#1F2937;--grey-mid:#6B7280;--grey-light:#F9FAFB;--white:#FFFFFF;
+    --mm:#7C3AED;--mm-light:#EDE9FE;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:var(--grey-light);color:var(--grey-dark);}
+  .nav-bar{position:sticky;top:0;z-index:100;background:white;border-bottom:1px solid #E5E7EB;padding:0 32px;display:flex;gap:28px;align-items:center;}
+  .nav-bar a{font-size:13px;font-weight:600;color:var(--grey-mid);text-decoration:none;padding:14px 0;border-bottom:3px solid transparent;}
+  .nav-bar a:hover,.nav-bar a.active{color:var(--grey-dark);border-bottom-color:var(--grey-dark);}
+  .nav-home{margin-right:auto;}
+  .hero{background:linear-gradient(135deg,#3B0764 0%,#7C3AED 60%,#A78BFA 100%);color:white;padding:48px 40px 40px;text-align:center;}
+  .hero-badge{display:inline-block;background:rgba(255,255,255,0.15);border:1px solid rgba(255,255,255,0.3);border-radius:20px;padding:5px 16px;font-size:12px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;margin-bottom:16px;}
+  .hero h1{font-size:34px;font-weight:800;margin-bottom:10px;}
+  .hero p{font-size:16px;opacity:0.85;max-width:600px;margin:0 auto;line-height:1.7;}
+  .page{max-width:920px;margin:0 auto;padding:44px 24px 72px;}
+  .intro{background:white;border-radius:14px;padding:28px 32px;border:1px solid #E5E7EB;margin-bottom:36px;box-shadow:0 1px 4px rgba(0,0,0,0.06);}
+  .intro p{font-size:15px;color:var(--grey-mid);line-height:1.8;margin-bottom:10px;}
+  .intro p:last-child{margin-bottom:0;}
+  .section-label{font-size:11px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--grey-mid);margin-bottom:18px;}
+  .tools-compare{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-bottom:36px;}
+  @media(max-width:700px){.tools-compare{grid-template-columns:1fr;}}
+  .tool-col{background:white;border-radius:14px;padding:28px;border:1px solid #E5E7EB;box-shadow:0 1px 4px rgba(0,0,0,0.06);}
+  .tool-col.gemini{border-top:4px solid var(--google-blue);}
+  .tool-col.cowork{border-top:4px solid var(--purple);}
+  .tool-col h2{font-size:17px;font-weight:800;margin-bottom:6px;}
+  .tool-col.gemini h2{color:var(--google-blue);}
+  .tool-col.cowork h2{color:var(--purple);}
+  .tool-col .tagline{font-size:12px;font-weight:600;color:var(--grey-mid);margin-bottom:20px;padding-bottom:16px;border-bottom:1px solid #F3F4F6;}
+  .use-case{margin-bottom:18px;}
+  .use-case h3{font-size:14px;font-weight:700;color:var(--grey-dark);margin-bottom:5px;}
+  .use-case p{font-size:13px;color:var(--grey-mid);line-height:1.75;}
+  .try-box{background:var(--grey-light);border-radius:8px;padding:12px 14px;margin-top:8px;font-size:12px;color:var(--grey-dark);line-height:1.6;}
+  .try-box strong{display:block;font-size:11px;text-transform:uppercase;letter-spacing:0.07em;color:var(--grey-mid);margin-bottom:4px;}
+  .cowork .try-box{background:var(--purple-light);}
+  .timesave{background:var(--mm-light);border-left:4px solid var(--mm);border-radius:0 8px 8px 0;padding:10px 14px;margin-top:10px;font-size:12px;color:var(--mm);font-weight:600;}
+  .note-box{background:white;border-radius:14px;padding:24px 28px;border:1px solid #E5E7EB;margin-bottom:36px;font-size:14px;color:var(--grey-mid);line-height:1.8;box-shadow:0 1px 4px rgba(0,0,0,0.06);}
+  .note-box strong{color:var(--grey-dark);}
+  .footer{background:white;border-top:1px solid #E5E7EB;padding:20px 40px;text-align:center;font-size:13px;color:var(--grey-mid);}
+  .footer a{color:var(--grey-dark);text-decoration:none;font-weight:600;}
+</style>
+</head>
+<body>
+
+<nav class="nav-bar">
+  <a href="../../" class="nav-home">← All Guides</a>
+  <a href="#gemini">Gemini</a>
+  <a href="#cowork">Claude + Cowork</a>
+</nav>
+
+<div class="hero">
+  <div class="hero-badge">Church House — AI Guide</div>
+  <h1>🕊️ Mission &amp; Ministry</h1>
+  <p>Supporting parish ministry, events, retreat programmes, and diocesan resources — with AI handling the administrative and creative work so your team can focus on the ministry itself.</p>
+</div>
+
+<div class="page">
+
+  <div class="intro">
+    <p>The Mission and Ministry team produces a constant flow of resources, communications, and event management work — retreat programmes, training events, parish guidance, liturgical materials, and outreach resources. Much of this is creative and contextual work where AI is genuinely useful as a drafting and organising partner, without replacing the theological judgement and pastoral sensitivity that underpins it.</p>
+    <p><strong>Gemini</strong> is strong for creative drafting, summarising theological documents, and producing event materials. <strong>Claude + Cowork</strong> adds the ability to manage event bookings through Outlook, organise resources on SharePoint, and handle the administrative cycle around retreats and training days.</p>
+  </div>
+
+  <div class="section-label" id="gemini">Gemini — resources, events and communications</div>
+  <div class="tools-compare">
+
+    <div class="tool-col gemini">
+      <h2>✨ Gemini</h2>
+      <p class="tagline">Open in your browser · No setup · All staff</p>
+
+      <div class="use-case">
+        <h3>Draft service orders and liturgy outlines</h3>
+        <p>Give Gemini the theme, season, and readings and it will produce a structured service order — with suggested prayers, responses, and a sermon outline. A strong first draft that your team shapes around the specific occasion and community.</p>
+        <div class="try-box">
+          <strong>Try this prompt</strong>
+          "Draft a service order for an Advent Sunday morning service suitable for a mixed congregation including families. Theme: waiting and hope. Readings: Isaiah 40:1-11, Mark 1:1-8. Include a children's address outline."
+        </div>
+      </div>
+
+      <div class="use-case">
+        <h3>Create retreat and training day programmes</h3>
+        <p>Describe the theme, audience, and length of your retreat, and Gemini will produce a structured programme — session titles, timings, suggested activities, and reflective questions. A useful scaffold for any planning meeting.</p>
+      </div>
+
+      <div class="use-case">
+        <h3>Write event publicity and promotional materials</h3>
+        <p>Gemini can draft posters, social media posts, email announcements, and parish bulletin notices for any event — matching the tone and audience you specify. Multiple versions for different channels from one brief.</p>
+        <div class="try-box">
+          <strong>Try this prompt</strong>
+          "Write a parish bulletin announcement and a short social media post for a Quiet Day on [date] at [venue], themed around Lenten reflection. Audience: regular churchgoers aged 40+. Keep the bulletin version to 80 words."
+        </div>
+      </div>
+
+      <div class="use-case">
+        <h3>Summarise theological documents and reports</h3>
+        <p>When the Church of England or Diocese publishes new reports — on evangelism, discipleship, or ministry strategy — paste the key sections into Gemini and ask for a plain-English summary suitable for sharing with parish clergy or lay leaders.</p>
+      </div>
+
+      <div class="use-case">
+        <h3>Write grant applications for ministry projects</h3>
+        <p>Describe the project and Gemini will help structure a grant application — articulating the need, the proposed activity, the expected outcomes, and how you will evaluate success. A much faster starting point than a blank page.</p>
+      </div>
+    </div>
+
+    <div class="tool-col cowork" id="cowork">
+      <h2>🖥️ Claude + Cowork</h2>
+      <p class="tagline">Opens your files · Works with Outlook and SharePoint · Things Gemini can't do</p>
+
+      <div class="use-case">
+        <h3>Manage event bookings via Outlook</h3>
+        <p>When people email to book a retreat, Quiet Day, or training event, Claude can read your Outlook inbox, compile the booking list, check for capacity, send confirmation emails with joining instructions, and flag any special requirements mentioned — all without you maintaining a manual spreadsheet.</p>
+        <div class="try-box">
+          <strong>Example workflow</strong>
+          "Read my inbox for emails about the October Quiet Day at Rydal Hall. Create a booking register with names and contact details. Send confirmation emails to everyone who has booked, using the standard joining instructions template."
+        </div>
+        <div class="timesave">⏱ Managing 25 retreat bookings: 3 hours manually → 20 minutes with Claude.</div>
+      </div>
+
+      <div class="use-case">
+        <h3>Organise ministry resources on SharePoint</h3>
+        <p>Claude can help bring order to a SharePoint resource library — renaming files consistently, moving resources into logical folders by theme or season, and generating a structured index so clergy and parish workers can find what they need without asking.</p>
+      </div>
+
+      <div class="use-case">
+        <h3>Chase non-responders and send reminders</h3>
+        <p>Claude can compare your booking list against your Outlook contacts to identify who has been invited but not responded, then draft and send reminder emails — personalised with each person's name — ready for your review before sending.</p>
+      </div>
+
+      <div class="use-case">
+        <h3>Generate ministry statistics reports</h3>
+        <p>If annual ministry returns are stored in SharePoint or submitted by email, Claude can read them, aggregate the key figures, and produce a summary report — showing attendance trends, baptisms, marriages, and ministry activity across the Diocese — without you collating each return manually.</p>
+        <div class="timesave">⏱ Annual statistics compilation: days → hours.</div>
+      </div>
+
+      <div class="use-case">
+        <h3>Create consistent parish communication templates</h3>
+        <p>Claude can take a standard letter or email template from SharePoint and produce personalised versions for every parish in the Diocese — inserting the correct incumbent name, parish name, and deanery — ready to send via Outlook as a batch.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="note-box">
+    <strong>A note on AI and theological content:</strong> AI tools can produce useful first drafts of liturgy, prayers, and theological commentary — but they draw on existing published material and may not reflect the Diocese's particular theological tradition or the pastoral context of a specific community. Always review AI-generated liturgical content carefully, and treat it as a starting point for your own creative and pastoral work, not as a finished product.
+  </div>
+
+</div>
+
+<div class="footer">
+  Diocese of Carlisle &nbsp;·&nbsp; <a href="../../">AI Guides home</a> &nbsp;·&nbsp; <a href="../../responsible-use/">Responsible Use Policy</a> &nbsp;·&nbsp; Maintained by <a href="mailto:martin.barker@carlislediocese.org.uk">Marti Barker</a>
+</div>
+
+</body>
+</html>

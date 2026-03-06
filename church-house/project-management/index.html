@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Project Management — Church House AI Guide</title>
+<style>
+  :root {
+    --purple:#6B21A8;--purple-light:#F3E8FF;--google-blue:#1A73E8;--google-light:#E8F0FE;
+    --grey-dark:#1F2937;--grey-mid:#6B7280;--grey-light:#F9FAFB;--white:#FFFFFF;
+    --pm:#D97706;--pm-light:#FEF3C7;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:var(--grey-light);color:var(--grey-dark);}
+  .nav-bar{position:sticky;top:0;z-index:100;background:white;border-bottom:1px solid #E5E7EB;padding:0 32px;display:flex;gap:28px;align-items:center;}
+  .nav-bar a{font-size:13px;font-weight:600;color:var(--grey-mid);text-decoration:none;padding:14px 0;border-bottom:3px solid transparent;}
+  .nav-bar a:hover,.nav-bar a.active{color:var(--grey-dark);border-bottom-color:var(--grey-dark);}
+  .nav-home{margin-right:auto;}
+  .hero{background:linear-gradient(135deg,#78350F 0%,#B45309 60%,#D97706 100%);color:white;padding:48px 40px 40px;text-align:center;}
+  .hero-badge{display:inline-block;background:rgba(255,255,255,0.15);border:1px solid rgba(255,255,255,0.3);border-radius:20px;padding:5px 16px;font-size:12px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;margin-bottom:16px;}
+  .hero h1{font-size:34px;font-weight:800;margin-bottom:10px;}
+  .hero p{font-size:16px;opacity:0.85;max-width:600px;margin:0 auto;line-height:1.7;}
+  .page{max-width:920px;margin:0 auto;padding:44px 24px 72px;}
+  .intro{background:white;border-radius:14px;padding:28px 32px;border:1px solid #E5E7EB;margin-bottom:36px;box-shadow:0 1px 4px rgba(0,0,0,0.06);}
+  .intro p{font-size:15px;color:var(--grey-mid);line-height:1.8;margin-bottom:10px;}
+  .intro p:last-child{margin-bottom:0;}
+  .section-label{font-size:11px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--grey-mid);margin-bottom:18px;}
+  .tools-compare{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-bottom:36px;}
+  @media(max-width:700px){.tools-compare{grid-template-columns:1fr;}}
+  .tool-col{background:white;border-radius:14px;padding:28px;border:1px solid #E5E7EB;box-shadow:0 1px 4px rgba(0,0,0,0.06);}
+  .tool-col.gemini{border-top:4px solid var(--google-blue);}
+  .tool-col.cowork{border-top:4px solid var(--purple);}
+  .tool-col h2{font-size:17px;font-weight:800;margin-bottom:6px;}
+  .tool-col.gemini h2{color:var(--google-blue);}
+  .tool-col.cowork h2{color:var(--purple);}
+  .tool-col .tagline{font-size:12px;font-weight:600;color:var(--grey-mid);margin-bottom:20px;padding-bottom:16px;border-bottom:1px solid #F3F4F6;}
+  .use-case{margin-bottom:18px;}
+  .use-case h3{font-size:14px;font-weight:700;color:var(--grey-dark);margin-bottom:5px;}
+  .use-case p{font-size:13px;color:var(--grey-mid);line-height:1.75;}
+  .try-box{background:var(--grey-light);border-radius:8px;padding:12px 14px;margin-top:8px;font-size:12px;color:var(--grey-dark);line-height:1.6;}
+  .try-box strong{display:block;font-size:11px;text-transform:uppercase;letter-spacing:0.07em;color:var(--grey-mid);margin-bottom:4px;}
+  .cowork .try-box{background:var(--purple-light);}
+  .timesave{background:var(--pm-light);border-left:4px solid var(--pm);border-radius:0 8px 8px 0;padding:10px 14px;margin-top:10px;font-size:12px;color:var(--pm);font-weight:600;}
+  .highlight-box{background:white;border-radius:14px;padding:28px 32px;border:2px solid var(--pm);margin-bottom:36px;box-shadow:0 1px 4px rgba(0,0,0,0.06);}
+  .highlight-box h2{font-size:17px;font-weight:800;color:var(--pm);margin-bottom:12px;}
+  .highlight-box p{font-size:14px;color:var(--grey-mid);line-height:1.8;margin-bottom:10px;}
+  .highlight-box p:last-child{margin-bottom:0;}
+  .footer{background:white;border-top:1px solid #E5E7EB;padding:20px 40px;text-align:center;font-size:13px;color:var(--grey-mid);}
+  .footer a{color:var(--grey-dark);text-decoration:none;font-weight:600;}
+</style>
+</head>
+<body>
+
+<nav class="nav-bar">
+  <a href="../../" class="nav-home">← All Guides</a>
+  <a href="#gemini">Gemini</a>
+  <a href="#cowork">Claude + Cowork</a>
+  <a href="#enabling">Enabling other teams</a>
+</nav>
+
+<div class="hero">
+  <div class="hero-badge">Church House — AI Guide</div>
+  <h1>📋 Project Management</h1>
+  <p>From project briefs and status reports to Power BI dashboards and team-enabling templates — AI as your project infrastructure partner.</p>
+</div>
+
+<div class="page">
+
+  <div class="intro">
+    <p>Project Management at Church House does two things: it delivers its own projects, and it helps other teams work better. AI can support both. For your own projects, it handles the documentation cycle — briefs, agendas, minutes, status reports, risk registers. For other teams, it can help you build the SharePoint structures, Power BI dashboards, and reusable templates that improve how the whole Diocese operates.</p>
+    <p><strong>Gemini</strong> is excellent for producing project documents quickly. <strong>Claude + Cowork</strong> is where the real capability sits — connecting to your Outlook, SharePoint, and Excel data to automate the reporting cycle and build infrastructure other teams will actually use.</p>
+  </div>
+
+  <div class="section-label" id="gemini">Gemini — project documentation at speed</div>
+  <div class="tools-compare">
+
+    <div class="tool-col gemini">
+      <h2>✨ Gemini</h2>
+      <p class="tagline">Open in your browser · No setup · All staff</p>
+
+      <div class="use-case">
+        <h3>Write project briefs and charters</h3>
+        <p>Describe a project to Gemini and it will produce a structured project brief — objectives, scope, stakeholders, timeline outline, dependencies, and success criteria. A proper first draft in 5 minutes.</p>
+        <div class="try-box">
+          <strong>Try this prompt</strong>
+          "Write a project brief for implementing a new HR system at the Diocese of Carlisle. The project involves [key steps]. Key stakeholders are HR, Finance, and IT. Timeline is approximately [period]."
+        </div>
+      </div>
+
+      <div class="use-case">
+        <h3>Build RACI matrices and responsibility grids</h3>
+        <p>List the project activities and the people involved, and Gemini will produce a RACI matrix — clarifying who is Responsible, Accountable, Consulted, and Informed for each element.</p>
+      </div>
+
+      <div class="use-case">
+        <h3>Draft stakeholder communications plans</h3>
+        <p>Describe your project and its stakeholder groups, and Gemini will produce a communications plan — what to communicate, to whom, how often, and through which channel. Adaptable to any project size.</p>
+      </div>
+
+      <div class="use-case">
+        <h3>Write meeting agendas and action log templates</h3>
+        <p>Gemini can produce consistent, well-structured meeting agendas and pre-formatted action log templates — ready to drop into SharePoint for each project.</p>
+      </div>
+
+      <div class="use-case">
+        <h3>Create risk registers</h3>
+        <p>Describe your project and Gemini will generate a risk register with likely risks, probability and impact ratings, and suggested mitigating actions — a strong starting point that you refine with your knowledge of the specific context.</p>
+      </div>
+    </div>
+
+    <div class="tool-col cowork" id="cowork">
+      <h2>🖥️ Claude + Cowork</h2>
+      <p class="tagline">Opens files · Works with Outlook and SharePoint · Builds dashboards</p>
+
+      <div class="use-case">
+        <h3>Generate status reports from your email threads</h3>
+        <p>Claude can read a project's Outlook email thread, identify what's been agreed, what's in progress, what's overdue, and who's responsible — then draft a formatted project status report without you synthesising it manually.</p>
+        <div class="try-box">
+          <strong>Example workflow</strong>
+          "Search my Outlook inbox for emails about the [project name] project. Summarise progress against the key milestones, flag any items that appear stuck, and draft a one-page status report for the project board."
+        </div>
+        <div class="timesave">⏱ Status report compilation: 2 hours → 20 minutes.</div>
+      </div>
+
+      <div class="use-case">
+        <h3>Minutes to action tracker, automatically</h3>
+        <p>Share meeting minutes from SharePoint and Claude will extract every action point, assign it to the right owner, suggest a due date based on context, and draft individual follow-up emails — all from one instruction.</p>
+      </div>
+
+      <div class="use-case">
+        <h3>Build SharePoint project tracking structures</h3>
+        <p>Claude can help you design and build SharePoint lists that serve as your project tracker — with the right columns, views, and metadata — and write the documentation that explains to other teams how to use them. It can also help you set up consistent folder structures across multiple projects.</p>
+        <div class="timesave">⏱ SharePoint list setup and documentation: days → hours.</div>
+      </div>
+
+      <div class="use-case">
+        <h3>Create Power BI reports and DAX queries</h3>
+        <p>If your project data lives in SharePoint or Excel, Claude can help you design Power BI reports — suggesting the right visualisations, writing DAX measures for calculated fields, and producing documentation that explains what each report shows. Describe what you want to see and Claude writes the query logic.</p>
+        <div class="try-box">
+          <strong>Example workflow</strong>
+          "I have a SharePoint list tracking project milestones with columns for: project name, milestone, due date, status, and owner. Write DAX measures to calculate % complete by project, and suggest a Power BI dashboard layout to show portfolio status."
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="highlight-box" id="enabling">
+    <h2>🔗 Enabling other teams — the multiplier effect</h2>
+    <p>Project Management's most significant AI opportunity isn't just improving your own team's output — it's building infrastructure that other Church House teams can use. Claude + Cowork can help you create standardised SharePoint structures for Finance, HR, and Safeguarding; build Power BI dashboards that pull from their data; and develop reusable templates that reduce how much every team has to reinvent from scratch.</p>
+    <p>For example: the Safeguarding team struggles with SharePoint organisation. Project Management, working with Claude, could build them a clean, intuitive folder structure with consistent naming conventions — something that would take days manually but can be designed and documented in hours with AI support.</p>
+    <p>Similarly, a Diocese-wide project portfolio dashboard in Power BI — showing every active project, its status, and its owner — could be built by Project Management using Claude to write the DAX and design the report, then shared across Church House so leadership always has a live view of what's in flight.</p>
+  </div>
+
+</div>
+
+<div class="footer">
+  Diocese of Carlisle &nbsp;·&nbsp; <a href="../../">AI Guides home</a> &nbsp;·&nbsp; <a href="../../responsible-use/">Responsible Use Policy</a> &nbsp;·&nbsp; Maintained by <a href="mailto:martin.barker@carlislediocese.org.uk">Marti Barker</a>
+</div>
+
+</body>
+</html>
