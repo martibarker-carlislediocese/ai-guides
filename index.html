@@ -3,1023 +3,239 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Claude + Cowork — Bishop's House, Keswick</title>
+<title>Diocese of Carlisle — AI Guides</title>
 <style>
   :root {
-    --purple:        #5B2C8D;
-    --purple-mid:    #7B3FB5;
-    --purple-light:  #EDE7F6;
-    --purple-pale:   #F8F4FD;
-    --grey-dark:     #2C2C2C;
-    --grey-mid:      #555;
-    --grey-light:    #F2F2F2;
-    --white:         #FFFFFF;
-    --teal:          #00796B;
-    --teal-light:    #E0F2F1;
-    --amber:         #E65100;
-    --amber-light:   #FFF3E0;
-    --blue:          #1565C0;
-    --blue-light:    #E3F2FD;
-    --green:         #2E7D32;
-    --green-light:   #E8F5E9;
-    --chat-bg:       #1E1E2E;
-    --chat-text:     #CDD6F4;
-    --chat-prompt:   #A6E3A1;
-    --chat-cursor:   #F38BA8;
+    --purple: #6B21A8;
+    --purple-light: #F3E8FF;
+    --purple-mid: #9333EA;
+    --grey-dark: #1F2937;
+    --grey-mid: #6B7280;
+    --grey-light: #F9FAFB;
+    --white: #FFFFFF;
   }
+
   * { box-sizing: border-box; margin: 0; padding: 0; }
-  body { font-family: 'Segoe UI', Arial, sans-serif; font-size: 15px; line-height: 1.65; color: var(--grey-dark); background: #FAFAFA; }
 
-  /* ── HERO ── */
-  .hero { background: linear-gradient(135deg, var(--purple) 0%, var(--purple-mid) 100%); color: white; padding: 56px 48px 48px; position: relative; overflow: hidden; }
-  .hero::before { content:''; position:absolute; top:-60px; right:-60px; width:320px; height:320px; border-radius:50%; background:rgba(255,255,255,0.06); }
-  .hero::after  { content:''; position:absolute; bottom:-80px; left:40%; width:200px; height:200px; border-radius:50%; background:rgba(255,255,255,0.04); }
-  .hero-label { font-size:12px; font-weight:600; letter-spacing:2px; text-transform:uppercase; opacity:0.75; margin-bottom:12px; }
-  .hero h1 { font-size:42px; font-weight:700; margin-bottom:8px; line-height:1.15; }
-  .hero-sub { font-size:20px; opacity:0.85; margin-bottom:32px; font-weight:300; }
-  .hero-meta { display:flex; gap:32px; flex-wrap:wrap; }
-  .hero-meta-item { font-size:14px; opacity:0.8; }
-  .hero-meta-item strong { display:block; opacity:1; font-size:15px; }
-
-  /* ── NAV ── */
-  .nav-bar { background:var(--white); border-bottom:2px solid var(--purple-light); padding:0 48px; display:flex; gap:0; overflow-x:auto; position:sticky; top:0; z-index:100; box-shadow:0 2px 8px rgba(0,0,0,0.06); }
-  .nav-bar a { display:inline-block; padding:14px 18px; font-size:13px; font-weight:600; color:var(--grey-mid); text-decoration:none; border-bottom:3px solid transparent; white-space:nowrap; transition:all 0.2s; }
-  .nav-bar a:hover { color:var(--purple); border-bottom-color:var(--purple-light); }
-
-  /* ── LAYOUT ── */
-  .page { max-width:1020px; margin:0 auto; padding:48px 32px 80px; }
-
-  /* ── SECTION HEADERS ── */
-  .section { margin-bottom:72px; }
-  .section-header { display:flex; align-items:center; gap:16px; margin-bottom:8px; }
-  .section-icon { width:48px; height:48px; border-radius:12px; background:var(--purple); display:flex; align-items:center; justify-content:center; font-size:22px; flex-shrink:0; }
-  .section-title { font-size:26px; font-weight:700; color:var(--purple); }
-  .section-divider { height:3px; background:linear-gradient(to right,var(--purple),var(--purple-light),transparent); border-radius:2px; margin-bottom:24px; }
-  .section-intro { font-size:15px; color:var(--grey-mid); font-style:italic; margin-bottom:28px; border-left:3px solid var(--purple-light); padding-left:16px; line-height:1.75; }
-
-  /* ── AUDIENCE CARDS ── */
-  .audience-strip { display:flex; gap:16px; margin-bottom:40px; flex-wrap:wrap; }
-  .audience-card { flex:1; min-width:200px; background:var(--white); border:2px solid var(--purple-light); border-radius:14px; padding:20px 24px; display:flex; align-items:center; gap:16px; }
-  .audience-card .icon { font-size:28px; }
-  .audience-card .name { font-weight:700; font-size:15px; color:var(--purple); }
-  .audience-card .role { font-size:13px; color:var(--grey-mid); }
-
-  /* ── FEATURE CARDS ── */
-  .card-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(270px,1fr)); gap:18px; margin-bottom:8px; }
-  .card { background:var(--white); border-radius:14px; padding:22px 24px; box-shadow:0 2px 10px rgba(91,44,141,0.08); border:1px solid var(--purple-light); transition:transform 0.15s,box-shadow 0.15s; }
-  .card:hover { transform:translateY(-2px); box-shadow:0 6px 20px rgba(91,44,141,0.13); }
-  .card-icon { font-size:28px; margin-bottom:12px; }
-  .card-title { font-weight:700; font-size:15px; color:var(--purple); margin-bottom:6px; }
-  .card-body { font-size:14px; color:var(--grey-mid); line-height:1.65; }
-  .card.teal  { border-color:#B2DFDB; } .card.teal  .card-title { color:var(--teal);  }
-  .card.blue  { border-color:#BBDEFB; } .card.blue  .card-title { color:var(--blue);  }
-  .card.amber { border-color:#FFCCBC; } .card.amber .card-title { color:var(--amber); }
-  .card.green { border-color:#C8E6C9; } .card.green .card-title { color:var(--green); }
-
-  /* ── SUB LABELS ── */
-  .sub-label { font-size:12px; font-weight:700; letter-spacing:1.2px; text-transform:uppercase; color:var(--purple); margin-bottom:14px; margin-top:36px; display:flex; align-items:center; gap:8px; }
-  .sub-label::after { content:''; flex:1; height:1px; background:var(--purple-light); }
-
-  /* ── CHAT / TRY-IT BOX ── */
-  .try-it { background:var(--chat-bg); border-radius:14px; padding:20px 24px; margin:20px 0 28px; position:relative; }
-  .try-it-label { font-size:11px; font-weight:700; letter-spacing:1.5px; text-transform:uppercase; color:var(--chat-prompt); margin-bottom:14px; display:flex; align-items:center; gap:8px; }
-  .try-it-label::before { content:'▶'; font-size:9px; }
-  .try-it-prompt { font-family:'Consolas','Courier New',monospace; font-size:13.5px; color:var(--chat-text); line-height:1.7; }
-  .try-it-prompt .cursor { color:var(--chat-prompt); }
-  .try-it-note { font-size:12px; color:#888; margin-top:12px; font-style:italic; }
-  .try-it-then { margin-top:16px; border-top:1px solid #333; padding-top:14px; }
-  .try-it-then-label { font-size:11px; font-weight:700; letter-spacing:1px; text-transform:uppercase; color:#89B4FA; margin-bottom:6px; }
-  .try-it-then p { font-size:13px; color:#BAC2DE; line-height:1.65; }
-
-  /* ── RESULT EXAMPLE ── */
-  .result-box { background:var(--white); border:1px solid var(--purple-light); border-left:4px solid var(--purple); border-radius:0 12px 12px 0; padding:18px 22px; margin:0 0 24px; }
-  .result-label { font-size:11px; font-weight:700; letter-spacing:1px; text-transform:uppercase; color:var(--purple); margin-bottom:8px; }
-  .result-box p { font-size:14px; color:var(--grey-mid); line-height:1.7; }
-
-  /* ── CALLOUT ── */
-  .callout { background:linear-gradient(135deg,var(--purple),var(--purple-mid)); color:white; border-radius:14px; padding:24px 28px; margin:28px 0; }
-  .callout-label { font-size:11px; font-weight:700; letter-spacing:1.5px; text-transform:uppercase; opacity:0.75; margin-bottom:10px; }
-  .callout-title { font-size:17px; font-weight:700; margin-bottom:12px; }
-  .callout ul { padding-left:20px; }
-  .callout li { font-size:14px; opacity:0.92; margin-bottom:8px; line-height:1.65; }
-  .callout.teal  { background:linear-gradient(135deg,#00695C,#00897B); }
-  .callout.blue  { background:linear-gradient(135deg,#1565C0,#1976D2); }
-  .callout.green { background:linear-gradient(135deg,#2E7D32,#388E3C); }
-  .callout.amber { background:linear-gradient(135deg,#BF360C,#E64A19); }
-
-  /* ── HIGHLIGHT ── */
-  .highlight { background:var(--purple-pale); border-left:4px solid var(--purple); border-radius:0 10px 10px 0; padding:16px 20px; margin:20px 0; font-size:14px; color:var(--grey-dark); line-height:1.75; }
-  .highlight strong { color:var(--purple); }
-
-  /* ── THREE-WAY TAB COMPARISON ── */
-  .compare-grid { display:grid; grid-template-columns:1fr 1fr 1fr; gap:16px; margin:20px 0 28px; }
-  .compare-card { border-radius:14px; padding:22px 24px; }
-  .compare-card.chat   { background:#F3F4F6; border:2px solid #D1D5DB; }
-  .compare-card.cowork { background:var(--purple-pale); border:2px solid var(--purple-light); }
-  .compare-card.code   { background:#FFF8E1; border:2px solid #FFE082; }
-  .compare-card .c-icon { font-size:28px; margin-bottom:10px; }
-  .compare-card .c-badge { display:inline-block; font-size:10px; font-weight:700; letter-spacing:1px; text-transform:uppercase; padding:2px 8px; border-radius:20px; margin-bottom:10px; }
-  .compare-card.chat   .c-badge { background:#E5E7EB; color:#374151; }
-  .compare-card.cowork .c-badge { background:var(--purple); color:white; }
-  .compare-card.code   .c-badge { background:#F59E0B; color:white; }
-  .compare-card .c-title { font-weight:700; font-size:15px; margin-bottom:12px; }
-  .compare-card.chat   .c-title { color:#374151; }
-  .compare-card.cowork .c-title { color:var(--purple); }
-  .compare-card.code   .c-title { color:#92400E; }
-  .compare-card ul { list-style:none; padding:0; }
-  .compare-card ul li { font-size:13px; padding:5px 0; border-bottom:1px solid rgba(0,0,0,0.06); display:flex; gap:8px; align-items:flex-start; line-height:1.5; }
-  .compare-card ul li:last-child { border-bottom:none; }
-  .compare-card.chat   ul li::before { content:'○'; color:#9CA3AF; font-size:10px; margin-top:3px; flex-shrink:0; }
-  .compare-card.cowork ul li::before { content:'●'; color:var(--purple); font-size:10px; margin-top:3px; flex-shrink:0; }
-  .compare-card.code   ul li::before { content:'◆'; color:#F59E0B; font-size:9px; margin-top:3px; flex-shrink:0; }
-  /* Tab strip diagram */
-  .tab-strip { background:#E5E7EB; border-radius:10px 10px 0 0; display:flex; gap:2px; padding:6px 8px 0; margin-bottom:0; }
-  .tab-strip-tab { padding:8px 16px; border-radius:8px 8px 0 0; font-size:13px; font-weight:600; cursor:default; }
-  .tab-strip-tab.t-chat   { background:#F9FAFB; color:#374151; }
-  .tab-strip-tab.t-cowork { background:var(--purple); color:white; }
-  .tab-strip-tab.t-code   { background:#F59E0B; color:white; }
-  .tab-strip-body { background:var(--white); border:1px solid #D1D5DB; border-radius:0 0 10px 10px; padding:16px 20px; margin-bottom:24px; font-size:14px; color:var(--grey-mid); line-height:1.7; }
-  @media(max-width:680px){ .compare-grid{grid-template-columns:1fr;} }
-
-  /* ── REASSURANCE STRIP ── */
-  .reassurance { background:#FFF8E1; border:1px solid #FFE082; border-radius:10px; padding:14px 18px; margin:16px 0; font-size:13.5px; color:#5D4037; display:flex; gap:12px; align-items:flex-start; }
-  .reassurance .r-icon { font-size:20px; flex-shrink:0; margin-top:1px; }
-
-  /* ── M365 TILES ── */
-  .m365-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(210px,1fr)); gap:16px; margin-bottom:32px; }
-  .m365-card { background:var(--white); border-radius:14px; padding:24px 20px; text-align:center; border:2px solid var(--purple-light); box-shadow:0 2px 10px rgba(91,44,141,0.07); }
-  .m365-card .app-icon { font-size:36px; margin-bottom:10px; }
-  .m365-card .app-name { font-weight:700; color:var(--purple); font-size:16px; margin-bottom:10px; }
-  .m365-card ul { list-style:none; text-align:left; }
-  .m365-card ul li { font-size:13px; color:var(--grey-mid); padding:4px 0; border-bottom:1px solid var(--grey-light); display:flex; align-items:flex-start; gap:6px; }
-  .m365-card ul li:last-child { border-bottom:none; }
-  .m365-card ul li::before { content:'→'; color:var(--purple); font-size:11px; margin-top:3px; flex-shrink:0; }
-
-  /* ── WORKFLOW STRIP ── */
-  .workflow { background:var(--grey-light); border-radius:14px; padding:24px 28px; margin:24px 0; }
-  .workflow-label { font-size:11px; font-weight:700; letter-spacing:1.5px; text-transform:uppercase; color:var(--grey-mid); margin-bottom:20px; }
-  .workflow-steps { display:flex; gap:0; align-items:flex-start; flex-wrap:wrap; }
-  .w-step { flex:1; min-width:120px; text-align:center; padding:0 8px; position:relative; }
-  .w-step + .w-step::before { content:'→'; position:absolute; left:-6px; top:18px; font-size:18px; color:var(--purple); }
-  .w-icon { width:48px; height:48px; border-radius:50%; background:var(--purple); color:white; font-size:20px; display:flex; align-items:center; justify-content:center; margin:0 auto 10px; }
-  .w-label { font-size:13px; font-weight:600; color:var(--grey-dark); }
-  .w-sub   { font-size:11px; color:var(--grey-mid); margin-top:4px; }
-
-  /* ── PROCESS FLOW ── */
-  .process-flow { display:flex; flex-direction:column; gap:0; margin:24px 0; }
-  .process-step { display:flex; align-items:flex-start; }
-  .step-left { display:flex; flex-direction:column; align-items:center; width:52px; flex-shrink:0; }
-  .step-num { width:40px; height:40px; border-radius:50%; background:var(--purple); color:white; font-weight:700; font-size:15px; display:flex; align-items:center; justify-content:center; z-index:1; }
-  .step-line { width:2px; flex:1; min-height:24px; background:var(--purple-light); margin:2px 0; }
-  .step-content { flex:1; background:var(--white); border:1px solid var(--purple-light); border-radius:12px; padding:16px 20px; margin-bottom:12px; margin-left:12px; box-shadow:0 1px 6px rgba(91,44,141,0.06); }
-  .step-title { font-weight:700; color:var(--purple); margin-bottom:4px; font-size:15px; }
-  .step-desc  { font-size:14px; color:var(--grey-mid); line-height:1.65; }
-  .step-quote { margin-top:10px; background:var(--purple-light); border-radius:8px; padding:10px 14px; font-size:13px; color:var(--purple); font-style:italic; font-family:'Consolas','Courier New',monospace; }
-
-  /* ── TASK TABLE ── */
-  .task-table { width:100%; border-collapse:collapse; margin:20px 0 32px; }
-  .task-table th { background:var(--purple); color:white; font-size:13px; font-weight:600; padding:12px 16px; text-align:left; }
-  .task-table th:first-child { border-radius:10px 0 0 0; } .task-table th:last-child { border-radius:0 10px 0 0; }
-  .task-table td { padding:13px 16px; font-size:14px; border-bottom:1px solid var(--purple-light); vertical-align:top; }
-  .task-table tr:nth-child(even) td { background:var(--purple-pale); }
-  .task-table tr:last-child td { border-bottom:none; }
-  .task-table td:first-child { font-weight:600; color:var(--purple); }
-
-  /* ── CONNECT STEPS ── */
-  .connect-steps { counter-reset:cs; display:flex; flex-direction:column; gap:12px; margin:20px 0; }
-  .connect-step { display:flex; gap:16px; align-items:flex-start; background:var(--white); border:1px solid var(--purple-light); border-radius:12px; padding:16px 20px; }
-  .connect-step::before { counter-increment:cs; content:counter(cs); width:30px; height:30px; border-radius:50%; background:var(--purple); color:white; font-weight:700; font-size:14px; display:flex; align-items:center; justify-content:center; flex-shrink:0; }
-  .connect-step-text { font-size:14px; color:var(--grey-dark); line-height:1.65; }
-  .connect-step-text strong { color:var(--purple); }
-
-  /* ── FOOTER ── */
-  .footer { background:var(--purple); color:white; padding:24px 48px; font-size:13px; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px; }
-  .footer a { color:rgba(255,255,255,0.75); text-decoration:none; }
-
-  /* ── RESPONSIVE ── */
-  @media(max-width:640px){
-    .hero{padding:36px 24px 32px;} .hero h1{font-size:28px;} .page{padding:32px 20px 60px;} .nav-bar{padding:0 12px;}
-    .workflow-steps{flex-direction:column;align-items:center;} .w-step+.w-step::before{content:'↓';left:50%;top:-14px;}
-    .footer{padding:20px 24px;}
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    background: var(--grey-light);
+    color: var(--grey-dark);
+    min-height: 100vh;
   }
 
-  /* ── PRINT / PDF STYLES ── */
-  @media print {
-    .nav-bar { display: none !important; }
-    .hero { padding: 28px 36px 22px; margin-bottom: 16px; }
+  /* Hero */
+  .hero {
+    background: linear-gradient(135deg, #4C1D95 0%, #6B21A8 50%, #7C3AED 100%);
+    color: white;
+    padding: 52px 40px 44px;
+    text-align: center;
+  }
+  .hero-badge {
+    display: inline-block;
+    background: rgba(255,255,255,0.15);
+    border: 1px solid rgba(255,255,255,0.3);
+    border-radius: 20px;
+    padding: 5px 16px;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 18px;
+  }
+  .hero h1 {
+    font-size: 36px;
+    font-weight: 800;
+    margin-bottom: 12px;
+    letter-spacing: -0.5px;
+  }
+  .hero p {
+    font-size: 16px;
+    opacity: 0.85;
+    max-width: 540px;
+    margin: 0 auto;
+    line-height: 1.7;
+  }
+
+  /* Main content */
+  .page {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 48px 24px 64px;
+  }
+
+  .section-label {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--grey-mid);
+    margin-bottom: 20px;
+  }
+
+  /* Guide cards */
+  .guides-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    margin-bottom: 48px;
+  }
+
+  @media (max-width: 600px) {
+    .guides-grid { grid-template-columns: 1fr; }
     .hero h1 { font-size: 26px; }
-    .hero p  { font-size: 14px; }
-    @page { size: A4 landscape; margin: 12mm 16mm 12mm 16mm; }
-    body { font-size: 13px; }
-    .section { page-break-before: always; padding: 20px 0 10px; border-radius: 0; box-shadow: none; margin-bottom: 0; }
-    .section:first-of-type { page-break-before: avoid; }
-    .how-to-box, .try-it, .highlight, .reassurance, .compare-card, .step-card { page-break-inside: avoid; }
-    .compare-grid { grid-template-columns: 1fr 1fr; gap: 10px; }
-    .step-grid    { grid-template-columns: 1fr 1fr 1fr; gap: 10px; }
-    * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
-    .section-number { font-size: 36px; }
-    .section-title  { font-size: 22px; }
-    .footer { margin-top: 20px; padding: 12px; font-size: 11px; }
   }
+
+  .guide-card {
+    background: var(--white);
+    border-radius: 14px;
+    padding: 28px;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.07);
+    border: 1px solid #E5E7EB;
+    text-decoration: none;
+    color: inherit;
+    display: block;
+    transition: box-shadow 0.15s, transform 0.15s;
+    position: relative;
+  }
+  .guide-card:hover {
+    box-shadow: 0 6px 20px rgba(107,33,168,0.12);
+    transform: translateY(-2px);
+  }
+  .guide-card.coming-soon {
+    opacity: 0.55;
+    cursor: default;
+    pointer-events: none;
+  }
+
+  .card-icon {
+    font-size: 32px;
+    margin-bottom: 14px;
+    display: block;
+  }
+  .card-title {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--grey-dark);
+    margin-bottom: 6px;
+  }
+  .card-subtitle {
+    font-size: 13px;
+    color: var(--purple);
+    font-weight: 600;
+    margin-bottom: 10px;
+  }
+  .card-desc {
+    font-size: 14px;
+    color: var(--grey-mid);
+    line-height: 1.7;
+  }
+  .card-badge {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    background: var(--purple-light);
+    color: var(--purple);
+    font-size: 11px;
+    font-weight: 700;
+    padding: 3px 10px;
+    border-radius: 20px;
+    letter-spacing: 0.04em;
+  }
+  .card-badge.soon {
+    background: #F3F4F6;
+    color: var(--grey-mid);
+  }
+  .card-arrow {
+    display: inline-block;
+    margin-top: 16px;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--purple);
+  }
+
+  /* What is Claude box */
+  .intro-box {
+    background: var(--white);
+    border-radius: 14px;
+    padding: 28px 32px;
+    margin-bottom: 40px;
+    border: 1px solid #E5E7EB;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+  }
+  .intro-box h2 {
+    font-size: 17px;
+    font-weight: 700;
+    color: var(--grey-dark);
+    margin-bottom: 10px;
+  }
+  .intro-box p {
+    font-size: 14px;
+    color: var(--grey-mid);
+    line-height: 1.8;
+  }
+
+  /* Footer */
+  .footer {
+    background: white;
+    border-top: 1px solid #E5E7EB;
+    padding: 20px 40px;
+    text-align: center;
+    font-size: 13px;
+    color: var(--grey-mid);
+  }
+  .footer a { color: var(--purple); text-decoration: none; }
 </style>
 </head>
 <body>
 
-<!-- HERO -->
 <div class="hero">
-  <div class="hero-label">Diocese of Carlisle · Bishop's House, Keswick</div>
-  <h1>Claude + Cowork</h1>
-  <div class="hero-sub">Capability Overview for the Bishop's House Team</div>
-  <div class="hero-meta">
-    <div class="hero-meta-item"><strong>Prepared for</strong>Ali Ng, Bishop's Chaplain &amp; admin team</div>
-    <div class="hero-meta-item"><strong>Prepared by</strong>Marti Barker, IT Support</div>
-    <div class="hero-meta-item"><strong>Date</strong>March 2026</div>
-  </div>
+  <div class="hero-badge">Diocese of Carlisle</div>
+  <h1>AI Guides</h1>
+  <p>Practical guides to using Claude + Cowork across the Diocese — written for each team, in plain English.</p>
 </div>
-
-<!-- NAV -->
-<nav class="nav-bar">
-  <a href="#what-is">What is it?</a>
-  <a href="#ali">For Ali</a>
-  <a href="#admin">Admin Team</a>
-  <a href="#finance">Finance</a>
-  <a href="#m365">Microsoft 365</a>
-  <a href="#scheduled">Scheduled Tasks</a>
-  <a href="#privacy">Privacy &amp; Data</a>
-</nav>
 
 <div class="page">
 
-<!-- ═══════════════════════════════════════════════════════════ WHAT IS IT -->
-<section class="section" id="what-is">
-  <div class="section-header">
-    <div class="section-icon">🤖</div>
-    <div class="section-title">What is Claude + Cowork?</div>
-  </div>
-  <div class="section-divider"></div>
-
-  <p style="margin-bottom:20px;color:var(--grey-mid);line-height:1.8;">
-    <strong style="color:var(--grey-dark);">Claude</strong> is an AI assistant — think of it like a very capable colleague who never gets tired, is always available, and can turn a rough idea into a finished document in seconds. It lives inside the <strong style="color:var(--grey-dark);">Claude desktop app</strong>, which is installed on your computer just like Microsoft Word or Outlook.
-  </p>
-  <p style="margin-bottom:28px;color:var(--grey-mid);line-height:1.8;">
-    Inside the desktop app there are three different tabs — <strong style="color:var(--grey-dark);">Chat</strong>, <strong style="color:var(--purple);">Cowork</strong>, and <strong style="color:#92400E;">Code</strong>. Think of them as three different modes for working with Claude. For the Bishop's House team, <strong style="color:var(--purple);">Cowork</strong> is the one you'll use for almost everything in this guide.
-  </p>
-
-  <div class="sub-label">The Three Tabs — What Each One Does</div>
-  <p style="margin-bottom:16px;color:var(--grey-mid);line-height:1.8;">When you open the Claude desktop app, you'll see these three tabs across the top. Here's what each one is for:</p>
-
-  <div style="background:#F3F4F6;border:2px dashed #D1D5DB;border-radius:10px;padding:20px 28px;margin-bottom:24px;text-align:center;">
-    <div style="font-size:15px;color:var(--grey-dark);margin-bottom:10px;">
-      <strong>The Claude Desktop App</strong>
-    </div>
-    <div style="display:inline-flex;gap:8px;background:#E5E7EB;border-radius:8px 8px 0 0;padding:6px 10px 0;">
-      <span style="background:#F9FAFB;color:#374151;padding:7px 18px;border-radius:6px 6px 0 0;font-size:13px;font-weight:600;">💬 Chat</span>
-      <span style="background:var(--purple);color:white;padding:7px 18px;border-radius:6px 6px 0 0;font-size:13px;font-weight:700;">🖥️ Cowork</span>
-      <span style="background:#F59E0B;color:white;padding:7px 18px;border-radius:6px 6px 0 0;font-size:13px;font-weight:600;">⌨️ Code</span>
-    </div>
-    <div style="background:white;border:1px solid #D1D5DB;border-radius:0 0 8px 8px;padding:10px 18px;font-size:13px;color:var(--grey-mid);">
-      When you open the Claude desktop app, these three tabs appear across the top.
-    </div>
-    <p style="margin-top:10px;font-size:13px;color:var(--grey-mid);"><em>Click <strong style="color:var(--purple);">Cowork</strong> — that's the tab this guide is about.</em></p>
+  <div class="intro-box">
+    <h2>🤖 What is Claude?</h2>
+    <p>Claude is an AI assistant built by Anthropic. The Diocese holds a <strong>Claude for Work (Team) licence</strong>, which means your conversations are never used to train the AI and all data is covered by a formal Data Processing Agreement. These guides explain how each team can use it day-to-day — from drafting letters to managing emails, analysing budgets, and automating routine tasks.</p>
   </div>
 
-  <div class="compare-grid">
-    <div class="compare-card chat">
-      <div class="c-icon">💬</div>
-      <div class="c-badge">Chat tab</div>
-      <div class="c-title">For quick questions &amp; conversation</div>
-      <ul>
-        <li>The simplest tab — just type and get a reply</li>
-        <li>Good for quick questions, drafting text, brainstorming ideas</li>
-        <li>Does not connect to your emails, calendar, or files</li>
-        <li>Output is text only — you copy and paste what you need</li>
-        <li>Each conversation is independent — no ongoing memory</li>
-        <li>Useful for one-off tasks that don't need a saved document</li>
-      </ul>
-    </div>
-    <div class="compare-card cowork">
-      <div class="c-icon">🖥️</div>
-      <div class="c-badge">Cowork tab ★ Use this</div>
-      <div class="c-title">For documents, email &amp; admin work</div>
-      <ul>
-        <li>Connects to your Microsoft 365 account — Outlook, OneDrive, SharePoint</li>
-        <li>Reads and saves files directly to your computer and OneDrive</li>
-        <li>Produces finished Word documents, Excel files, and PDFs</li>
-        <li>Scheduled tasks run automatically in the background</li>
-        <li>Can work with files you drag into the chat window</li>
-        <li>The tab used for everything covered in this guide</li>
-      </ul>
-    </div>
-    <div class="compare-card code">
-      <div class="c-icon">⌨️</div>
-      <div class="c-badge">Code tab</div>
-      <div class="c-title">For technical &amp; IT tasks</div>
-      <ul>
-        <li>Designed for writing and running computer code and scripts</li>
-        <li>Can automate repetitive technical tasks on your computer</li>
-        <li>Useful for IT, data processing, and system administration</li>
-        <li>More relevant for Marti (IT) than the admin team day-to-day</li>
-        <li>Does not require knowledge of coding to use for simple tasks</li>
-        <li>Most admin team tasks are better handled in the Cowork tab</li>
-      </ul>
-    </div>
-  </div>
+  <div class="section-label">Available Guides</div>
 
-  <div class="sub-label">How to Open the Cowork Tab</div>
-  <div class="try-it">
-    <div class="try-it-label">Step by step — getting to Cowork</div>
-    <div class="try-it-prompt">
-      1. Find the <strong style="color:var(--chat-prompt);">Claude desktop app</strong> on your computer. Look for the Claude icon in your taskbar at the bottom of the screen, or in the Start menu. Double-click to open it.<br><br>
-      2. The app opens. Along the top you will see three tabs: <strong style="color:#9CA3AF;">Chat</strong>, <strong style="color:var(--chat-prompt);">Cowork</strong>, and <strong style="color:#F59E0B;">Code</strong>. Click <strong style="color:var(--chat-prompt);">Cowork</strong>.<br><br>
-      3. The Cowork panel opens. This is where everything in this guide takes place.<br><br>
-      4. Click in the message box at the bottom of the screen, type what you need, and press <strong style="color:var(--chat-prompt);">Enter</strong>.<br><br>
-      <span style="color:#888;">If you can't find the Claude desktop app on your computer, contact Marti — it may need to be installed first. This is a five-minute job.</span>
-    </div>
-    <div class="try-it-then">
-      <div class="try-it-then-label">What it looks like in practice</div>
-      <p>The Chat tab looks and feels like a simple messaging app — just a text box and replies. The Cowork tab has the same text box but also shows your connected apps (Outlook, OneDrive) and your output folder where finished documents are saved. You'll see a difference immediately the first time you use it.</p>
-    </div>
-  </div>
+  <div class="guides-grid">
 
-  <div class="reassurance">
-    <div class="r-icon">💡</div>
-    <div><strong>There is no wrong way to ask.</strong> Claude understands plain, conversational English. You don't need to use special commands or precise wording. If you're not happy with the result, just say so — "make it shorter", "make it warmer", "add a paragraph about X" — and Claude will adjust it.</div>
-  </div>
+    <a class="guide-card" href="bishops-house/">
+      <span class="card-icon">⛪</span>
+      <div class="card-badge">Available now</div>
+      <div class="card-title">Bishop's House</div>
+      <div class="card-subtitle">Keswick</div>
+      <div class="card-desc">For Ali (Bishop's Chaplain) and the admin team — covering correspondence, diary management, M365 integration, scheduled tasks, financial documents, and data privacy.</div>
+      <span class="card-arrow">Read guide →</span>
+    </a>
 
-  <div class="audience-strip">
-    <div class="audience-card">
-      <div class="icon">✝️</div>
-      <div><div class="name">Ali Ng</div><div class="role">Bishop's Chaplain — drafting, research &amp; preparation</div></div>
-    </div>
-    <div class="audience-card">
-      <div class="icon">🗂️</div>
-      <div><div class="name">Admin Staff &amp; PAs</div><div class="role">Correspondence, documents &amp; financial admin</div></div>
-    </div>
-  </div>
-
-  <div class="sub-label">Getting Started — The Basics</div>
-  <div class="try-it">
-    <div class="try-it-label">How to open Cowork and start a task</div>
-    <div class="try-it-prompt">
-      1. Double-click the <strong style="color:var(--chat-prompt);">Cowork</strong> icon on your desktop.<br>
-      2. A chat window opens — it looks like a messaging app.<br>
-      3. Click in the text box at the bottom and type what you need.<br>
-      4. Press <strong style="color:var(--chat-prompt);">Enter</strong> (or click the send button) and Claude will get to work.<br><br>
-      <span style="color:#888;">That's it. Everything in this guide is done exactly this way.</span>
-    </div>
-  </div>
-</section>
-
-<!-- ═══════════════════════════════════════════════════════════ FOR ALI -->
-<section class="section" id="ali">
-  <div class="section-header">
-    <div class="section-icon">✝️</div>
-    <div class="section-title">1. For Ali — Chaplain's Workload</div>
-  </div>
-  <div class="section-divider"></div>
-  <p class="section-intro">Ali's role involves a constant flow of sensitive correspondence, pastoral research, and briefing material for the Bishop. Claude acts as a discreet, capable assistant — available at any hour and already familiar with Church of England context.</p>
-
-  <!-- CORRESPONDENCE -->
-  <div class="sub-label">📝 Correspondence &amp; Letters</div>
-  <div class="card-grid">
-    <div class="card">
-      <div class="card-icon">✉️</div>
-      <div class="card-title">Letters from the Bishop</div>
-      <div class="card-body">Pastoral, formal, or congratulatory letters to clergy, parishes, or individuals — drafted in the Bishop's voice and saved as a Word document ready for letterhead.</div>
-    </div>
-    <div class="card">
-      <div class="card-icon">🤝</div>
-      <div class="card-title">Difficult Correspondence</div>
-      <div class="card-body">Sensitive situations — vacancy processes, capability concerns, pastoral care letters — handled with appropriate care and the right tone.</div>
-    </div>
-    <div class="card">
-      <div class="card-icon">↩️</div>
-      <div class="card-title">Routine Replies</div>
-      <div class="card-body">Speaking invitations, letters of support, reference requests — consistent, professional replies without writing each one from scratch.</div>
-    </div>
-  </div>
-
-  <div class="try-it">
-    <div class="try-it-label">Try it — writing a letter to a retiring churchwarden</div>
-    <div class="try-it-prompt">
-      <span style="color:#888;">"</span>Please write a letter from Bishop Rob to a churchwarden who is retiring after 22 years of faithful service to their parish. The letter should be warm, personal, and genuinely grateful — recognising the sacrifice and dedication involved. About one page. Leave [NAME] and [PARISH] as placeholders so I can fill them in. Save as a Word document.<span style="color:#888;">"</span>
-    </div>
-    <div class="try-it-then">
-      <div class="try-it-then-label">What happens next</div>
-      <p>Claude drafts the full letter with [NAME] and [PARISH] clearly marked where they need to be filled in. Open the Word document, replace the placeholders with the real details, and it's ready to print and sign. If the tone isn't quite right, just say: <em style="color:#89B4FA;">"Make it a little more personal"</em> or <em style="color:#89B4FA;">"Add something about the value of lay ministry."</em></p>
-    </div>
-    <div class="try-it-note">💡 Using placeholders like [NAME] and [PARISH] is a useful technique whenever you're creating a letter you'll reuse — Claude will include them clearly so nothing gets missed.</div>
-  </div>
-
-  <div class="try-it">
-    <div class="try-it-label">Try it — replying to a speaking invitation</div>
-    <div class="try-it-prompt">
-      <span style="color:#888;">"</span>The Bishop has received an invitation to speak at a Mothers' Union event in Penrith on 15 May. He can't attend. Please draft a polite reply declining, expressing genuine regret and wishing them well with the event.<span style="color:#888;">"</span>
-    </div>
-    <div class="try-it-then">
-      <div class="try-it-then-label">What happens next</div>
-      <p>A polished, ready-to-send reply is drafted in seconds. You review it, make any small adjustments, and it's done.</p>
-    </div>
-  </div>
-
-  <!-- RESEARCH -->
-  <div class="sub-label">🔍 Research &amp; Briefing Notes</div>
-  <div class="card-grid">
-    <div class="card teal">
-      <div class="card-icon">⛪</div>
-      <div class="card-title">Parish Background</div>
-      <div class="card-body">Before a visit, Claude prepares a concise briefing: parish profile, current clergy, recent history, and anything the Bishop should know before he arrives.</div>
-    </div>
-    <div class="card teal">
-      <div class="card-icon">📋</div>
-      <div class="card-title">Policy &amp; Synod Summaries</div>
-      <div class="card-body">Upload a long PDF — a synod paper, national strategy document, safeguarding report — and Claude pulls out the key points and any actions required.</div>
-    </div>
-    <div class="card teal">
-      <div class="card-icon">⚖️</div>
-      <div class="card-title">Canon Law &amp; Procedure</div>
-      <div class="card-body">Quick, clear answers on faculty jurisdiction, liturgical permissions, safeguarding processes, or ecclesiastical procedure — without needing to search through lengthy guidance.</div>
-    </div>
-    <div class="card teal">
-      <div class="card-icon">🗒️</div>
-      <div class="card-title">One-Page Briefings</div>
-      <div class="card-body">For ecumenical meetings, school visits, civic occasions — a concise briefing note so the Bishop arrives fully prepared.</div>
-    </div>
-  </div>
-
-  <div class="try-it">
-    <div class="try-it-label">Try it — preparing a parish visit briefing</div>
-    <div class="try-it-prompt">
-      <span style="color:#888;">"</span>Bishop Rob is visiting St John's, Keswick next Thursday. Please prepare a one-page briefing note covering: the parish profile, current vicar and how long they've been in post, any known pastoral concerns or recent significant events, and two or three things the Bishop could mention to show he's engaged with their community.<span style="color:#888;">"</span>
-    </div>
-    <div class="try-it-then">
-      <div class="try-it-then-label">What happens next</div>
-      <p>Claude researches the parish and produces a formatted, printable one-page briefing note. What would previously take 30–40 minutes of research takes about 30 seconds.</p>
-    </div>
-  </div>
-
-  <div class="try-it">
-    <div class="try-it-label">Try it — summarising a long document</div>
-    <div class="try-it-prompt">
-      <span style="color:#888;">"</span>[Drag the PDF file into the chat window, then type:]<span style="color:#888;"><br><br></span>
-      Please summarise this document. Pull out any actions required of the Bishop, flag anything urgent, and tell me which sections he actually needs to read in full.<span style="color:#888;">"</span>
-    </div>
-    <div class="try-it-then">
-      <div class="try-it-then-label">What happens next</div>
-      <p>Claude reads the entire document and returns a clear summary with a numbered action list — saving the Bishop and Ali from reading every page of a lengthy report.</p>
-    </div>
-    <div class="try-it-note">💡 To add a file: drag it from your desktop or Downloads folder directly into the Cowork chat window, then type your question.</div>
-  </div>
-</section>
-
-<!-- ═══════════════════════════════════════════════════════════ ADMIN TEAM -->
-<section class="section" id="admin">
-  <div class="section-header">
-    <div class="section-icon">🗂️</div>
-    <div class="section-title">2. For Admin Staff &amp; PAs</div>
-  </div>
-  <div class="section-divider"></div>
-  <p class="section-intro">The admin team carries a wide range of document and organisational work every day. Claude can handle the drafting, formatting, and structure — leaving the team to focus on review and relationships rather than blank pages.</p>
-
-  <!-- AGENDAS & MINUTES -->
-  <div class="sub-label">📅 Agendas &amp; Minutes</div>
-  <div class="card-grid">
-    <div class="card blue">
-      <div class="card-icon">📋</div>
-      <div class="card-title">Agendas</div>
-      <div class="card-body">Give Claude a list of items and the meeting details — it produces a properly formatted, numbered agenda with space for notes.</div>
-    </div>
-    <div class="card blue">
-      <div class="card-icon">📝</div>
-      <div class="card-title">Minutes</div>
-      <div class="card-body">Paste in rough notes from a meeting — or even key bullet points — and Claude produces formatted minutes with decisions, actions, and owners clearly identified.</div>
-    </div>
-  </div>
-
-  <div class="try-it">
-    <div class="try-it-label">Try it — creating an agenda</div>
-    <div class="try-it-prompt">
-      <span style="color:#888;">"</span>Please create an agenda for the Bishop's Staff Meeting on Thursday 19 March at 10am in Bishop's House. Items are: Opening prayer, Apologies, Minutes of last meeting, Safeguarding update from the Diocesan Safeguarding Adviser, Vacancy update — Keswick benefice, Archdeacon of Westmorland and Furness report, Any other business, Date of next meeting. Save it as a Word document.<span style="color:#888;">"</span>
-    </div>
-    <div class="try-it-then">
-      <div class="try-it-then-label">What happens next</div>
-      <p>Claude produces a formatted agenda as a Word document, ready to circulate. All items are numbered, with space for discussion notes against each one.</p>
-    </div>
-  </div>
-
-  <div class="try-it">
-    <div class="try-it-label">Try it — turning rough notes into minutes</div>
-    <div class="try-it-prompt">
-      <span style="color:#888;">"</span>Here are my rough notes from today's staff meeting. Please turn them into proper formatted minutes — decisions in bold, actions with the name of who's responsible and any deadline. Save as a Word document.<br><br>
-      [Paste your notes here]<span style="color:#888;">"</span>
-    </div>
-    <div class="try-it-then">
-      <div class="try-it-then-label">What happens next</div>
-      <p>Claude produces clean, professional minutes with a clear action list at the end. Writing up minutes that previously took an hour can take under five minutes.</p>
-    </div>
-  </div>
-
-  <!-- SERVICE ORDERS -->
-  <div class="sub-label">📜 Service Orders &amp; Documents</div>
-  <div class="card-grid">
-    <div class="card blue">
-      <div class="card-icon">🕊️</div>
-      <div class="card-title">Orders of Service</div>
-      <div class="card-body">Licensing services, confirmation services, institution services, memorial services — formatted and laid out, ready to send to the printer.</div>
-    </div>
-    <div class="card blue">
-      <div class="card-icon">✉️</div>
-      <div class="card-title">Pastoral &amp; Circular Letters</div>
-      <div class="card-body">The Bishop's pastoral letters to the diocese — Advent, Christmas, Easter, or for particular occasions — drafted consistently each time.</div>
-    </div>
-    <div class="card blue">
-      <div class="card-icon">📊</div>
-      <div class="card-title">Reports &amp; Synod Papers</div>
-      <div class="card-body">Structured reports with headings, summaries, and recommendations — ready for board or synod circulation.</div>
-    </div>
-    <div class="card blue">
-      <div class="card-icon">📁</div>
-      <div class="card-title">Templates</div>
-      <div class="card-body">Create and maintain standard templates for recurring document types, so every similar document starts in the right place.</div>
-    </div>
-  </div>
-
-  <div class="try-it">
-    <div class="try-it-label">Try it — creating a circular letter to all clergy</div>
-    <div class="try-it-prompt">
-      <span style="color:#888;">"</span>Please write a circular letter from Bishop Rob to all clergy in the Diocese of Carlisle. The purpose is to announce this year's clergy in-service training days and ask for confirmation of attendance. Details: the three dates are 12 June, 19 September, and 14 November; the venue is Rydal Hall; please reply to the Bishop's PA by 1 May. The tone should be warm and encouraging — emphasising the value of learning and fellowship together. Save as a Word document.<span style="color:#888;">"</span>
-    </div>
-    <div class="try-it-then">
-      <div class="try-it-then-label">What happens next</div>
-      <p>Claude produces a complete, properly formatted circular letter as a Word document — ready to add the Bishop's signature and circulate. The whole thing takes about 20 seconds rather than 20 minutes.</p>
-    </div>
-    <div class="try-it-note">💡 The same approach works for any circular — safeguarding updates, vacancy announcements, Advent letters to the diocese, or any communication that goes to multiple recipients.</div>
-  </div>
-
-  <div class="sub-label">🖥️ Presentations</div>
-  <div class="highlight">
-    Claude can build a <strong>PowerPoint presentation</strong> from a rough outline — for clergy training days, Bishop's staff meetings, or diocesan events. Just describe the topic, audience, and how many slides you'd like.
-  </div>
-
-  <div class="try-it">
-    <div class="try-it-label">Try it — creating a presentation</div>
-    <div class="try-it-prompt">
-      <span style="color:#888;">"</span>Please create a PowerPoint presentation for a clergy training morning on the theme of 'Wellbeing in Ministry'. Audience is about 30 clergy. Should have around 8 slides, with a mix of reflection questions and practical suggestions. Include speaker notes on each slide. Diocese of Carlisle purple colour scheme.<span style="color:#888;">"</span>
-    </div>
-    <div class="try-it-then">
-      <div class="try-it-then-label">What happens next</div>
-      <p>Claude produces a complete PowerPoint file you can open, edit, and present directly. Speaker notes are included on every slide so the presenter knows what to say.</p>
-    </div>
-  </div>
-
-  <div class="reassurance">
-    <div class="r-icon">💡</div>
-    <div><strong>You're always in control.</strong> Claude produces a first draft — you decide what stays and what changes. Nothing is sent or saved anywhere without you choosing to do so. Think of Claude as a very fast first draft, not a final decision.</div>
-  </div>
-</section>
-
-<!-- ═══════════════════════════════════════════════════════════ FINANCE -->
-<section class="section" id="finance">
-  <div class="section-header">
-    <div class="section-icon">💷</div>
-    <div class="section-title">3. Financial Documents, Budgets &amp; Reports</div>
-  </div>
-  <div class="section-divider"></div>
-  <p class="section-intro">Claude can handle the full range of financial administration — creating spreadsheets, maintaining records, and producing narrative reports. No accounting knowledge is required to ask for these things.</p>
-
-  <!-- SPREADSHEETS -->
-  <div class="sub-label">📊 Budgets &amp; Spreadsheets</div>
-  <div class="card-grid">
-    <div class="card green">
-      <div class="card-icon">📈</div>
-      <div class="card-title">Annual Budget Templates</div>
-      <div class="card-body">Build spreadsheets with automatic totals, category breakdowns, and variance tracking against prior year. No need to rebuild from scratch each year.</div>
-    </div>
-    <div class="card green">
-      <div class="card-icon">🎪</div>
-      <div class="card-title">Event &amp; Project Budgets</div>
-      <div class="card-body">Set up a budget for confirmations, training days, or any project — track income and expenditure as costs come in.</div>
-    </div>
-    <div class="card green">
-      <div class="card-icon">🧾</div>
-      <div class="card-title">Invoice &amp; Expenditure Tracking</div>
-      <div class="card-body">Running logs of payments, suppliers, and cost codes. Ask questions in plain English: <em>"What did we spend on hospitality in February?"</em></div>
-    </div>
-    <div class="card green">
-      <div class="card-icon">💰</div>
-      <div class="card-title">Petty Cash Logs</div>
-      <div class="card-body">Simple, tidy records maintained without manual reformatting or spreadsheet expertise.</div>
-    </div>
-  </div>
-
-  <div class="try-it">
-    <div class="try-it-label">Try it — creating a budget spreadsheet</div>
-    <div class="try-it-prompt">
-      <span style="color:#888;">"</span>Please create a budget spreadsheet for Bishop's House running costs for 2026. Categories should include: staff costs, utilities, catering and hospitality, printing and stationery, travel and expenses, garden and maintenance, and miscellaneous. Include columns for budget, actual spend each month, and a running total. Save it as an Excel file.<span style="color:#888;">"</span>
-    </div>
-    <div class="try-it-then">
-      <div class="try-it-then-label">What happens next</div>
-      <p>Claude produces a complete Excel spreadsheet with all the categories, automatic formulas for totals and variances, and a clean, easy-to-read layout. You can start entering figures straight away.</p>
-    </div>
-  </div>
-
-  <div class="try-it">
-    <div class="try-it-label">Try it — asking a question about an existing spreadsheet</div>
-    <div class="try-it-prompt">
-      <span style="color:#888;">"</span>[Drag your Excel file into the chat window, then type:]<span style="color:#888;"><br><br></span>
-      Looking at this spreadsheet, which budget categories are most over budget so far this year? And what's our total spend to date compared to the annual budget?<span style="color:#888;">"</span>
-    </div>
-    <div class="try-it-then">
-      <div class="try-it-then-label">What happens next</div>
-      <p>Claude reads the spreadsheet and gives you a plain-English answer — no need to scroll through rows of figures yourself.</p>
-    </div>
-  </div>
-
-  <!-- FINANCIAL REPORTS -->
-  <div class="sub-label">📄 Financial Reports &amp; Narratives</div>
-  <p style="margin-bottom:20px;color:var(--grey-mid);line-height:1.8;">Claude can take raw figures from a spreadsheet and produce a properly written narrative report — the kind of document you'd send to the Diocesan Board of Finance, Bishop's Council, or an external funder. You supply the numbers; Claude writes the words.</p>
-
-  <div class="card-grid">
-    <div class="card amber">
-      <div class="card-icon">📉</div>
-      <div class="card-title">Quarterly &amp; Annual Summaries</div>
-      <div class="card-body">Financial summaries with written commentary and comparison to previous periods — ready for board circulation.</div>
-    </div>
-    <div class="card amber">
-      <div class="card-icon">🔍</div>
-      <div class="card-title">Budget vs Actuals Reports</div>
-      <div class="card-body">Reports that explain variances in plain language — so the board understands why figures differ from budget without having to decipher a spreadsheet.</div>
-    </div>
-    <div class="card amber">
-      <div class="card-icon">🏛️</div>
-      <div class="card-title">Grant Applications</div>
-      <div class="card-body">Financial schedules and budget justifications formatted to the funder's requirements, including narrative explanation of costs.</div>
-    </div>
-  </div>
-
-  <div class="try-it">
-    <div class="try-it-label">Try it — producing a quarterly financial report</div>
-    <div class="try-it-prompt">
-      <span style="color:#888;">"</span>[Drag your expenditure spreadsheet into the chat, then type:]<span style="color:#888;"><br><br></span>
-      Please write a Q1 financial summary for Bishop's Council. Highlight any categories that are significantly over or under budget, give a brief explanation of any major variances, and include a short overall commentary on our financial position. Keep it professional but easy to read. Save as a Word document.<span style="color:#888;">"</span>
-    </div>
-    <div class="try-it-then">
-      <div class="try-it-then-label">What happens next</div>
-      <p>Claude reads your figures and produces a complete, formatted financial narrative — the kind of document that previously took half a day to write. You review the figures for accuracy, make any adjustments, and it's ready to circulate.</p>
-    </div>
-    <div class="try-it-note">⚠️ Always check figures carefully before sharing financial documents. Claude is excellent at writing the narrative and structure — you are the expert on whether the numbers are correct.</div>
-  </div>
-</section>
-
-<!-- ═══════════════════════════════════════════════════════════ M365 -->
-<section class="section" id="m365">
-  <div class="section-header">
-    <div class="section-icon">🔗</div>
-    <div class="section-title">4. Microsoft 365 Integration</div>
-  </div>
-  <div class="section-divider"></div>
-  <p class="section-intro">The Claude desktop app connects directly to your Diocese of Carlisle Microsoft account — giving it access to your Outlook email, OneDrive files, SharePoint documents, and calendar. This is what turns Claude from a helpful assistant into a genuine part of your daily workflow.</p>
-
-  <!-- CONNECTING -->
-  <div class="sub-label">🔌 Connecting Your Microsoft Account</div>
-  <p style="margin-bottom:16px;color:var(--grey-mid);line-height:1.8;">You only need to do this once. After that, Claude will remember the connection and use it automatically.</p>
-
-  <div class="connect-steps">
-    <div class="connect-step"><div class="connect-step-text"><strong>Open Cowork</strong> and type: <em style="color:var(--purple);">"Connect my Microsoft 365 account."</em> Claude will show you a Connect button.</div></div>
-    <div class="connect-step"><div class="connect-step-text"><strong>Click Connect</strong> — a Microsoft sign-in window will open. Sign in with your normal diocesan email and password (e.g. yourname@carlislediocese.org.uk).</div></div>
-    <div class="connect-step"><div class="connect-step-text"><strong>Click Accept</strong> when Microsoft asks if Claude can access your account. This just means Claude can read your emails and files — it cannot send emails or delete anything without you asking it to.</div></div>
-    <div class="connect-step"><div class="connect-step-text"><strong>Done.</strong> Claude will confirm the connection. From now on, you can ask it to search your emails, find files, and check your calendar at any time.</div></div>
-  </div>
-
-  <div class="reassurance">
-    <div class="r-icon">🔒</div>
-    <div><strong>Your data is safe.</strong> Claude only accesses what your own account can see — it cannot reach anyone else's email or files. It does not store or copy your emails. If you have any concerns, speak to Marti.</div>
-  </div>
-
-  <!-- OUTLOOK -->
-  <div class="sub-label">📧 Outlook — Email Organisation</div>
-  <p style="margin-bottom:20px;color:var(--grey-mid);line-height:1.8;">Managing a busy inbox is one of the most time-consuming parts of the day. Claude can search, summarise, and draft replies — transforming what can feel like an overwhelming task into a quick morning routine.</p>
-
-  <div class="m365-grid">
-    <div class="m365-card">
-      <div class="app-icon">🔎</div>
-      <div class="app-name">Search</div>
-      <ul>
-        <li>Find emails by topic, sender, or date</li>
-        <li>Search across months of email instantly</li>
-        <li>Surface related threads together</li>
-      </ul>
-    </div>
-    <div class="m365-card">
-      <div class="app-icon">⚠️</div>
-      <div class="app-name">Flag &amp; Triage</div>
-      <ul>
-        <li>Identify unanswered emails</li>
-        <li>Flag urgent or sensitive items</li>
-        <li>Spot emails needing action</li>
-      </ul>
-    </div>
-    <div class="m365-card">
-      <div class="app-icon">✍️</div>
-      <div class="app-name">Draft Replies</div>
-      <ul>
-        <li>Draft replies in the right tone</li>
-        <li>Handle recurring reply types</li>
-        <li>Adjust length and formality</li>
-      </ul>
-    </div>
-    <div class="m365-card">
-      <div class="app-icon">📋</div>
-      <div class="app-name">Summarise</div>
-      <ul>
-        <li>Digest emails by topic or sender</li>
-        <li>Morning overview of overnight emails</li>
-        <li>Pull out action points from threads</li>
-      </ul>
-    </div>
-  </div>
-
-  <div class="sub-label">⏱️ The Morning Triage Workflow</div>
-  <div class="workflow">
-    <div class="workflow-label">From 90 minutes of inbox management to 15 — every morning</div>
-    <div class="workflow-steps">
-      <div class="w-step"><div class="w-icon">🖥️</div><div class="w-label">Open Cowork</div><div class="w-sub">Arrive at desk, launch the app</div></div>
-      <div class="w-step"><div class="w-icon">💬</div><div class="w-label">Ask Claude</div><div class="w-sub">Type your morning request (see below)</div></div>
-      <div class="w-step"><div class="w-icon">📧</div><div class="w-label">Claude searches</div><div class="w-sub">Reads inbox, classifies messages</div></div>
-      <div class="w-step"><div class="w-icon">📋</div><div class="w-label">Briefing ready</div><div class="w-sub">Summary + urgency flags + draft replies</div></div>
-      <div class="w-step"><div class="w-icon">✅</div><div class="w-label">Review &amp; send</div><div class="w-sub">PA approves each reply and sends</div></div>
-    </div>
-  </div>
-
-  <div class="try-it">
-    <div class="try-it-label">Try it — morning inbox triage</div>
-    <div class="try-it-prompt">
-      <span style="color:#888;">"</span>Please check the Bishop's inbox for emails received since yesterday afternoon. Give me a short summary of what's come in, flag anything that looks urgent or sensitive, and draft a reply to any routine requests — such as speaking invitations, requests for letters of support, or general enquiries.<span style="color:#888;">"</span>
-    </div>
-    <div class="try-it-then">
-      <div class="try-it-then-label">What happens next</div>
-      <p>Claude returns a short summary of new emails with urgency flags, plus ready-to-review draft replies for the routine ones. You read each draft, make any changes, and send. The whole process takes a fraction of the time it would normally take.</p>
-    </div>
-  </div>
-
-  <div class="try-it">
-    <div class="try-it-label">Try it — finding a specific email thread</div>
-    <div class="try-it-prompt">
-      <span style="color:#888;">"</span>Find all the emails about the Keswick benefice vacancy from the last three months. Summarise where things stand and what the next steps are.<span style="color:#888;">"</span>
-    </div>
-    <div class="try-it-then">
-      <div class="try-it-then-label">What happens next</div>
-      <p>Claude searches across all email from the last three months, finds the relevant thread, and gives you a clear summary — so you don't need to scroll back through weeks of messages to find out where things were left.</p>
-    </div>
-  </div>
-
-  <div class="try-it">
-    <div class="try-it-label">Try it — drafting a reply to a specific email</div>
-    <div class="try-it-prompt">
-      <span style="color:#888;">"</span>Find the email from Archdeacon Johnson sent on Monday about the Rural Dean meeting. Draft a reply confirming the Bishop will attend, asking if there is a briefing paper in advance, and checking whether parking is available at the venue. Formal tone.<span style="color:#888;">"</span>
-    </div>
-    <div class="try-it-then">
-      <div class="try-it-then-label">What happens next</div>
-      <p>Claude finds the email, drafts the reply, and shows it to you for approval. You click send when you're happy. Nothing is sent without you seeing it first.</p>
-    </div>
-  </div>
-
-  <!-- ONEDRIVE & SHAREPOINT -->
-  <div class="sub-label">☁️ OneDrive &amp; SharePoint — Finding Your Files</div>
-  <p style="margin-bottom:20px;color:var(--grey-mid);line-height:1.8;">Once connected, Claude can search across all your OneDrive and SharePoint files — so you never need to remember which folder something is saved in.</p>
-
-  <div class="try-it">
-    <div class="try-it-label">Try it — finding a document</div>
-    <div class="try-it-prompt">
-      <span style="color:#888;">"</span>Find the template we use for an Order of Service for a licensing service.<span style="color:#888;">"</span><br><br>
-      — or —<br><br>
-      <span style="color:#888;">"</span>Find last year's Advent pastoral letter from Bishop Rob.<span style="color:#888;">"</span>
-    </div>
-    <div class="try-it-then">
-      <div class="try-it-then-label">What happens next</div>
-      <p>Claude searches OneDrive and SharePoint and returns the file — or a link to it — without you needing to remember where it was saved or what it was called.</p>
-    </div>
-  </div>
-
-  <div class="try-it">
-    <div class="try-it-label">Try it — reading a document from SharePoint</div>
-    <div class="try-it-prompt">
-      <span style="color:#888;">"</span>Find the minutes from the last Bishop's Staff Meeting on SharePoint and pull out all the action points — who is responsible for each one and what the deadline is.<span style="color:#888;">"</span>
-    </div>
-    <div class="try-it-then">
-      <div class="try-it-then-label">What happens next</div>
-      <p>Claude finds the minutes, reads them, and returns a clean action list — a much faster way to follow up on outstanding items after a meeting.</p>
-    </div>
-  </div>
-</section>
-
-<!-- ═══════════════════════════════════════════════════════════ SCHEDULED TASKS -->
-<section class="section" id="scheduled">
-  <div class="section-header">
-    <div class="section-icon">⏰</div>
-    <div class="section-title">5. Scheduled &amp; Automated Tasks</div>
-  </div>
-  <div class="section-divider"></div>
-  <p class="section-intro">Claude can run tasks automatically on a regular schedule — without anyone needing to remember to ask. Once set up, these run in the background and the output is ready and waiting when you need it.</p>
-
-  <div class="sub-label">📋 Examples of What Can Be Scheduled</div>
-  <table class="task-table">
-    <thead><tr><th>Task</th><th>When it runs</th><th>What Claude does</th></tr></thead>
-    <tbody>
-      <tr><td>📅 Weekly diary briefing</td><td>Every Monday, 8am</td><td>Checks the Bishop's calendar and prepares a briefing note for each commitment in the coming week.</td></tr>
-      <tr><td>📧 Unanswered email check</td><td>Every weekday, 9am</td><td>Flags emails older than 48 hours with no reply — listed with sender, subject, and urgency.</td></tr>
-      <tr><td>💷 Monthly budget snapshot</td><td>1st of each month</td><td>Reads the expenditure spreadsheet and summarises spend against budget, noting any variances.</td></tr>
-      <tr><td>🛡️ Safeguarding returns reminder</td><td>Quarterly</td><td>Checks for outstanding returns from parishes and drafts a reminder circular for sending.</td></tr>
-      <tr><td>📋 Meeting prep pack</td><td>Before each staff meeting</td><td>Compiles agenda, papers, and briefing notes into a single document for the Bishop.</td></tr>
-    </tbody>
-  </table>
-
-  <div class="sub-label">🛠️ How to Set Up a Scheduled Task — Step by Step</div>
-  <p style="margin-bottom:24px;color:var(--grey-mid);line-height:1.8;">Setting up a scheduled task requires no technical knowledge at all. You do the whole thing in plain English, directly in the Cowork chat window. Here's how, using the <strong style="color:var(--purple);">weekly diary briefing</strong> as a worked example.</p>
-
-  <div class="process-flow">
-    <div class="process-step">
-      <div class="step-left"><div class="step-num">1</div><div class="step-line"></div></div>
-      <div class="step-content">
-        <div class="step-title">Open Cowork</div>
-        <div class="step-desc">Launch the Claude desktop app as normal. You don't need to go to any special menu or settings page.</div>
-      </div>
-    </div>
-    <div class="process-step">
-      <div class="step-left"><div class="step-num">2</div><div class="step-line"></div></div>
-      <div class="step-content">
-        <div class="step-title">Tell Claude you want to create a scheduled task</div>
-        <div class="step-desc">Just type this to get started:</div>
-        <div class="step-quote">"I'd like to set up a scheduled task."</div>
-        <div class="step-desc" style="margin-top:10px;">Claude will confirm it's ready and ask you to describe what you'd like it to do.</div>
-      </div>
-    </div>
-    <div class="process-step">
-      <div class="step-left"><div class="step-num">3</div><div class="step-line"></div></div>
-      <div class="step-content">
-        <div class="step-title">Describe what you want it to do</div>
-        <div class="step-desc">Explain the task in plain English — as you would to a new member of staff. The more detail you give, the more useful the output will be.</div>
-        <div class="step-quote">"Every Monday morning, check Bishop Rob's Outlook calendar for the coming week. For each appointment, prepare a short briefing note: who he is meeting, where, and anything relevant I should know in advance. Save it as a Word document in my OneDrive."</div>
-      </div>
-    </div>
-    <div class="process-step">
-      <div class="step-left"><div class="step-num">4</div><div class="step-line"></div></div>
-      <div class="step-content">
-        <div class="step-title">Set the schedule</div>
-        <div class="step-desc">Tell Claude when you'd like it to run. You can be as specific or as simple as you like.</div>
-        <div class="step-quote">"Run this every Monday at 8am."</div>
-        <div class="step-desc" style="margin-top:10px;">Claude handles all the scheduling automatically — you don't need to set any timers or alarms.</div>
-      </div>
-    </div>
-    <div class="process-step">
-      <div class="step-left"><div class="step-num">5</div><div class="step-line"></div></div>
-      <div class="step-content">
-        <div class="step-title">Claude shows you a summary — confirm to save</div>
-        <div class="step-desc">Claude will repeat back what it will do and when. Check it looks right, then type <em style="color:var(--purple);">"Yes, save that"</em> — and the task is set up. From that point on, it runs automatically every Monday morning without anyone needing to do anything.</div>
-      </div>
-    </div>
-    <div class="process-step">
-      <div class="step-left"><div class="step-num">6</div></div>
-      <div class="step-content">
-        <div class="step-title">Find the output when it's ready</div>
-        <div class="step-desc">When the task runs, Claude saves the output to your Cowork folder. You'll see it waiting there when you arrive in the morning. You can also run any scheduled task immediately on demand by asking: <em style="color:var(--purple);">"Run the Monday diary briefing now."</em></div>
-      </div>
-    </div>
-  </div>
-
-  <div class="try-it">
-    <div class="try-it-label">Worked example — setting up the unanswered email check</div>
-    <div class="try-it-prompt">
-      Step 1 — Type: <span style="color:var(--chat-prompt);">"I'd like to set up a scheduled task."</span><br><br>
-      Step 2 — When Claude is ready, type:<br><br>
-      <span style="color:#888;">"</span>Every weekday morning at 9am, search the Bishop's Outlook inbox for any emails that arrived more than 48 hours ago and have not been replied to. List them in a table showing: sender name, subject line, date received, and whether it looks urgent. Save the list to my OneDrive.<span style="color:#888;">"</span><br><br>
-      Step 3 — When asked for the schedule, type: <span style="color:var(--chat-prompt);">"Every weekday at 9am."</span><br><br>
-      Step 4 — Confirm when Claude shows the summary.
-    </div>
-    <div class="try-it-then">
-      <div class="try-it-then-label">What happens next</div>
-      <p>From the following morning, a neatly formatted list of unanswered emails is waiting in OneDrive when the PA arrives — every single weekday, automatically, without anyone having to remember to do anything.</p>
-    </div>
-  </div>
-
-  <div class="sub-label">✏️ Changing or Pausing a Scheduled Task</div>
-  <div class="highlight">
-    You can change, pause, or delete any scheduled task at any time — just by asking Claude in plain English. No technical steps needed.<br><br>
-    <strong>Examples:</strong><br>
-    <em>"Pause the Monday diary briefing while Bishop Rob is on holiday — restart it on 14 April."</em><br>
-    <em>"Change the monthly budget task to run on the 5th of each month instead of the 1st."</em><br>
-    <em>"Delete the safeguarding returns reminder — we've set that up another way now."</em><br><br>
-    Claude will confirm the change is made.
-  </div>
-
-  <div class="reassurance">
-    <div class="r-icon">💡</div>
-    <div><strong>Not sure where to start?</strong> Pick one task from the table above — the unanswered email check is a good first one — and follow the steps above. Once you've done it once, the rest feel straightforward. Marti is available to help if you'd like to run through it together the first time.</div>
-  </div>
-
-</section>
-
-<!-- SECTION 6: PRIVACY & DATA -->
-<section class="section" id="privacy">
-  <div class="section-number">6</div>
-  <div class="section-title">Privacy, Data &amp; Confidentiality</div>
-  <p style="color:var(--grey-mid);line-height:1.8;margin-bottom:24px;">This is one of the most important questions for any organisation handling sensitive information — and it deserves a straight answer, not just reassurance. There are two separate things to understand: what Anthropic (the company that makes Claude) does with your data, and what the Diocese is responsible for under UK data protection law.</p>
-
-  <!-- Part 1: The licence -->
-  <div class="sub-label">🔒 What the Claude Team Licence Guarantees</div>
-  <p style="color:var(--grey-mid);line-height:1.8;margin-bottom:16px;">The Diocese holds a <strong>Claude for Work (Team) licence</strong>, which is governed by Anthropic's <strong>Commercial Terms</strong> — not the consumer terms that apply to free or personal accounts. This matters significantly. The commercial terms include the following hard guarantees:</p>
-
-  <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:24px;">
-    <div style="background:#F0FDF4;border:1px solid #BBF7D0;border-radius:10px;padding:20px;">
-      <div style="font-size:22px;margin-bottom:8px;">🚫</div>
-      <div style="font-weight:700;color:#166534;margin-bottom:6px;">Your data is never used to train AI</div>
-      <div style="font-size:14px;color:#166534;line-height:1.7;">Anthropic's commercial terms state explicitly: <em>"Anthropic may not train models on Customer Content."</em> What the Bishop's team types into Claude stays within the Diocese's contract — it does not feed back into the AI or anyone else's experience.</div>
-    </div>
-    <div style="background:#F0FDF4;border:1px solid #BBF7D0;border-radius:10px;padding:20px;">
-      <div style="font-size:22px;margin-bottom:8px;">📄</div>
-      <div style="font-weight:700;color:#166534;margin-bottom:6px;">A Data Processing Addendum is in place</div>
-      <div style="font-size:14px;color:#166534;line-height:1.7;">The commercial licence includes a formal Data Processing Addendum (DPA) — the legal agreement required under UK GDPR when an organisation shares data with a third-party processor. This means the relationship is legally defined and contractually binding.</div>
-    </div>
-    <div style="background:#F0FDF4;border:1px solid #BBF7D0;border-radius:10px;padding:20px;">
-      <div style="font-size:22px;margin-bottom:8px;">🏛️</div>
-      <div style="font-weight:700;color:#166534;margin-bottom:6px;">The Diocese owns everything</div>
-      <div style="font-size:14px;color:#166534;line-height:1.7;">All inputs (what you type) and all outputs (what Claude produces) belong to the Diocese. Anthropic makes no claim to the content of your conversations, documents, or drafts.</div>
-    </div>
-    <div style="background:#F0FDF4;border:1px solid #BBF7D0;border-radius:10px;padding:20px;">
-      <div style="font-size:22px;margin-bottom:8px;">👤</div>
-      <div style="font-weight:700;color:#166534;margin-bottom:6px;">Strict limits on who at Anthropic can see anything</div>
-      <div style="font-size:14px;color:#166534;line-height:1.7;">Anthropic employees can only access data on a strict need-to-know basis, and only those bound by their own confidentiality obligations. This is the same model used by reputable legal, financial, and IT service providers.</div>
-    </div>
-  </div>
-
-  <div class="reassurance" style="margin-bottom:32px;">
-    <div class="r-icon">✅</div>
-    <div><strong>In short:</strong> The contractual protections are strong. The commercial licence was specifically designed for organisations handling confidential information — and it was the right choice for the Diocese.</div>
-  </div>
-
-  <!-- Part 2: GDPR distinction -->
-  <div class="sub-label">⚖️ The GDPR Distinction — What the Diocese is Still Responsible For</div>
-  <p style="color:var(--grey-mid);line-height:1.8;margin-bottom:16px;">The commercial terms protect the Diocese's data <em>within</em> Anthropic's systems. But under UK GDPR, the <strong>Diocese remains the data controller</strong> for anything it puts <em>into</em> Claude. This is not a gap in the licence — it is simply how data protection law works. The same principle applies to any third-party service the Diocese uses: a solicitor, an accountant, a cloud storage provider.</p>
-
-  <p style="color:var(--grey-mid);line-height:1.8;margin-bottom:16px;">What this means in practice is that <strong>staff need to apply the same judgement they would with any trusted external professional.</strong> Share what is needed to get the task done — no more. The ICO (the UK's data protection regulator) is clear that organisations using AI tools are responsible for what personal data they input, and must have a lawful basis for processing it.</p>
-
-  <!-- Traffic light guide -->
-  <div class="sub-label" style="margin-top:8px;">🚦 A Practical Guide for Staff — What to Put In, and What Not To</div>
-  <p style="color:var(--grey-mid);line-height:1.8;margin-bottom:16px;">Think of this as a simple traffic light. Most day-to-day tasks are straightforwardly fine. A small number of situations need more care.</p>
-
-  <div style="display:grid;gap:12px;margin-bottom:24px;">
-
-    <div style="background:#F0FDF4;border-left:5px solid #22C55E;border-radius:0 10px 10px 0;padding:18px 20px;">
-      <div style="font-weight:700;color:#166534;margin-bottom:10px;font-size:15px;">🟢 &nbsp;Generally fine to use Claude for</div>
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;font-size:14px;color:#166534;line-height:1.8;">
-        <div>• Drafting letters, emails, and communications</div>
-        <div>• Summarising meeting notes or agendas</div>
-        <div>• Creating templates and standard documents</div>
-        <div>• Financial reports and budget analysis</div>
-        <div>• Diary management and scheduling</div>
-        <div>• Researching topics, policies, or guidance</div>
-        <div>• Producing service orders, rotas, or programmes</div>
-        <div>• Formatting, proofreading, and editing text</div>
-      </div>
-    </div>
-
-    <div style="background:#FFFBEB;border-left:5px solid #F59E0B;border-radius:0 10px 10px 0;padding:18px 20px;">
-      <div style="font-weight:700;color:#92400E;margin-bottom:10px;font-size:15px;">🟡 &nbsp;Use with care — think before you paste</div>
-      <div style="font-size:14px;color:#78350F;line-height:1.8;">
-        <strong>Personal details about named individuals</strong> (parishioners, clergy, staff) — if you are drafting a letter about a specific person or referencing their circumstances, Claude can help, but consider whether you need to include their full name and address, or whether initials or "a parishioner" would do the same job.<br><br>
-        <strong>Personnel or HR matters</strong> — general HR letter templates are fine. Drafting something about a specific named employee's conduct or personal situation needs more thought. Where possible, anonymise before pasting in.
-      </div>
-    </div>
-
-    <div style="background:#FEF2F2;border-left:5px solid #EF4444;border-radius:0 10px 10px 0;padding:18px 20px;">
-      <div style="font-weight:700;color:#991B1B;margin-bottom:10px;font-size:15px;">🔴 &nbsp;Do not paste into Claude</div>
-      <div style="font-size:14px;color:#7F1D1D;line-height:1.8;">
-        <strong>Safeguarding case notes or referrals</strong> — these contain special category data under UK GDPR Article 9 and must remain within the Diocese's own secure systems. Claude can help you produce <em>templates</em> or <em>blank forms</em>, but never paste in real case details.<br><br>
-        <strong>Detailed medical, health, or pastoral confidences</strong> about identifiable individuals — the same principle applies. Claude is not the right tool for processing this kind of information.<br><br>
-        <strong>Financial account credentials, passwords, or login details</strong> — Claude does not need these and should never be given them.
-      </div>
+    <div class="guide-card coming-soon">
+      <span class="card-icon">🏛️</span>
+      <div class="card-badge soon">Coming soon</div>
+      <div class="card-title">Church House</div>
+      <div class="card-subtitle">Carlisle</div>
+      <div class="card-desc">For the central diocesan office team — covering communications, HR support, governance documents, and diocesan administration.</div>
     </div>
 
   </div>
 
-  <!-- DPIA note -->
-  <div class="highlight" style="margin-bottom:24px;">
-    <strong>A note for Marti (IT):</strong> Where Claude is used systematically to process personal data — for example, a scheduled task that regularly handles staff or parishioner information — the ICO recommends completing a <strong>Data Protection Impact Assessment (DPIA)</strong>. This does not have to be a lengthy exercise, but it creates a documented record of what data is processed, why, and what safeguards are in place. It would be worth raising with whoever holds the Diocese's data protection responsibility (the DPO or equivalent) to confirm whether one is needed for any particular workflow.
+  <div class="section-label">About These Guides</div>
+  <div class="intro-box">
+    <h2>📋 How guides are organised</h2>
+    <p>Each guide is tailored to the specific team and their workflows. They include worked examples you can try yourself, step-by-step how-to instructions, and a plain-English section on data privacy and what is and isn't appropriate to use Claude for. New guides will appear here as they are produced.<br><br>
+    Questions or suggestions? Contact <a href="mailto:martin.barker@carlislediocese.org.uk">Marti Barker</a> (IT Support Manager).</p>
   </div>
 
-  <div class="reassurance">
-    <div class="r-icon">💬</div>
-    <div><strong>Questions about a specific task?</strong> If Ali or a member of the admin team is unsure whether something is appropriate to use Claude for, the rule of thumb is: <em>would I be comfortable sharing this with a trusted external professional to help draft or summarise it?</em> If yes, Claude is likely fine. If it feels sensitive enough that you'd normally keep it entirely in-house, keep it in-house with Claude too. Marti is happy to advise on specific cases.</div>
-  </div>
+</div>
 
-</section>
-
-</div><!-- /page -->
-
-<!-- FOOTER -->
 <div class="footer">
-  <div>Diocese of Carlisle &nbsp;·&nbsp; Bishop's House, Keswick &nbsp;·&nbsp; Claude + Cowork Overview &nbsp;·&nbsp; March 2026</div>
-  <div>Prepared by Marti Barker &nbsp;·&nbsp; <a href="mailto:martin.barker@carlislediocese.org.uk">martin.barker@carlislediocese.org.uk</a></div>
+  Diocese of Carlisle &nbsp;·&nbsp; AI Guides &nbsp;·&nbsp; Maintained by <a href="mailto:martin.barker@carlislediocese.org.uk">Marti Barker</a>
 </div>
 
 </body>
