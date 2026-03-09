@@ -41,6 +41,17 @@
   .try-box strong{display:block;font-size:11px;text-transform:uppercase;letter-spacing:0.07em;color:var(--grey-mid);margin-bottom:4px;}
   .cowork .try-box{background:var(--purple-light);}
   .timesave{background:var(--prop-light);border-left:4px solid var(--prop);border-radius:0 8px 8px 0;padding:10px 14px;margin-top:10px;font-size:12px;color:var(--prop);font-weight:600;}
+  .safety-box{background:#FEF2F2;border:1px solid #FECACA;border-radius:14px;padding:28px 32px;margin-bottom:36px;}
+  .safety-box h2{font-size:17px;font-weight:800;color:#991B1B;margin-bottom:16px;}
+  .safety-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+  @media(max-width:600px){.safety-grid{grid-template-columns:1fr;}}
+  .safety-ok{background:#F0FDF4;border-radius:10px;padding:16px 18px;}
+  .safety-no{background:#FEF2F2;border:1px solid #FECACA;border-radius:10px;padding:16px 18px;}
+  .safety-ok h3{font-size:13px;font-weight:700;color:#166534;margin-bottom:8px;}
+  .safety-no h3{font-size:13px;font-weight:700;color:#991B1B;margin-bottom:8px;}
+  .safety-ok li,.safety-no li{font-size:12px;line-height:1.8;list-style:none;padding:2px 0;}
+  .safety-ok li::before{content:"✓ ";color:#166534;font-weight:700;}
+  .safety-no li::before{content:"✗ ";color:#991B1B;font-weight:700;}
   .footer{background:white;border-top:1px solid #E5E7EB;padding:20px 40px;text-align:center;font-size:13px;color:var(--grey-mid);}
   .footer a{color:var(--grey-dark);text-decoration:none;font-weight:600;}
 </style>
@@ -137,6 +148,34 @@
       <div class="use-case">
         <h3>Organise and index historic property documents</h3>
         <p>SharePoint folders that have accumulated years of documents — surveys, correspondence, specifications, certificates — can be brought into order. Claude can review the folder, rename files consistently, and create a structured index document so the team can find what they need without searching manually.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="safety-box">
+    <h2>🔒 Data safety for Property</h2>
+    <div class="safety-grid">
+      <div class="safety-ok">
+        <h3>Fine to share with AI tools</h3>
+        <ul>
+          <li>Building descriptions, survey summaries, and inspection reports</li>
+          <li>Contractor instruction letters and general correspondence</li>
+          <li>Planning application supporting statements</li>
+          <li>Maintenance schedules and asset register templates</li>
+          <li>Quinquennial inspection checklists and response drafts</li>
+          <li>General property policy documents and guidance</li>
+        </ul>
+      </div>
+      <div class="safety-no">
+        <h3>Do not share with any AI tool</h3>
+        <ul>
+          <li>Contractor bank account or payment details</li>
+          <li>Personal details of tenants in diocesan properties</li>
+          <li>Legally privileged correspondence (solicitor letters, disputes)</li>
+          <li>Confidential property valuations or sale/acquisition details</li>
+          <li>Details of ongoing insurance claims or liability disputes</li>
+          <li>Personally identifiable details of individual occupants</li>
+        </ul>
       </div>
     </div>
   </div>

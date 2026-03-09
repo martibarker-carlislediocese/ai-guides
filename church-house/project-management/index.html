@@ -45,6 +45,17 @@
   .highlight-box h2{font-size:17px;font-weight:800;color:var(--pm);margin-bottom:12px;}
   .highlight-box p{font-size:14px;color:var(--grey-mid);line-height:1.8;margin-bottom:10px;}
   .highlight-box p:last-child{margin-bottom:0;}
+  .safety-box{background:#FEF2F2;border:1px solid #FECACA;border-radius:14px;padding:28px 32px;margin-bottom:36px;}
+  .safety-box h2{font-size:17px;font-weight:800;color:#991B1B;margin-bottom:16px;}
+  .safety-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+  @media(max-width:600px){.safety-grid{grid-template-columns:1fr;}}
+  .safety-ok{background:#F0FDF4;border-radius:10px;padding:16px 18px;}
+  .safety-no{background:#FEF2F2;border:1px solid #FECACA;border-radius:10px;padding:16px 18px;}
+  .safety-ok h3{font-size:13px;font-weight:700;color:#166534;margin-bottom:8px;}
+  .safety-no h3{font-size:13px;font-weight:700;color:#991B1B;margin-bottom:8px;}
+  .safety-ok li,.safety-no li{font-size:12px;line-height:1.8;list-style:none;padding:2px 0;}
+  .safety-ok li::before{content:"✓ ";color:#166534;font-weight:700;}
+  .safety-no li::before{content:"✗ ";color:#991B1B;font-weight:700;}
   .footer{background:white;border-top:1px solid #E5E7EB;padding:20px 40px;text-align:center;font-size:13px;color:var(--grey-mid);}
   .footer a{color:var(--grey-dark);text-decoration:none;font-weight:600;}
 </style>
@@ -149,6 +160,35 @@
     <p>Project Management's most significant AI opportunity isn't just improving your own team's output — it's building infrastructure that other Church House teams can use. Claude + Cowork can help you create standardised SharePoint structures for Finance, HR, and Safeguarding; build Power BI dashboards that pull from their data; and develop reusable templates that reduce how much every team has to reinvent from scratch.</p>
     <p>For example: the Safeguarding team struggles with SharePoint organisation. Project Management, working with Claude, could build them a clean, intuitive folder structure with consistent naming conventions — something that would take days manually but can be designed and documented in hours with AI support.</p>
     <p>Similarly, a Diocese-wide project portfolio dashboard in Power BI — showing every active project, its status, and its owner — could be built by Project Management using Claude to write the DAX and design the report, then shared across Church House so leadership always has a live view of what's in flight.</p>
+  </div>
+
+  <div class="safety-box">
+    <h2>🔒 Data safety for Project Management</h2>
+    <div class="safety-grid">
+      <div class="safety-ok">
+        <h3>Fine to share with AI tools</h3>
+        <ul>
+          <li>Project briefs, charters, and plans</li>
+          <li>Risk registers and RACI matrices</li>
+          <li>Meeting agendas and action log templates</li>
+          <li>Status reports and progress summaries</li>
+          <li>SharePoint structure designs and documentation</li>
+          <li>Power BI report designs and DAX query drafts</li>
+          <li>Stakeholder communications (non-confidential)</li>
+        </ul>
+      </div>
+      <div class="safety-no">
+        <h3>Do not share with any AI tool</h3>
+        <ul>
+          <li>Confidential board or leadership decisions before publication</li>
+          <li>Legal or contractual details currently under negotiation</li>
+          <li>Individual staff performance or HR information</li>
+          <li>Financial figures under embargo or not yet approved</li>
+          <li>Personal data about staff or contractors (names, salaries)</li>
+          <li>Commercially sensitive supplier or tender information</li>
+        </ul>
+      </div>
+    </div>
   </div>
 
 </div>
